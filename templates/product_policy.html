@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="product-policy">
+    <div class="container policy-content">
+        <h2 class="section-title">Product Listing Policy</h2>
+        <p>This policy outlines the rules for listing products on our platform to ensure fairness, quality, and safety.</p>
+
+        <div class="policy-item">
+            <h3><i class="fas fa-check-circle"></i> Allowed Products</h3>
+            <p>Only genuine, legal, and safe products can be listed. Counterfeit or restricted items are strictly prohibited.</p>
+        </div>
+
+        <div class="policy-item">
+            <h3><i class="fas fa-ban"></i> Prohibited Products</h3>
+            <p>Any illegal, hazardous, or offensive items are not allowed. Listings that violate this rule will be removed.</p>
+        </div>
+
+        <div class="policy-item">
+            <h3><i class="fas fa-clipboard-list"></i> Listing Guidelines</h3>
+            <ul>
+                <li>Provide accurate product details</li>
+                <li>Upload high-quality images</li>
+                <li>Ensure fair and competitive pricing</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .policy-content h2.section-title {
+    color: var(--primary-black) !important; /* Force black section title */
+    margin-bottom: 25px;
+}
+.product-policy { background: var(--secondary-white); padding: 60px 0; }
+.policy-content { max-width: 800px; margin: 0 auto; }
+.policy-item { margin-bottom: 25px; padding: 15px; background: var(--primary-white); border-radius: 8px; }
+.policy-item h3 { margin-bottom: 10px; display: flex; align-items: center; }
+.policy-item i { margin-right: 8px; color: var(--highlight); }
+</style>
+{% endblock %}

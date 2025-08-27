@@ -1,74 +1,266 @@
-
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 
+<style>
+  /* ================= NAVBAR ADJUSTMENT ================= */
+  .navbar {
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    min-height: 50px;
+  }
 
+  .navbar-brand {
+    padding-top: 0.1rem !important;
+    padding-bottom: 0.1rem !important;
+    font-size: 1.25rem;
+  }
 
-<!-- ========================= SECTION MAIN ========================= -->
-<section class="section-intro padding-y-sm">
-<div class="container">
+  .navbar-nav .nav-link {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    font-size: 0.95rem;
+  }
 
-<div class="intro-banner-wrap">
-	<img src="{% static 'images/banners/cover.jpg' %}" class="img-fluid rounded">
+  /* Full-width video banner */
+  .full-width-video {
+    width: 100%;
+    height: 390px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .full-width-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Optional overlay */
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    z-index: 1;
+  }
+
+  /* Product image styling */
+  .product-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  /* Section Heading */
+  .section-header {
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  /* Custom Button */
+  .btn-custom {
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+  }
+
+  .btn-custom:hover {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    transform: scale(1.05);
+  }
+
+  /* Footer Styling */
+  footer {
+    background-color: #000;
+    color: #fff;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+  }
+
+  footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  footer a:hover {
+    color: #ddd;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: #444;
+    margin: 2rem 0;
+  }
+
+  .input-group input {
+    border: none;
+    border-radius: 0;
+  }
+
+  .input-group .btn {
+    border-radius: 0;
+  }
+  
+ .section-heading.dark-mode{
+  color: white !important;
+ }
+.btn btn-outline-primary{
+  font-weight: bold !important;
+  font-size: 1.1rem;
+}
+  
+
+/* Modern social buttons */
+.btn-social {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 50px;
+    padding: 0.6rem 1.8rem;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid #000;
+    color: #000;
+    background-color: #fff;
+}
+
+.btn-social:hover {
+    background-color: #000;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Dark mode override */
+body.dark-mode .btn-social {
+    border: 2px solid #fff;
+    color: #fff;
+    background-color: #000;
+}
+
+body.dark-mode .btn-social:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+</style>
+
+<!-- ========================= FULL-WIDTH VIDEO BANNER ========================= -->
+<div class="full-width-video">
+  <video autoplay muted loop>
+    <source src="{% static 'videos/clothing.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-overlay">
+    JURU COLLECTION
+  </div>
 </div>
 
-</div> <!-- container //  -->
-</section>
-<!-- ========================= SECTION MAIN END// ========================= -->
-
-<!-- ========================= SECTION  ========================= -->
+<!-- ========================= SECTION: POPULAR PRODUCTS ========================= -->
 <section class="section-name padding-y-sm">
-<div class="container">
+  <div class="container">
+    <header class=".brand-title">
+      <a href="{% url 'store' %}" class="brand-part1 float-right">See All</a>
+      <h3 class="brand-part1 " >Popular roducts</h3>
+    </header>
 
-<header class="section-heading">
-	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
-</header><!-- sect-heading -->
-
-	
-<div class="row">
-	{% for product in products %}
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
-			<figcaption class="info-wrap">
-				<a href="{{ product.get_url }}" class="title">{{ product.product_name}}</a>
-				<div class="price mt-1">RWF {{ product.price}}</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	{% endfor %}
-</div> <!-- row.// -->
-
-</div><!-- container // -->
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-3 mb-4">
+        <div class="card card-product-grid">
+          <a href="{{ product.get_url }}" class="img-wrap">
+            <img src="{{ product.images.url }}" class="product-image" alt="{{ product.product_name }}">
+          </a>
+          <figcaption class="info-wrap">
+            <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+            <div class="price mt-1">RWF {{ product.price }}</div>
+          </figcaption>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
-<!-- ========================= SECTION  END// ========================= -->
+
+<!-- ========================= CONNECT WITH US ========================= -->
+<div class="text-center my-5">
+  <h2 class="section-header">Connect With Us</h2>
+  <a href="https://www.instagram.com/juru_collection" class="btn-social mx-2">Instagram</a>
+  <a href="https://wa.me/250791376419" class="btn-social mx-2">WhatsApp</a>
+</div>
+
 
 <!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top">
-	<div class="container">
-		<section class="footer-bottom border-top row">
-			<div class="col-md-2">
-				<p class="text-muted"> &copy 2025 Company name </p>
-			</div>
-			<div class="col-md-8 text-md-center">
-				<span  class="px-2">divin2250@gmail.com</span>
-				<span  class="px-2">+250782551311</span>
-				<span  class="px-2">Kigali RAWANDA, Avanue abc</span>
-			</div>
-			<div class="col-md-2 text-md-right text-muted">
-				<i class="fab fa-lg fa-cc-visa"></i>
-				<i class="fab fa-lg fa-cc-paypal"></i>
-				<i class="fab fa-lg fa-cc-mastercard"></i>
-			</div>
-		</section>
-	</div><!-- //container -->
-</footer>
-<!-- ========================= FOOTER END // ========================= -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <h5>JURU COLLECTION</h5>
+        <p>
+          Kigali, Rwanda<br>
+          CHIC Building, 2nd Floor<br>
+          Email: jurucollection@gmail.com<br>
+          Phone: +250 791 376 419 
+        </p>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <h5>QUICK LINKS</h5>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'store' %}">Shop</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="https://wa.me/250791376419">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 mb-4">
+  <h5>NEWSLETTER</h5>
+  <p>Subscribe to receive updates on new collections and exclusive offers.</p>
+  <form method="POST" action="{% url 'subscribe' %}" class="mt-3">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="email" name="email" class="form-control" placeholder="Your email" required>
+      <button class="btn btn-dark" type="submit">Subscribe</button>
+    </div>
+  </form>
+</div>
 
-</body>
-</html>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="row">
+      <div class="col-md-6 text-center text-md-start">
+        <small>&copy; 2025 Juru Collection. All rights reserved.</small>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <small><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></small>
+      </div>
+    </div>
+  </div>
+</footer>
+
 {% endblock %}
+{% include 'includes/footer.html' %}

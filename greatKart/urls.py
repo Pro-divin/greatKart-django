@@ -26,4 +26,19 @@ urlpatterns = [
     path('store/', include('store.urls')),
     path('cart/', include('carts.urls')),
     path('accounts/', include('accounts.urls')),
+    path('orders/', include('orders.urls')),
+    path('safe-payments/', views.safe_payments, name='safe-payments'),
+    path('footer/', views.footer, name='footer'),
+    path('help-center/', views.help_center, name='help_center'),
+    # urls.py
+    path('corporate-responsibility/', views.corporate_responsibility, name='corporate_responsibility'),
+    path('conditions/', views.conditions, name='conditions'),
+     path('privacy/', views.privacy, name='privacy'),
+    path('cookies/', views.cookies, name='cookies'),
+    path('product_policy/', views.product_policy, name='product_policy'),
+
+
+
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

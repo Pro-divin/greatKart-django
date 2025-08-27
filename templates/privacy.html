@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="privacy">
+    <div class="container privacy-content">
+        <h2 class="privacy-item">Privacy Notice</h2>
+        
+        <div class="privacy-item">
+            <h3 class="privacy-title"><i class="fas fa-user-shield"></i> Information Collection</h3>
+            <p>We collect personal information (such as name, email, and address) only to process orders and provide better services.</p>
+        </div>
+
+        <div class="privacy-item">
+            <h3 class="privacy-title"><i class="fas fa-database"></i> Data Usage</h3>
+            <p>Your data is used strictly for order processing, customer support, and service improvements. We never sell your data.</p>
+        </div>
+
+        <div class="privacy-item">
+            <h3 class="privacy-title"><i class="fas fa-lock"></i> Security</h3>
+            <p>We implement secure encryption and best practices to protect your information against unauthorized access.</p>
+        </div>
+
+        <div class="privacy-item">
+            <h3 class="privacy-title"><i class="fas fa-envelope"></i> Communication</h3>
+            <p>We may contact you for order confirmations, updates, or marketing (if you subscribe). You can opt out anytime.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.privacy {
+    background-color: var(--secondary-white);
+    padding: 60px 0;
+}
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.privacy-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--primary-white);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+.privacy-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.privacy-title i {
+    margin-right: 10px;
+    color: var(--highlight);
+}
+</style>
+{% endblock %}

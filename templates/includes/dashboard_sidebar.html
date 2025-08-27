@@ -1,0 +1,68 @@
+<aside class="col-md-3">
+    <!-- SIDEBAR -->
+    <ul class="list-group sidebar-light-mode">
+        <a class="list-group-item {% if request.path == '/accounts/' %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
+        <a class="list-group-item {% if '/my_orders/' in request.path %}active{% endif %}" href="{% url 'my_orders' %}">My Orders</a>
+        <a class="list-group-item {% if '/edit_profile/' in request.path %}active{% endif %}" href="{% url 'edit_profile' %}">Edit Profile</a>
+    </ul>
+    <br>
+    <a class="btn btn-logout btn-block" href="{% url 'logout' %}">
+        <i class="fa fa-power-off"></i> <span class="text">Log out</span>
+    </a>
+    <!-- SIDEBAR END -->
+</aside>
+
+<style>
+/* Sidebar links - light style even in dark mode */
+.sidebar-light-mode .list-group-item {
+    background-color: #f8f9fa; /* light background */
+    color: #000 !important; /* black text */
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar-light-mode .list-group-item.active,
+.sidebar-light-mode .list-group-item:hover {
+    background-color: #e9ecef !important; /* slightly darker on hover/active */
+    color: #000 !important;
+}
+
+/* Logout button styling */
+.btn-logout {
+    background-color: #f8f9fa; /* light background */
+    color: #000 !important; /* black text */
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-logout:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+    background-color: #e9ecef; /* slightly darker on hover */
+}
+
+/* FORCE light style in dark mode */
+body.dark-mode .sidebar-light-mode .list-group-item,
+body.dark-mode .btn-logout {
+    background-color: #f8f9fa !important;
+    color: #000 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+body.dark-mode .sidebar-light-mode .list-group-item.active,
+body.dark-mode .sidebar-light-mode .list-group-item:hover,
+body.dark-mode .btn-logout:hover {
+    background-color: #e9ecef !important;
+    color: #000 !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3) !important;
+}
+</style>

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section-conten padding-y bg">
+
+{% include 'includes/alerts.html' %}
+<div class="container">
+	<div class="row">
+	{% include 'includes/dashboard_sidebar.html' %}
+	<main class="col-md-9">
+		<article class="card shadow-lg rounded-2xl">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Your order history</strong>
+		</header>
+		<div class="card-body">
+			<div class="row"> 
+				<div class="col-md-12">
+					<table class="table table-hover table-bordered history-table">
+					  <thead class="thead-dark">
+						<tr>
+						  <th scope="col">Order #</th>
+						  <th scope="col">Billing Name</th>
+						  <th scope="col">Phone</th>
+						  <th scope="col">Order Total</th>
+						  <th scope="col">Date</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						{% for order in orders %}
+						<tr>
+						  <th scope="row">{{ order.order_number }}</th>
+						  <td>{{ order.full_name }}</td>
+						  <td>{{ order.phone }}</td>
+						  <td>${{ order.order_total }}</td>
+						  <td>{{ order.created_at }}</td>
+						</tr>
+						{% empty %}
+						<tr>
+						  <td colspan="5" class="text-center">No orders found</td>
+						</tr>
+						{% endfor %}
+					  </tbody>
+					</table>
+				</div>
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+		</article> <!-- order-group.// --> 
+	</main>
+</div> <!-- row.// -->
+</div>
+</section>
+
+<style>
+/* ✅ Dark mode - make all text white */
+body.dark-mode {
+    background-color: #111 !important;
+    color: #fff !important;
+}
+
+/* Headings, labels, and table text */
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode strong,
+body.dark-mode td,
+body.dark-mode th,
+body.dark-mode label,
+body.dark-mode .card-header {
+    color: #fff !important;
+}
+
+/* ✅ Professional order history table */
+.history-table {
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.history-table thead {
+    background: #343a40;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.history-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.history-table tbody tr:hover {
+    background: #e9ecef;
+    cursor: pointer;
+}
+
+/* ✅ Dark mode for table */
+body.dark-mode .history-table thead {
+    background: #222 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .history-table tbody tr {
+    background: #1a1a1a !important;
+    color: #fff !important;
+}
+
+body.dark-mode .history-table tbody tr:nth-child(even) {
+    background: #2a2a2a !important;
+}
+
+body.dark-mode .history-table tbody tr:hover {
+    background: #333 !important;
+}
+</style>
+
+{% endblock %}

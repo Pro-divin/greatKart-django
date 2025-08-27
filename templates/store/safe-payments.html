@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .fade-in {
+        animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<body class="bg-white text-black">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-6 px-8 mb-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-semibold text-black">Secure Payments</h1>
+            <a href="/" class="text-sm text-black hover:underline">← Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="max-w-6xl mx-auto px-6 fade-in">
+        <section class="bg-white rounded-xl shadow p-10 mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-black">Our Commitment to Secure Transactions</h2>
+            <p class="text-lg mb-6 text-black">
+                At <strong>JURUCOLLECTION</strong>, your security is our top priority. We use industry-standard encryption,
+                fraud detection tools, and third-party verifications to keep your payments safe.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-lock text-3xl text-black"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-black">SSL Encryption</h3>
+                        <p class="text-sm text-black">All data is encrypted with 256-bit SSL for a secure connection.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-user-shield text-3xl text-black"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-black">Fraud Protection</h3>
+                        <p class="text-sm text-black">We use AI-based fraud detection and continuous monitoring.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-shield-alt text-3xl text-black"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold text-black">Trusted Payment Gateways</h3>
+                        <p class="text-sm text-black">All transactions are processed via trusted platforms like Stripe and PayPal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="bg-white rounded-xl shadow p-10">
+            <h2 class="text-xl font-bold mb-4 text-black">Tips for Safe Online Shopping</h2>
+            <ul class="list-disc list-inside text-black space-y-2">
+                <li>Always check the URL starts with <strong>https://</strong>.</li>
+                <li>Use strong, unique passwords for each account.</li>
+                <li>Avoid using public Wi-Fi when making payments.</li>
+                <li>Keep your browser and antivirus software updated.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-black mt-16 py-6">
+        &copy; {{ year|default:2025 }} JURU COLLECTION. All rights reserved.
+    </footer>
+
+</body>
+{% endblock %}

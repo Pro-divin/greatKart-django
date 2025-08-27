@@ -1,49 +1,269 @@
-
 {% extends 'base.html' %}
+
+{% load static %}
 
 
 {% block content %}
+<style>
+  /* Existing styles... */
+  /* 🌈 Animated Gradient Background */
+  body {
+    height: 100vh;
+    background-color: #000;
+    background-image: url(https://images.unsplash.com/photo-1485470733090-0aae1788d5af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1517&q=80);
+    background-size: cover;
+    background-position: center;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ✨ Modern Input Field Styling */
+  .box .form-control {
+    background: transparent;
+    border: 2px solid #45f3ff;
+    color: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    transition: all 0.4s ease;
+    font-size: 0.95em;
+    box-shadow: 0 0 5px rgba(69, 243, 255, 0.2);
+  }
+
+  .box .form-control::placeholder {
+    color: #aaa;
+    opacity: 0.8;
+    transition: color 0.3s ease;
+  }
+
+  .box .form-control:focus {
+    border-color: #ff45f3;
+    box-shadow: 0 0 5px #ff45f3, 0 0 10px #ff45f3;
+    background: rgba(255, 255, 255, 0.05);
+    outline: none;
+  }
+
+  /* 🔘 Stylish Login Button */
+  .box .btn-primary {
+    background: linear-gradient(45deg, #45f3ff, #ff45f3);
+    border: none;
+    color: white !important;
+    font-weight: bold;
+    font-size: 1em;
+    border-radius: 6px;
+    border-color: black;
+    padding: 10px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 10px #45f3ff80, 0 0 15px #ff45f380;
+  }
+
+  .box .btn-primary:hover {
+    background: linear-gradient(45deg, #ff45f3, #45f3ff);
+    box-shadow: 0 0 15px #ff45f3, 0 0 25px #45f3ff;
+    transform: scale(1.03);
+  }
+
+  /* 🔗 Modern link effects */
+  .box a {
+    color: #45f3ff;
+    transition: 0.3s ease;
+    font-weight: 500;
+  }
+
+  .box a:hover {
+    color: #ff45f3;
+    text-decoration: underline;
+  }
+
+  .box {
+    position: relative;
+    width: 380px;
+    height: 480px;
+    background: #1c1c1c;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  /* Glowing rotating border effect */
+  .box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, #45f3ff, #45f3ff);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+  }
+
+  .box::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, transparent, #ff45f3, #ff45f3);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+  }
+
+  @keyframes animate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Inner card content */
+  .box .card {
+    position: absolute;
+    inset: 4px;
+    background: #222;
+    padding: 50px 40px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  }
+
+  /* --- New styles for layout --- */
+ .login-container {
+  max-width: 1100px;
+  margin: 30px auto 50px;  /* ⬅ reduced top margin */
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+  .video-wrapper {
+    flex: 1 1 450px;
+    max-width: 450px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 40px #45f3ffcc;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.85);
+    border-radius: 15px;
+    transition: transform 0.4s ease;
+  }
+  .video-wrapper video:hover {
+    transform: scale(1.05);
+  }
+
+  .promo-text {
+    flex: 1 1 400px;
+    max-width: 400px;
+    color: #45f3ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: left;
+  }
+
+  .promo-text h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ff45f3;
+    text-shadow: 0 0 8px #ff45f3bb;
+  }
+
+  .promo-text p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+    color: #ccefff;
+  }
+
+  .promo-text strong {
+    color: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .login-container {
+      flex-direction: column;
+      margin: 60px auto 40px;
+    }
+    .promo-text {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
 <section class="section-conten padding-y" style="min-height:84vh">
 
-<!-- ============================ COMPONENT LOGIN   ================================= -->
-{% if request.GET.command == 'verification' %}
- <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024; margin-top: 100px;">
-  Thank you for registering with us. We have sent you an activation email: {{ request.GET.email}}, please check your email to activate your account.
- <br><br>
- Already veriefied? <a href="{% url 'login' %}">Login</a>
- </div>   
- {% else %}
-	<div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
-      <div class="card-body">
-      <h4 class="card-title mb-4">Sign in</h4>
-      {% include 'includes/alerts.html'%}
-      <form action="{% url 'login' %}" method="POST">
+  {% if request.GET.command == 'verification' %}
+    <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024; margin-top: 100px;">
+      Thank you for registering with us. We have sent you an activation email: {{ request.GET.email }}, please check your email to activate your account.
+      <br><br>
+      Already verified? <a href="{% url 'login' %}">Login</a>
+    </div>   
+  {% else %}
+    <div class="login-container">
+      
+      <!-- Video + Promo Text on left -->
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="{% static 'videos/clothing.mp4' %}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <div class="promo-text">
+        <h2>Step Into Style with <span style="color:#45f3ff;">Juru Collection</span></h2>
+        <p><strong>Discover exclusive Rwandan craftsmanship, bold designs, and premium quality.</strong> Elevate your wardrobe with fashion that tells a story — authentically African, uniquely yours.</p>
+        <p>Join thousands who trust us for the latest trends and sustainable fashion that empowers local artisans. Your perfect look starts here.</p>
+        <p style="font-weight:bold; font-size:1.1rem; color:#ff45f3; text-shadow: 0 0 6px #ff45f3bb;">
+          Don’t just wear clothes — wear a legacy.
+        </p>
+      </div>
+
+      <!-- Login Box on right -->
+      <div class="box">
+        <div class="card">
+          <h4 class="card-title mb-4">Sign in</h4>
+          {% include 'includes/alerts.html' %}
+          <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-            
-          <div class="form-group">
-			 <input type="email" class="form-control" placeholder="Email Address" name="email" required>
-          </div> <!-- form-group// -->
-          <div class="form-group">
-			<input type="password" class="form-control" placeholder="Password" name="password" required>
-          </div> <!-- form-group// -->
-          
-          <div class="form-group">
-          	<a href="{% url 'forgotPassword'%}" class="float-right">Forgot password?</a> 
-           
-          </div> <!-- form-group form-check .// -->
-          <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block"> Login  </button>
-          </div> <!-- form-group// -->    
-      </form>
-      </div> <!-- card-body.// -->
-    </div> <!-- card .// -->
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Password" name="password" required>
+            </div>
+            <div class="form-group">
+              <a href="{% url 'forgotPassword' %}" class="float-right">Forgot password?</a>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block"> Login </button>
+            </div>
+          </form>
+        </div>
+      </div>
 
-     <p class="text-center mt-4">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
-     <br><br>
-<!-- ============================ COMPONENT LOGIN  END.// ================================= -->
-{% endif %}
+    </div>
 
+    <p class="text-center mt-4" style="color:#45f3ff;">
+      Don't have an account? <a style="color: #45f3ff;" href="{% url 'register' %}">Sign up</a>
+    </p>
+    <br><br>
+  {% endif %}
 </section>
-
 
 {% endblock %}

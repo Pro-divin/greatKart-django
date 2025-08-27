@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="cookies">
+    <div class="container cookies-content">
+        <h2 class="section-title">Cookies Policy</h2>
+        <p>We use cookies to enhance your browsing experience, analyze site traffic, and serve personalized content. By continuing to use our site, you accept our cookie policy.</p>
+
+        <div class="cookies-item">
+            <h3><i class="fas fa-cookie-bite"></i> What are Cookies?</h3>
+            <p>Cookies are small text files stored on your device that help websites remember your preferences.</p>
+        </div>
+
+        <div class="cookies-item">
+            <h3><i class="fas fa-cogs"></i> How We Use Cookies</h3>
+            <ul>
+                <li>To keep you signed in</li>
+                <li>To store your preferences</li>
+                <li>To analyze website performance</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .cookies-content h2.section-title {
+    color: var(--primary-black) !important; /* Force black section title */
+    margin-bottom: 25px;
+}
+.cookies { background: var(--secondary-white); padding: 60px 0; }
+.cookies-content { max-width: 800px; margin: 0 auto;  }
+.cookies-item { margin-bottom: 25px; padding: 15px; background: var(--primary-white); border-radius: 8px; }
+.cookies-item h3 { margin-bottom: 10px; display: flex; align-items: center; }
+.cookies-item i { margin-right: 8px; color: var(--highlight); }
+</style>
+{% endblock %}

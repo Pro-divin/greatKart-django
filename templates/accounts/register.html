@@ -1,66 +1,204 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
+<style>
+  /* ==================== BASE STYLES ==================== */
+  body {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .section-content {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  /* ==================== CARD ==================== */
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .card-title {
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+  }
+
+  /* ==================== FORM ==================== */
+  label {
+    font-weight: 600;
+    color: #444444;
+  }
+
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #000;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .form-control:focus {
+    border-color: #000000;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+
+  .btn-primary {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .btn-primary:hover {
+    background-color: #333333 !important;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .text-center a {
+    color: #000000;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .text-center a:hover {
+    color: #555555;
+  }
+
+  /* ==================== DARK MODE ==================== */
+  body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  body.dark-mode .card {
+    background-color: #1e1e1e;
+    border-color: #444444;
+    color: #ffffff;
+  }
+
+  body.dark-mode .card-title {
+    color: #ffffff;
+  }
+
+  body.dark-mode label {
+    color: #cccccc;
+  }
+
+  body.dark-mode .form-control {
+    background-color: #2a2a2a;
+    border-color: #555555;
+    color: #ffffff;
+  }
+
+  body.dark-mode .form-control:focus {
+    border-color: #ffffff;
+    background-color: #333333;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  }
+
+  body.dark-mode .btn-primary {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body.dark-mode .btn-primary:hover {
+    background-color: #cccccc !important;
+    color: #000000 !important;
+  }
+
+  body.dark-mode .text-center a {
+    color: #ffffff !important;
+  }
+
+  body.dark-mode .text-center a:hover {
+    color: #cccccc;
+  }
+
+  
+
+</style>
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-
-<!-- ============================ COMPONENT REGISTER   ================================= -->
-	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+<section class="section-content">
+  <div class="container">
+    <div class="card mx-auto" style="max-width: 520px;">
       <article class="card-body">
-		{% include 'includes/alerts.html'%}
-		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-		<form action="{% url 'register' %}" method="POST">
-            {% csrf_token %}
-            
-				<div class="form-row">
-					<div class="col form-group">
-						<label>First name</label>
-					  	{{ form.first_name }}
-					</div> <!-- form-group end.// -->
-					<div class="col form-group">
-						<label>Last name</label>
-					  	{{ form.last_name }}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row end.// -->
-				
-				
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					  <label>Email Address</label>
-					  {{form.email}}
-                      
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-					  <label>Phone Number</label>
-					  {{ form.phone_number }}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Create password</label>
-                        {{ form.password }}
-					    
-					</div> <!-- form-group end.// --> 
-					<div class="form-group col-md-6">
-						<label>Repeat password</label>
-					    {{ form.confirm_password }}
-					</div> <!-- form-group end.// -->  
-				</div>
-			    <div class="form-group">
-			        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-			    </div> <!-- form-group// -->      
-			{{ form.email.errors }}  
-            {{ form.non_field_errors}}      
-			</form>
-		</article><!-- card-body.// -->
-    </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
-    <br><br>
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+        {% include 'includes/alerts.html' %}
+        <header class="mb-4">
+          <h4 class="card-title">Create Your Account</h4>
+        </header>
 
+        <form action="{% url 'register' %}" method="POST">
+          {% csrf_token %}
 
+          <div class="form-row">
+            <div class="col form-group">
+              <label>First name</label>
+              {{ form.first_name }}
+            </div>
+            <div class="col form-group">
+              <label>Last name</label>
+              {{ form.last_name }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Email Address</label>
+              {{ form.email }}
+            </div>
+            <div class="form-group col-md-6">
+              <label>Phone Number</label>
+              {{ form.phone_number }}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Create password</label>
+              {{ form.password }}
+            </div>
+            <div class="form-group col-md-6">
+              <label>Repeat password</label>
+              {{ form.confirm_password }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+
+          <!-- Optional error messages -->
+          {{ form.email.errors }}
+          {{ form.non_field_errors }}
+        </form>
+      </article>
+    </div>
+
+    <p class="text-center mt-4">
+      Already have an account? <a href="{% url 'login' %}">Log In</a>
+    </p>
+  </div>
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
