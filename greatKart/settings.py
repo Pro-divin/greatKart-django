@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -23,10 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fc2sf4)8!32ode6wwenm_7yx5giiw9s@a*32buxz!%dbc!k9kz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+<<<<<<< HEAD
+=======
+ALLOWED_HOSTS = ['greatkart-django-7.onrender.com']
 
+>>>>>>> origin/main
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
