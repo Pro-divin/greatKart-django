@@ -3,121 +3,252 @@
 
 {% block content %}
 
+<style>
+/* ================== GENERAL ================== */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f5f5f5;
+    color: #000;
+}
 
+.card {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid #000 !important;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.btn-primary:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+.btn-light {
+    background-color: #f8f9fa !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+}
+.btn-light:hover {
+    background-color: #e2e6ea !important;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+/* ================== DARK MODE ================== */
+body.dark-mode {
+    background-color: #121212;
+    color: #fff !important; /* all text white by default */
+}
+
+/* Cards */
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    border: 1px solid #555;
+    color: #fff !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-primary {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+body.dark-mode .btn-primary:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+body.dark-mode .btn-light {
+    background-color: #444 !important;
+    color: #fff !important;
+    border: 1px solid #666 !important;
+}
+body.dark-mode .btn-light:hover {
+    background-color: #666 !important;
+    color: #fff !important;
+}
+
+/* Table and text */
+body.dark-mode .table th,
+body.dark-mode .table td,
+body.dark-mode .table .text-muted,
+body.dark-mode small,
+body.dark-mode .summary-box,
+body.dark-mode a,
+body.dark-mode h4,
+body.dark-mode h2,
+body.dark-mode p,
+body.dark-mode dt,
+body.dark-mode dd {
+    color: #fff !important; /* force all text white */
+}
+
+/* Price specifically */
+body.dark-mode .price-wrap,
+body.dark-mode .price {
+    color: #fff !important;
+}
+
+/* Quantity input number stays black with white background */
+body.dark-mode input.form-control.text-center {
+    color: #000 !important;
+    background-color: #fff !important;
+    border-color: #555 !important;
+}
+
+/* Links */
+body.dark-mode a {
+    color: #fff !important;
+    text-decoration: none;
+}
+body.dark-mode a:hover {
+    color: #ccc !important;
+}
+
+/* Input, select, textarea */
+body.dark-mode input:not(.text-center),
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #2a2a2a;
+    color: #fff;
+    border-color: #555;
+}
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #fff;
+}
+
+/* Summary Box */
+body.dark-mode .summary-box {
+    background-color: #1e1e1e;
+    border: 1px solid #555;
+    color: #fff !important;
+}
+
+/* Icons */
+body.dark-mode i,
+body.dark-mode .fa {
+    color: #fff !important;
+}
+body.dark-mode .text-dark {
+    color: #fff !important;
+}
+</style>
 
 <section class="section-content padding-y bg">
-<div class="container">
+  <div class="container">
+    {% if not cart_items %}
+      <h2 class="text-center my-5">Your shopping cart is empty</h2>
+      <div class="text-center mb-5">
+        <a href="{% url 'store' %}" class="btn btn-primary btn-lg">Continue shopping</a>
+      </div>
+    {% else %}
+    <div class="row">
+      <!-- Cart Items -->
+      <aside class="col-lg-8">
+        <div class="card">
+          <h4 class="mb-3">Your Cart</h4>
+          <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted small text-uppercase">
+              <tr>
+                <th>Product</th>
+                <th width="100">Qty</th>
+                <th width="120">Price</th>
+                <th width="120"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cart_item in cart_items %}
+              <tr>
+                <td>
+                  <figure class="itemside align-items-center">
+                    <div class="aside">
+                      <img src="{{ cart_item.product.images.url }}" class="img-sm rounded">
+                    </div>
+                    <figcaption class="info">
+                      <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                      <p class="text-muted small">
+                        {% for item in cart_item.variations.all %}
+                          {{ item.variation_category|capfirst }}: {{ item.variation_value|capfirst }}<br>
+                        {% endfor %}
+                      </p>
+                    </figcaption>
+                  </figure>
+                </td>
+                <td>
+                  <div class="input-group input-spinner">
+                    <div class="input-group-prepend">
+                      <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="btn btn-light">
+                        <i class="fa fa-minus"></i>
+                      </a>
+                    </div>
+                    <input type="text" class="form-control text-center" value="{{ cart_item.quantity }}" readonly>
+                    <div class="input-group-append">
+                      <form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
+                        {% csrf_token %}
+                        {% for item in cart_item.variations.all %}
+                          <input type="hidden" name="{{ item.variation_category|lower }}" value="{{ item.variation_value|capfirst }}">
+                        {% endfor %}
+                        <button class="btn btn-light" type="submit"><i class="fa fa-plus"></i></button>
+                      </form>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="price-wrap">RWF {{ cart_item.sub_total }}</div>
+                  <small class="text-muted">RWF {{ cart_item.product.price }} each</small>
+                </td>
+                <td>
+                  <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Remove</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </aside>
 
-<!-- ============================ COMPONENT 1 ================================= -->
-{% if not cart_items %}
-<h2 class="text-center"> Your shopping cart is empty</h2>
-<div class="text-center">
-	<a href="{% url 'store' %}" class="btn btn-primary">Continue shopping</a>
-</div>
-
-{% else %}
-<div class="row">
-	<aside class="col-lg-9">
-<div class="card">
-<table class="table table-borderless table-shopping-cart">
-<thead class="text-muted">
-<tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
-  <th scope="col" class="text-right" width="200"> </th>
-</tr>
-</thead>
-<tbody>
-	{% for cart_item in cart_items %}
-<tr>
-	<td>
-		<figure class="itemside align-items-center">
-			<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
-			<figcaption class="info">
-				<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-				<p class="text-muted small">
-					{% if cart_item.variations.all %}
-					  {% for item in cart_item.variations.all %}
-					    {{item.variation_category | capfirst }} : {{ item.variation_value | capfirst }}<br>
-					  {% endfor %}
-					{% endif %}
-				</p>
-			</figcaption>
-		</figure>
-	</td>
-	<td> 
-		<!-- col.// -->
-					<div class="col"> 
-						<div class="input-group input-spinner">
-							<div class="input-group-prepend">
-							<a href="{% url 'remove_cart' cart_item.product.id  cart_item.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
-							</div>
-							<input type="text" class="form-control"  value="{{cart_item.quantity }}">
-							<div class="input-group-append">
-							<form action=" {% url 'add_cart' cart_item.product.id %}" method="POST">
-							
-								{% csrf_token %}
-								{% for item in cart_item.variations.all %}
-								  <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
-							    {% endfor %}
-								<button  class="btn btn-light" type="submit" id="button-minus"> <i class="fa fa-plus"></i> </button>
-
-							</form>
-						    </div>
-						</div> <!-- input-group.// -->
-					</div> <!-- col.// -->
-	</td>
-	<td> 
-		<div class="price-wrap"> 
-			<var class="price">RWF {{ cart_item.sub_total }}</var> 
-			<small class="text-muted"> RWF {{ cart_item.product.price }} each </small> 
-		</div> <!-- price-wrap .// -->
-	</td>
-	<td class="text-right"> 
-	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete item?')" class="btn btn-danger"> Remove</a>
-	</td>
-</tr>
-{% endfor   %}
-
-</tbody>
-</table>
-</div> <!-- card.// -->
-
-	</aside> <!-- col.// -->
-	<aside class="col-lg-3">
-
-		<div class="card">
-		<div class="card-body">
-			<dl class="dlist-align">
-			  <dt>Total price:</dt>
-			  <dd class="text-right">RWF {{total}}</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Tax:</dt>
-			  <dd class="text-right"> RWF {{tax}}</dd>
-			</dl>
-			<dl class="dlist-align">
-			  <dt>Grand Total:</dt>
-			  <dd class="text-right text-dark b"><strong>RWF {{ grand_total }}</strong></dd>
-			</dl>
-			<hr>
-			<p class="text-center mb-3">
-				<img src="{% static './images/misc/payments.png' %}" height="26">
-			</p>
-			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
-		</div> <!-- card-body.// -->
-		</div> <!-- card.// -->
-
-</aside> <!-- col.// -->
-
-
-</div> <!-- row.// -->
-{% endif %}
-<!-- ============================ COMPONENT 1 END .// ================================= -->
-
-</div> <!-- container .//  -->
+      <!-- Summary Box -->
+      <aside class="col-lg-4">
+        <div class="summary-box">
+          <h4>Order Summary</h4>
+          <dl>
+            <dt>Subtotal:</dt>
+            <dd>RWF {{ total }}</dd>
+          </dl>
+          <dl>
+            <dt>Tax:</dt>
+            <dd>RWF {{ tax }}</dd>
+          </dl>
+          <dl>
+            <dt>Total:</dt>
+            <dd>RWF {{ grand_total }}</dd>
+          </dl>
+          <hr>
+          <a href="{% url 'checkout' %}" class="btn btn-primary btn-block mb-2">Place Order</a>
+          <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+        </div>
+      </aside>
+    </div>
+    {% endif %}
+  </div>
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+
 {% endblock %}

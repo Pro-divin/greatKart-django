@@ -1,0 +1,12 @@
+1. weka 
+2. power bi
+  prepocessing
+  classify
+  clustering
+  association
+  visualize
+
+
+
+notes:  standard deviation must between - to 1
+

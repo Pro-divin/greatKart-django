@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* Dark mode variables */
+.dark-mode {
+    --body-bg: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #555;
+    --text-color: #fff;
+}
+
+/* Apply dark mode styling */
+.dark-mode body {
+    background-color: var(--body-bg);
+    color: var(--text-color) !important;
+}
+
+/* Make all text inside cards, tables, and forms white, EXCEPT headings with .keep-black */
+.dark-mode *:not(.keep-black),
+.dark-mode .card,
+.dark-mode h1:not(.keep-black), 
+.dark-mode h2:not(.keep-black), 
+.dark-mode h3:not(.keep-black), 
+.dark-mode h4:not(.keep-black), 
+.dark-mode h5:not(.keep-black), 
+.dark-mode h6:not(.keep-black),
+.dark-mode p,
+.dark-mode label,
+.dark-mode table,
+.dark-mode th,
+.dark-mode td,
+.dark-mode small,
+.dark-mode .price,
+.dark-mode .title,
+.dark-mode a,
+.dark-mode .text-muted,
+.dark-mode strong {
+    color: #fff !important;
+}
+
+/* Dark card background */
+.dark-mode .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Dark mode buttons */
+.dark-mode .btn-warning {
+    background-color: #f5a623 !important;
+    color: #000 !important;
+}
+.btn-warning {
+    background-color: #f5a623 !important;
+    color: white !important;
+    font-weight: 600;
+}
+.dark-mode .btn-warning:hover {
+    background-color: #e5941f !important;
+    color: #000 !important;
+}
+.keep-black{
+  color: black !important;
+  font-weight: bolder !important;
+}
+</style>
+
+<section class="section-content padding-y bg">
+  <div class="container">
+    <h4 class="text-center mb-10 keep-black" >Review Your Order and Make Payment</h4>
+    <div class="row">
+      
+      <!-- Left Column - Order Details -->
+      <aside class="col-lg-8">
+        <!-- Billing Address Card -->
+        <div class="card">
+          <h5 class="card-header">Billing Address</h5>
+          <div class="card-body">
+            <p class="card-text mb-0">{{ order.first_name }} {{ order.last_name }}</p>
+            <p class="card-text mb-0">{{ order.country }}, {{ order.city }}, {{ order.district }}</p>
+            <p class="card-text mb-0">{{ order.email }}</p>
+            <p class="card-text mb-0">{{ order.phone }}</p>
+            {% if order.order_note %}
+              <b>Order Note: </b> {{ order.order_note }}
+            {% endif %}
+          </div>
+        </div>
+        
+        <!-- Payment Method Card -->
+        <div class="card">
+          <h5 class="card-header">Payment Method</h5>
+          <div class="card-body">
+            <p class="card-text">MTN Momo, VISA, MASTER CARD</p>
+          </div>
+        </div>
+        
+        <!-- Products Review Card -->
+        <div class="card">
+          <h5 class="card-header">Review Products</h5>
+          <div class="card-body">
+            <table class="table table-borderless table-shopping-cart">
+              <thead class="text-muted">
+                <tr class="small text-uppercase">
+                  <th scope="col">Product</th>
+                  <th scope="col" width="120">Quantity</th>
+                  <th scope="col" width="120">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cart_item in cart_items %}
+                <tr>
+                  <td>
+                    <figure class="itemside align-items-center">
+                      <div class="aside">
+                        <img src="{{ cart_item.product.images.url }}" class="img-sm" alt="{{ cart_item.product.product_name }}">
+                      </div>
+                      <figcaption class="info">
+                        <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                        <p class="text-muted small">
+                          {% if cart_item.variations.all %}
+                            {% for item in cart_item.variations.all %}
+                              {{ item.variation_category|capfirst }} : {{ item.variation_value|capfirst }}<br>
+                            {% endfor %}
+                          {% endif %}
+                        </p>
+                      </figcaption>
+                    </figure>
+                  </td>
+                  <td>
+                    <label>{{ cart_item.quantity }}</label>
+                  </td>
+                  <td>
+                    <div class="price-wrap">
+                      <var class="price">RWF {{ cart_item.sub_total }}</var>
+                      <small class="text-muted"> RWF {{ cart_item.product.price }} each </small>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Column - Payment Summary -->
+      <aside class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Total price:</dt>
+              <dd class="text-right">RWF {{ total }}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Tax:</dt>
+              <dd class="text-right">RWF {{ tax }}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Grand Total:</dt>
+              <dd class="text-right text-dark b"><strong>RWF {{ grand_total }}</strong></dd>
+            </dl>
+            <hr>
+            <p class="text-center mb-3">
+              <img src="{% static 'images/misc/payments.png' %}" height="26" alt="Payment methods">
+            </p>
+
+            <!-- Flutterwave Button Only -->
+            <form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
+              <input type="hidden" name="public_key" value="FLWPUBK_TEST-a5cec53facb9632b20c905e0d28c3b54-X" />
+              <input type="hidden" name="tx_ref" value="{{ order.order_number }}" />
+              <input type="hidden" name="amount" value="{{ grand_total|floatformat:2 }}" />
+              <input type="hidden" name="currency" value="RWF" />
+              <input type="hidden" name="payment_options" value="card,ussd,mobilemoneyrwanda" />
+              <input type="hidden" name="redirect_url" value="http://127.0.0.1:8000{% url 'flutterwave_callback' %}?order_id={{ order.order_number }}" />
+              <input type="hidden" name="meta[token]" value="12345" />
+              <input type="hidden" name="customer[name]" value="{{ order.first_name }} {{ order.last_name }}" />
+              <input type="hidden" name="customer[email]" value="{{ order.email }}" />
+              <input type="hidden" name="configurations[session_duration]" value="10" />
+              <input type="hidden" name="configurations[max_retry_attempt]" value="5" />
+              <button type="submit" class="btn btn-warning btn-block" >
+                <i class="fas fa-bolt"></i> Pay Now 
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Flutterwave Script -->
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

@@ -3,107 +3,507 @@
 
 {% block content %}
 
+<style>
+/* Enhanced Add to Cart Button */
+.add-to-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid #000;
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 15px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #fff;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.add-to-cart-btn i {
+    margin-right: 10px;
+}
+
+/* Dark mode styles for the add to cart button */
+body.dark-mode .add-to-cart-btn {
+    border: 2px solid #fff !important;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+body.dark-mode .add-to-cart-btn:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+/* Out of stock button style */
+.out-of-stock-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid #ccc;
+    background-color: #ccc !important;
+    color: #666 !important;
+    border-radius: 4px;
+    cursor: not-allowed;
+    margin-top: 15px;
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Review submit button style (kept as standard button) */
+.review-submit-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    border: 2px solid #000 !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.review-submit-btn:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+body.dark-mode .review-submit-btn {
+    border: 2px solid #fff;
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode .review-submit-btn:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+/* Form control styling */
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 9px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.1) !important;
+}
+
+body.dark-mode .form-control {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .form-control:focus {
+    border-color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.1);
+}
+
+/* Product gallery styling */
+.gallery-wrap {
+    padding: 20px;
+}
+
+.carousel-item img {
+    border-radius: 8px;
+    object-fit: cover;
+    height: 400px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+    left: 15px;
+}
+
+.carousel-control-next {
+    right: 15px;
+}
+
+/* Product info styling */
+.content-body {
+    padding: 20px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+}
+
+body.dark-mode .price {
+    color: #fff;
+}
+
+/* Rating stars styling - SIMPLIFIED FOR FULL STARS ONLY */
+.rate {
+    display: inline-block;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.rate > input {
+    display: none;
+}
+
+.rate > label {
+    float: right;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+    line-height: 30px;
+}
+
+.rate > label:before {
+    content: '\2605';
+}
+
+
+/* Review section styling */
+.box.mb-3 {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .box.mb-3 {
+    border-color: #444;
+    background-color: #1e1e1e !important;
+}
+/* ================= STAR RATING ================= */
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .add-to-cart-btn {
+        max-width: 100%;
+    }
+}
+body.dark-mode .rate > input:checked ~ label,
+body.dark-mode .rate > label:hover,
+body.dark-mode .rate > label:hover ~ label {
+    color:#ffd700 !important;
+    text-shadow: 0 0 3px #fff; /* subtle glow for better visibility */
+}
+
+/* ================= REVIEW SECTION DARK MODE ================= */
+/* ================= REVIEW SECTION DARK MODE ONLY ================= */
+body.dark-mode .review-section-dark,
+body.dark-mode .review-section-dark h3,
+body.dark-mode .review-section-dark h5,
+body.dark-mode .review-section-dark h6,
+body.dark-mode .review-section-dark p,
+body.dark-mode .review-section-dark label,
+body.dark-mode .review-section-dark span,
+body.dark-mode .review-section-dark strong {
+    color: #0c0c0c !important; /* white text in dark mode only for this section */
+}
+
+body.dark-mode .review-section-dark input.form-control,
+body.dark-mode .review-section-dark textarea.form-control {
+    background-color: #333 !important; /* dark background for inputs */
+    color: #fff !important; /* white text inside inputs */
+    border-color: #555 !important;
+}
+
+
+/* ================= CUSTOMER REVIEW SECTION DARK MODE TEXT ONLY ================= */
+body.dark-mode .customer-reviews1,
+body.dark-mode .customer-reviews1 ,
+body.dark-mode .customer-reviews1 h5,
+body.dark-mode .customer-reviews1 h6,
+body.dark-mode .customer-reviews1 p,
+body.dark-mode .customer-reviews1 span,
+body.dark-mode .customer-reviews1 strong {
+    color: #fff !important; /* White text in dark mode */
+}
+
+body.dark-mode .customer-reviews1 .box {
+    background-color: #1e1e1e; /* dark background for review boxes */
+    border-color: #444; /* dark border */
+}
+
+/* Display stars in reviews */
+.rating-star {
+    color: #ffd700; /* gold stars */
+    font-size: 18px;
+}
+
+body.dark-mode .rating-star {
+    color:#ffd700 !important; /* softer gold in dark mode */
+}
+
+.rating-star i {
+  color: #ccc; /* empty star */
+}
+.rating-star i.filled {
+  color: #ffd700; /* gold for filled star */
+}
+body.dark-mode .rating-star i {
+  color: #555; /* dim stars in dark mode */
+}
+body.dark-mode .rating-star i.filled {
+  color: #ffd700; /* soft gold in dark mode */
+}
+/* Review star rating (for selecting stars in the form) */
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc; /* Default unselected star */
+  transition: color 0.2s ease-in-out;
+}
+
+/* Hover + checked (Light Mode) */
+.rating input[type="radio"]:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color:#ffd700 !important; /* Bright Gold */
+}
+
+/* Dark Mode support */
+.dark-mode .rating label {
+  color: #555; /* Dim stars on dark */
+}
+
+.dark-mode .rating input[type="radio"]:checked ~ label,
+.dark-mode .rating label:hover,
+.dark-mode .rating label:hover ~ label {
+  color:#ffd700 !important; /* Same Gold in dark mode */
+}
+
+
+</style>
+
+<script>
+	
+</script>
+
 
 <section class="section-content padding-y bg">
 <div class="container">
 
 <!-- ============================ COMPONENT 1 ================================= -->
 <div class="card">
-	<div class="row no-gutters">
-		<aside class="col-md-6">
-<article class="gallery-wrap"> 
-	<div class="img-big-wrap">
-	   <a href="#"><img src="{{ single_product.images.url }}"></a>
-	</div> <!-- img-big-wrap.// -->
-	
-</article> <!-- gallery-wrap .end// -->
-		</aside>
-		<main class="col-md-6 border-left">
-			<form action="{% url 'add_cart' single_product.id %}" method="POST">
-				{% csrf_token %}
-<article class="content-body">
+  <div class="row no-gutters">
+    <aside class="col-md-6">
+      <article class="gallery-wrap">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for image in single_product.gallery_images.all %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.alt_text }}">
+              </div>
+            {% endfor %}
+          </div>
 
-<h2 class="title">{{ single_product.product_name}}</h2>
+          <!-- Carousel controls -->
+          <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
 
-<div class="mb-3"> 
-	<var class="price h4">Rwf {{ single_product.price }}</var> 
-</div> 
+          <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </article>
+    </aside>
 
-<p>{{ single_product.description }}</p>
+    <main class="col-md-6 border-left">
+      <form action="{% url 'add_cart' single_product.id %}" method="POST">
+        {% csrf_token %}
+        <article class="content-body">
+          <h2 class="title">{{ single_product.product_name}}</h2>
 
+          <div class="mb-3"> 
+            <var class="price h4">Rwf {{ single_product.price }}</var> 
+          </div> 
 
-<hr>
-	<div class="row">
-		<div class="item-option-select">
-			<h6>Choose Color</h6>
-			<select name="color" class="form-control" required>
-				<option value="" disabled selected>Select</option>
-				{% for i in single_product.variation_set.colors %}
-				<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
-				{% endfor %}
-				
-			</select> 
-		</div>
-	</div> 
-	<div class="row">
-		<div class="item-option-select">
-			<h6>Select Size</h6>
-			<select name="size" class="form-control">
-				<option value="" disabled selected>Select</option>
-				{% for i in single_product.variation_set.sizes %}
-				<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
-				{% endfor %}
-			</select>
-		</div>
-	</div> 
-	<hr>
-    {% if single_product.stock <= 0 %}
-    <h5 class='text-danger'>Out of stock </h5>
-    {% else  %}
-	<button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
-       
-	{% endif %}
-</article> <!-- product-info-aside .// -->
-</form>
-		</main> <!-- col.// -->
-	</div> <!-- row.// -->
+          <p>{{ single_product.description }}</p>
+
+          <hr>
+          <div class="row">
+            <div class="item-option-select">
+              <h6>Choose Color</h6>
+              <select name="color" class="form-control" required>
+                <option value="" disabled selected>Select</option>
+                {% for i in single_product.variation_set.colors %}
+                <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                {% endfor %}
+              </select> 
+            </div>
+          </div> 
+          <div class="row">
+            <div class="item-option-select">
+              <h6>Select Size</h6>
+              <select name="size" class="form-control">
+                <option value="" disabled selected>Select</option>
+                {% for i in single_product.variation_set.sizes %}
+                <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div> 
+          <hr>
+          {% if single_product.stock <= 0 %}
+            <button type="button" class="out-of-stock-btn" disabled>
+              <span class="text">Out of Stock</span>
+            </button>
+          {% else %}
+            <button type="submit" class="add-to-cart-btn">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+          {% endif %}
+        </article> <!-- product-info-aside .// -->
+      </form>
+    </main> <!-- col.// -->
+  </div> <!-- row.// -->
 </div> <!-- card.// -->
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 <br>
 
 <div class="row">
-			<div class="col-md-9">
+  <div class="col-md-9">
+    <form action="{% url 'submit_review' single_product.id %}" method="post">
+      {% csrf_token %}
+      <div class="col-md-9 review-section review-section-dark">
 
-	<header class="section-heading">
-		<h3>Customer Reviews </h3>  
-		
-	</header>
+      <div class="col">
+      <h5>Write your Review</h5>
+      <div>
+        <label for="">How do you rate this product?</label>
+        <br>
+        <!-- SIMPLIFIED 5-STAR RATING (NO HALF STARS) -->
+        <div class="rate">
+          <input type="radio" name="rating" id="rating5" value="5" required/><label for="rating5" title="5 stars"></label>
+          <input type="radio" name="rating" id="rating4" value="4" required/><label for="rating4" title="4 stars"></label>
+          <input type="radio" name="rating" id="rating3" value="3" required/><label for="rating3" title="3 stars"></label>
+          <input type="radio" name="rating" id="rating2" value="2" required/><label for="rating2" title="2 stars"></label>
+          <input type="radio" name="rating" id="rating1" value="1" required/><label for="rating1" title="1 star"></label>
+        </div>
+        <br>
+        
+        Review Title:
+        <input type="text" class="form-control" name="subject" required>
+        <br>
+        Review:
+        <textarea name="review" rows="4" class="form-control"  required></textarea>
+        <br>
+        {% if user.is_authenticated %}
+          {% if orderproduct %}
+            <input type="submit" value="Submit Review" class="review-submit-btn">
+          {% else %}
+            <p>You must purchase this product to post a review. </p>
+          {% endif %}
+        {% else %}
+          <p>You must be logged in to post a review. <span><a href="{% url 'login' %}">Login now</a></span></p>
+        {% endif %}
+        <br>
+      </div>
+      {% include 'includes/alerts.html' %}
+    </form>
+    <br>
+    <header class="section-heading">
+      <div class="customer-reviews1">
+  <header class="section-heading">
+    <h3>Customer Reviews</h3>  
+  </header>
 
-	<article class="box mb-3">
-		<div class="icontext w-100">
-			<img src="{% static './images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle">
-			<div class="text">
-				<span class="date text-muted float-md-right">24.04.2020 </span>  
-				<h6 class="mb-1">Mike John </h6>
-				
-			</div>
-		</div> <!-- icontext.// -->
-		<div class="mt-3">
-			<p>
-				Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip
-			</p>	
-		</div>
-	</article>
+  {% for review in reviews %}
+  <article class="box mb-3">
+    <div class="icontext w-100">
+      <div class="text">
+        <span class="date text-muted float-md-right">{{ review.updated_at|date:"M d, Y" }}</span>  
+        <h6 class="mb-1">{{ review.user.full_name }}</h6>
+      </div>
+    </div>
+    
+    <!-- Display Rating Stars -->
+    <div class="rating-star mb-2">
+      {% for i in "12345"|make_list %}
+        {% if forloop.counter <= review.rating %}
+          <i class="fa fa-star filled"></i>
+        {% else %}
+          <i class="fa fa-star"></i>
+        {% endif %}
+      {% endfor %}
+      <strong>({{ review.rating }}/5)</strong>
+    </div>
+    
+    <div class="mt-2">
+      <h6>{{ review.subject }}</h6>
+      <p>{{ review.review }}</p>  
+    </div>
+  </article>
+{% empty %}
+  <p>No reviews yet. Be the first to review this product!</p>
+{% endfor %}
 
-	
+</div>
 
-	</div> <!-- col.// -->
 </div> <!-- row.// -->
-
-
+</div>
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->

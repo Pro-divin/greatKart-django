@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* ==================== BASE STYLES ==================== */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000 !important;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  /* ==================== SUCCESS MESSAGE ==================== */
+  .success-container {
+    text-align: center;
+    padding: 60px 20px 30px;
+    
+  }
+
+  .success-container i {
+    font-size: 70px;
+    color: #28A745 !important;
+  }
+
+  .success-container h2 {
+    font-weight: bold;
+    font-size: 28px;
+    margin-top: 20px;
+    color: #28A745 !important;
+  }
+
+  .btn-shop {
+    background-color: #000000;
+    color: #ffffff !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-shop:hover {
+    background-color: #333333;
+    color: #ffffff !important;
+  }
+
+  /* ==================== INVOICE BOX ==================== */
+  .invoice-box {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff !important;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .invoice-header img {
+    max-height: 50px;
+  }
+
+  .invoice-details ul,
+  .invoice-to ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .invoice-details ul li,
+  .invoice-to ul li {
+    margin-bottom: 4px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .table th {
+    background-color: #f5f5f5 !important;
+  }
+
+  .table tfoot th {
+    font-weight: bold;
+  }
+
+  .invoice-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #555 !important;
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 768px) {
+    .invoice-box {
+      padding: 20px;
+    }
+
+    .invoice-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  /* ==================== DARK MODE ==================== */
+  body.dark-mode {
+    background-color: #121212;
+    color: #0f0f0f;
+  }
+
+  body.dark-mode .invoice-box {
+    background-color: #1e1e1e;
+    color: #0c0c0c;
+    border-color: #444;
+  }
+
+  body.dark-mode .invoice-box th {
+    background-color: #2a2a2a;
+    color: #141313;
+  }
+
+  body.dark-mode .invoice-box td {
+    color: #0a0a0a;
+  }
+
+  body.dark-mode .invoice-footer {
+    color: #0e0e0e;
+  }
+
+  body.dark-mode .success-container i {
+    color: #28A745;
+  }
+
+  body.dark-mode .success-container h2 {
+    color: #28A745;
+  }
+
+  body.dark-mode .btn-shop {
+    background-color: #ffffff;
+    color: #000000 !important;
+  }
+
+  body.dark-mode .btn-shop:hover {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+</style>
+
+<div class="success-container">
+  <i class="fas fa-check-circle"></i>
+  <h2>Payment Successful</h2>
+  <a href="{% url 'store' %}" class="btn-shop">Shop More</a>
+</div>
+
+<div class="invoice-box">
+  <div class="invoice-header">
+    <img src="{% static '/images/logo.jpeg' %}" alt="Juru Collection Logo">
+    <h3>
+      <span style="color: #000000;">JURU</span> <span style="font-weight: 400;">Collection</span>
+    </h3>
+  </div>
+
+  <div class="invoice-to">
+    <ul>
+      <li><strong>Invoiced To:</strong></li>
+      <li>{{ order.full_name }}</li>
+      <li>{{ order.full_address }}</li>
+      <li>{{ order.city }}, {{ order.district }}</li>
+      <li>{{ country }}</li>
+    </ul>
+  </div>
+
+  <div class="invoice-details" style="margin-top: 30px;">
+    <ul>
+      <li><strong>Order Number:</strong> #{{ order_number }}</li>
+      <li><strong>Transaction ID:</strong> {{ transID }}</li>
+      <li><strong>Order Date:</strong> {{ order.created_at }}</li>
+      <li><strong>Status:</strong> {{ payment.status }}</li>
+    </ul>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th style="width: 10%;">Qty</th>
+          <th style="width: 25%;">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in ordered_products %}
+        <tr>
+          <td>{{ item.product.product_name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>${{ item.product_price }} RWF</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="2" class="text-right">Subtotal:</th>
+          <th>${{ subtotal }}</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="text-right">Tax:</th>
+          <th>${{ order.tax }}</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="text-right">Grand Total:</th>
+          <th>${{ order.order_total }} RWF</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="invoice-footer">
+    <p>Thank you for shopping with Juru Collection!</p>
+  </div>
+</div>
+
+<script>
+  // Optional: Toggle dark mode for testing
+  // document.body.classList.toggle('dark-mode');
+</script>
+
+{% endblock %}

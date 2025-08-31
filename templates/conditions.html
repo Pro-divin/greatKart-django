@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div>
+                <h1>Authentic Rwandan Clothing</h1>
+                <p>Discover our unique collection of traditional and modern Rwandan attire, crafted with care and cultural significance.</p>
+                <a href="{% url 'home'%}" class="btn">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products">
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Rwandan Dress" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Traditional Mushanana</h3>
+                  
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Rwandan Shirt" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Modern Imigongo Shirt</h3>
+                    
+                </div>
+            </div>
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Rwandan Accessories" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Handcrafted Accessories</h3>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conditions Section -->
+    <section class="conditions">
+        <div class="container conditions-content">
+            <h2 class="section-title">Website Terms & Conditions</h2>
+            
+            <div class="condition-item">
+                <h3 class="condition-title"><i class="fas fa-shopping-cart"></i> Ordering Process</h3>
+                <p>All orders placed through the Juru Collection website are subject to product availability. After placing an order, you will receive an order confirmation email within 24 hours.</p>
+            </div>
+            
+            <div class="condition-item">
+                <h3 class="condition-title"><i class="fas fa-truck"></i> Shipping Policy</h3>
+                <p>We ship worldwide. Domestic orders typically arrive within 3-5 business days. International orders may take 7-14 business days. Shipping costs are calculated at checkout.</p>
+            </div>
+            
+            <div class="condition-item">
+                <h3 class="condition-title"><i class="fas fa-undo"></i> Returns & Exchanges</h3>
+                <p>We accept returns within 30 days of purchase. Items must be unworn, unwashed, and with original tags attached. Sale items are final and cannot be returned.</p>
+            </div>
+            
+            <div class="condition-item">
+                <h3 class="condition-title"><i class="fas fa-lock"></i> Privacy Policy</h3>
+                <p>Juru Collection respects your privacy. We collect personal information only to process orders and improve your shopping experience. We never share your data with third parties.</p>
+            </div>
+            
+            <div class="condition-item">
+                <h3 class="condition-title"><i class="fas fa-credit-card"></i> Payment Security</h3>
+                <p>All transactions are secure and encrypted. We accept Visa, MasterCard, American Express, and PayPal. Payment information is never stored on our servers.</p>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-black: #000;
+    --secondary-black: #222;
+    --primary-white: #fff;
+    --secondary-white: #f8f8f8;
+    --accent-gray: #888;
+    --highlight: #d4af37;
+}
+
+body {
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--primary-white);
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--highlight);
+    color: var(--primary-black);
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--primary-white);
+    transform: translateY(-3px);
+}
+
+/* Products Section */
+.section-title {
+    text-align: center;
+    margin: 60px 0 40px;
+    font-size: 32px;
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-black);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.product {
+    background-color: var(--secondary-white);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--secondary-black);
+}
+
+/* Conditions Section */
+.conditions {
+    background-color: var(--secondary-white);
+    padding: 60px 0;
+}
+
+.conditions-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.condition-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--primary-white);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.condition-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.condition-title i {
+    margin-right: 10px;
+    color: var(--highlight);
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    .hero-content h1,
+    .hero-content p,
+    .section-title,
+    .product-title,
+    .product-price,
+    .condition-title,
+    .conditions p {
+        color: #fff !important;
+    }
+
+    .product {
+        background-color: #1e1e1e !important;
+    }
+
+    .conditions {
+        background-color: #121212 !important;
+    }
+
+    .condition-item {
+        background-color: #1e1e1e !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+}
+</style>
+{% endblock %}
