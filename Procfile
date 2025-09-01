@@ -1,1 +1,1 @@
-web: gunicorn greatKart.wsgi:application --bind 0.0.0.0:$PORT --worker-tmp-dir /dev/shm
+web: gunicorn greatKart.wsgi:application 
