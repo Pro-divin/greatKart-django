@@ -91,14 +91,18 @@ body {
 }
 
 /* ================= BRAND ================= */
+/* Reduce size of brand title */
 .brand-title {
-  font-weight: bold;
-  margin: 0;
-  font-size: 14px;
-  color: black !important;
+    font-size: 12px !important;  /* smaller than current 14px */
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.1;            /* optional: tighten vertical spacing */
 }
+
+/* Optional: slightly reduce spacing between parts */
 .brand-part1, .brand-part2 {
-  color: var(--text-color);
+    display: inline-block;
+    margin: 0 1px;               /* reduce horizontal gap */
 }
 
 /* Logo image only */
