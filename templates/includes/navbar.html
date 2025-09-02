@@ -538,6 +538,95 @@ body.dark-mode .dropdown-item:hover {
   }
 }
 
+
+/* ================= NAVBAR HORIZONTAL FIX ================= */
+.header-main .row.align-items-center {
+    flex-wrap: nowrap !important; /* Never wrap on small devices */
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.header-main .col-auto,
+.header-main .col-lg-2,
+.header-main .col-lg,
+.header-main .col-sm,
+.header-main .col-md {
+    flex: 0 0 auto; /* Keep width automatic */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.brand-wrap, .logo-link {
+    flex: 0 0 auto;
+    margin: 0 !important;
+    text-align: center;
+}
+
+.col-auto.d-flex.align-items-center {
+    flex: 0 0 auto; 
+    justify-content: flex-end; /* Keep user info & icons right */
+}
+
+.category-wrap.dropdown {
+    flex: 0 0 auto;
+    margin: 0 10px;
+}
+
+.user-info {
+    flex-direction: row !important;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.user-info a,
+.widget-header,
+#modeToggle {
+    margin: 0 5px;
+}
+
+.search-wrapper {
+    flex: 0 0 auto;
+    margin: 0 10px;
+}
+
+/* Keep logo size consistent */
+.logo-img {
+    height: 120px;
+    width: auto;
+}
+
+/* Navbar links spacing */
+.navbar .nav-link,
+.header-main a {
+    padding: 0 5px;
+    margin: 0 2px;
+}
+
+/* Disable stacking for small devices */
+@media (max-width: 991px) {
+    .header-main .row.align-items-center {
+        flex-wrap: nowrap !important;
+        justify-content: space-between;
+    }
+    .brand-wrap, .logo-link, .category-wrap.dropdown, .col-auto.d-flex.align-items-center {
+        flex: 0 0 auto;
+        margin: 0 5px;
+    }
+    .search-wrapper {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .logo-img {
+        height: 100px;
+    }
+    .brand-title {
+        font-size: 18px;
+    }
+}
 </style>
 
 <script>
