@@ -395,26 +395,46 @@ body.dark-mode .dropdown-item:hover {
 /* ===== Tablets (<=991px) ===== */
 
 /* ===== Tablets & Phones (<=991px) ===== */
+/* ===== First row fix for tablets & phones (<=991px) ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
     display: flex;
-    flex-wrap: wrap !important;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* make first row elements spread evenly */
   }
 
-  /* First row: logo + brand + search + user info */
-  .header-main .col-auto:first-child,     /* brand title */
-  .header-main .col-lg-2,                 /* logo image */
-  .header-main .search-wrapper,           /* search */
-  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
+  /* First row elements: brand, logo, search, user-info */
+  .header-main .col-auto:first-child, /* brand title */
+  .header-main .col-lg-2,             /* logo image */
+  .header-main .search-wrapper,
+  .header-main .col-auto.ml-auto {    /* user info + cart + toggle */
     order: 1;
-    flex: 1 1 auto;
+    flex: 0 1 auto;                   /* allow shrinking if needed */
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-width: 0;
   }
+
+  /* Brand + Logo should be close together */
+  .header-main .col-auto:first-child {
+    margin-right: 5px;
+  }
+  .header-main .col-lg-2 {
+    margin-left: 5px;
+  }
+
+  /* Search field shrink */
+  .search-wrapper {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+  }
+
+  /* User info & cart stays on right */
+  .header-main .col-auto.ml-auto {
+    justify-content: flex-end;
+  }
+}
+
 
   /* Second row: categories + store + about (centered) */
   .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
