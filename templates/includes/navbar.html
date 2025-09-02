@@ -394,74 +394,71 @@ body.dark-mode .dropdown-item:hover {
 
 /* ===== Tablets (<=991px) ===== */
 /* ===== Tablets & Phones (<=991px) ===== */
+/* ===== Force TWO ROW layout on tablets/phones ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
+    display: flex;
     flex-wrap: wrap !important;
-    justify-content: space-between !important;
-    gap: 4px !important;
-  }
-
-  /* ----- First row ----- */
-  .first-row {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
   }
 
-  .first-row .left-side {
+  /* First row: logo image + brand title + search icon + user info */
+  .header-main .col-auto:first-child,     /* brand title */
+  .header-main .col-lg-2,                 /* logo image */
+  .header-main .search-wrapper,           /* search */
+  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
+    order: 1; /* group them together */
+  }
+
+  /* Make them share a single row */
+  .header-main .col-auto:first-child,
+  .header-main .col-lg-2,
+  .header-main .search-wrapper,
+  .header-main .col-auto.ml-auto {
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
-    gap: 6px;
-  }
-
-  .first-row .right-side {
-    text-align: right;
-  }
-
-  /* ----- Second row ----- */
-  .second-row {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 2px;
+    min-width: 0;
   }
 
-  /* Font sizes shrink */
-  .brand-title { font-size: 12px !important; }
+  /* Second row: categories + store + about */
+  .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
+  .header-main .col-auto.d-flex {            /* store + about */
+    order: 2;
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Compact logo and fonts */
+  .logo-img { height: 36px !important; }
+  .brand-title { font-size: 12px !important; margin-left: 4px; }
   .navbar .nav-link,
   .category-wrap .btn,
   .user-info a,
   #modeToggle { font-size: 0.7rem !important; }
   .search-field input { width: 90px !important; font-size: 0.7rem !important; }
-
-  /* Logo smaller */
-  .logo-img { height: 40px !important; }
 }
 
 /* ===== Phones (<=575px) ===== */
 @media (max-width: 575px) {
-  .first-row, .second-row {
-    gap: 4px !important;
-  }
-
+  .logo-img { height: 26px !important; }
   .brand-title { font-size: 10px !important; }
-  .logo-img { height: 28px !important; }
 
   .navbar .nav-link,
   .category-wrap .btn,
   .user-info a,
   #modeToggle {
     font-size: 0.55rem !important;
-    margin: 0 1px !important;
+    margin: 0 2px !important;
     padding: 1px 2px !important;
   }
-  .search-field input {
-    width: 70px !important;
-    font-size: 0.55rem !important;
-  }
+
+  .search-field input { width: 70px !important; font-size: 0.55rem !important; }
 }
+
 
 
 </style>
