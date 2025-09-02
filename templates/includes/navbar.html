@@ -394,7 +394,6 @@ body.dark-mode .dropdown-item:hover {
 
 /* ===== Tablets (<=991px) ===== */
 /* ===== Tablets & Phones (<=991px) ===== */
-/* ===== Force TWO ROW layout on tablets/phones ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
     display: flex;
@@ -403,19 +402,12 @@ body.dark-mode .dropdown-item:hover {
     justify-content: space-between;
   }
 
-  /* First row: logo image + brand title + search icon + user info */
+  /* First row: logo + brand + search + user info */
   .header-main .col-auto:first-child,     /* brand title */
   .header-main .col-lg-2,                 /* logo image */
   .header-main .search-wrapper,           /* search */
   .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
-    order: 1; /* group them together */
-  }
-
-  /* Make them share a single row */
-  .header-main .col-auto:first-child,
-  .header-main .col-lg-2,
-  .header-main .search-wrapper,
-  .header-main .col-auto.ml-auto {
+    order: 1;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
@@ -423,16 +415,18 @@ body.dark-mode .dropdown-item:hover {
     min-width: 0;
   }
 
-  /* Second row: categories + store + about */
+  /* Second row: categories + store + about (centered) */
   .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
   .header-main .col-auto.d-flex {            /* store + about */
     order: 2;
-    flex: 1 1 auto;
+    flex: 1 1 100%;         /* take full width */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* center horizontally */
+    gap: 6px;                /* small spacing */
+    margin-top: 4px;
   }
 
-  /* Compact logo and fonts */
+  /* Compact adjustments */
   .logo-img { height: 36px !important; }
   .brand-title { font-size: 12px !important; margin-left: 4px; }
   .navbar .nav-link,
@@ -457,6 +451,12 @@ body.dark-mode .dropdown-item:hover {
   }
 
   .search-field input { width: 70px !important; font-size: 0.55rem !important; }
+
+  /* Reduce gap between Store, About, Categories */
+  .header-main .col-lg.col-sm.col-md.col-6,
+  .header-main .col-auto.d-flex {
+    gap: 4px;
+  }
 }
 
 
