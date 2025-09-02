@@ -282,13 +282,25 @@ body.dark-mode .dropdown-item:hover {
 }
 
 /* ========== Compact Navbar ========== */
+/* ===== Reset Row & Columns ===== */
 .header-main .row.align-items-center {
-    padding: 0 !important;
-    margin: 0 !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
+  flex-wrap: nowrap !important;    /* prevent stacking */
+  justify-content: flex-start !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important; /* kill all spacing */
 }
+.header-main .col-auto,
+.header-main .col-lg-2,
+.header-main .col-lg,
+.header-main .col-sm,
+.header-main .col-md {
+  flex: 0 1 auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 /* Brand & Logo */
 .brand-wrap, .brand-title, .logo-link, .logo-img {
     margin: 0 !important;
@@ -297,10 +309,12 @@ body.dark-mode .dropdown-item:hover {
 }
 
 .header-main .brand-wrap,
-.header-main .brand-title {
-    margin: 0;           /* remove extra margin */
-    line-height: 1;      /* tighten vertical space */
+.brand-title {
+  font-size: 14px !important;
+  margin: 0 2px !important;
+  white-space: nowrap; /* prevent wrapping */
 }
+
 
 .header-main .col-auto,
 .header-main .col-lg-2 {
@@ -325,9 +339,10 @@ body.dark-mode .dropdown-item:hover {
 .category-wrap .btn,
 .user-info a,
 #modeToggle {
-    font-size: 0.7rem !important; /* very small text */
-    margin: 0 2px !important;
-    padding: 1px 2px !important;
+  font-size: 0.8rem !important;
+  margin: 0 3px !important;
+  padding: 2px 4px !important;
+  white-space: nowrap;
 }
 
 
@@ -341,8 +356,9 @@ body.dark-mode .dropdown-item:hover {
 
 /* Keep logo size unchanged */
 .logo-img {
-    height: 120px; /* keep the original logo height */
-    width: auto;
+  height: 50px !important; /* desktop smaller */
+  width: auto;
+  margin: 0 2px !important;
 }
 
 /* ===== Compact Navbar ===== */
@@ -401,56 +417,50 @@ body.dark-mode .dropdown-item:hover {
     height: 120px; /* unchanged */
     width: auto;
 }
-
-/* Responsive: phones (<=575px) */
-@media (max-width: 575px) {
-    .header-main .row.align-items-center {
-        flex-wrap: nowrap !important;
-        justify-content: flex-start !important;
-    }
-    .logo-img {
-        height: 35px !important;
-    }
-    .brand-title {
-        font-size: 10px !important;
-    }
-    .navbar .nav-link,
-    .category-wrap .btn,
-    .user-info a,
-    #modeToggle {
-        font-size: 0.6rem !important;
-        margin: 0 1px !important;
-        padding: 1px !important;
-    }
-    .search-field input {
-        width: 60px !important;
-        font-size: 0.6rem !important;
-        padding: 1px 1px !important;
-    }
+.search-field input {
+  width: 120px !important;
+  max-width: 25vw !important; /* relative, no overflow */
+  font-size: 0.8rem !important;
+  padding: 2px 4px !important;
 }
 
-@media (max-width: 575px) {
-    .brand-title {
-        font-size: 8px !important;
-    }
-
-    .logo-img {
-        height: 40px !important;
-    }
-
-    .navbar .nav-link,
-    .category-wrap .btn,
-    .user-info a,
-    #modeToggle {
-        font-size: 0.46rem !important;
-        margin: 0 1px !important;
-        padding: 1px 1px !important;
-    }
-
-    .search-field input {
-        width: 60px !important;
-    }
+/* ===== Right icons ===== */
+.widget-header .icon,
+#modeToggle i {
+  font-size: 16px !important;
+  margin: 0 2px !important;
 }
+
+/* ===== Tablets (<=991px) ===== */
+@media (max-width: 991px) {
+  .logo-img { height: 40px !important; }
+  .brand-title { font-size: 12px !important; }
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle { font-size: 0.7rem !important; }
+  .search-field input { width: 100px !important; }
+}
+
+/* ===== Phones (<=575px) ===== */
+@media (max-width: 575px) {
+  .logo-img { height: 28px !important; }
+  .brand-title { font-size: 10px !important; }
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle {
+    font-size: 0.55rem !important;
+    margin: 0 1px !important;
+    padding: 1px 2px !important;
+  }
+  .search-field input {
+    width: 70px !important;
+    font-size: 0.55rem !important;
+  }
+}
+
+
 </style>
 
 <script>
