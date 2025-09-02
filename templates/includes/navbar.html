@@ -91,18 +91,14 @@ body {
 }
 
 /* ================= BRAND ================= */
-/* Reduce size of brand title */
 .brand-title {
-    font-size: 12px !important;  /* smaller than current 14px */
-    font-weight: bold;
-    margin: 0;
-    line-height: 1.1;            /* optional: tighten vertical spacing */
+  font-weight: bold;
+  margin: 0;
+  font-size: 14px;
+  color: black !important;
 }
-
-/* Optional: slightly reduce spacing between parts */
 .brand-part1, .brand-part2 {
-    display: inline-block;
-    margin: 0 1px;               /* reduce horizontal gap */
+  color: var(--text-color);
 }
 
 /* Logo image only */
@@ -399,50 +395,26 @@ body.dark-mode .dropdown-item:hover {
 /* ===== Tablets (<=991px) ===== */
 
 /* ===== Tablets & Phones (<=991px) ===== */
-/* ===== First row fix for tablets & phones (<=991px) ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
     align-items: center;
-    justify-content: space-between; /* make first row elements spread evenly */
+    justify-content: space-between;
   }
 
-  /* First row elements: brand, logo, search, user-info */
-  .header-main .col-auto:first-child, /* brand title */
-  .header-main .col-lg-2,             /* logo image */
-  .header-main .search-wrapper,
-  .header-main .col-auto.ml-auto {    /* user info + cart + toggle */
+  /* First row: logo + brand + search + user info */
+  .header-main .col-auto:first-child,     /* brand title */
+  .header-main .col-lg-2,                 /* logo image */
+  .header-main .search-wrapper,           /* search */
+  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
     order: 1;
-    flex: 0 1 auto;                   /* allow shrinking if needed */
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    min-width: 0;
   }
-
-  /* Brand + Logo should be close together */
-  .header-main .col-auto:first-child {
-    margin-right: 5px;
-  }
-  .header-main .col-lg-2 {
-    margin-left: 5px;
-  }
-
-  /* Search field shrink */
-  .search-wrapper {
-    flex: 1 1 auto;
-    justify-content: flex-end;
-  }
-
-  /* User info & cart stays on right */
-  .header-main .col-auto.ml-auto {
-    justify-content: flex-end;
-  }
-}
-@media (max-width: 575px) {
-    .brand-title {
-        font-size: 9px !important;
-    }
-}
 
   /* Second row: categories + store + about (centered) */
   .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
