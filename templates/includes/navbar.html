@@ -467,6 +467,55 @@ body.dark-mode .dropdown-item:hover {
   .search-field input { width: 60px !important; font-size: 0.5rem !important; }
 }
 
+/* ===== Tablets & Phones (<=991px) ===== */
+@media (max-width: 991px) {
+  .header-main .row.align-items-center {
+    display: flex;
+    flex-wrap: wrap !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* First row: logo + brand + search + user info */
+  .header-main .col-auto:first-child,     /* brand title */
+  .header-main .col-lg-2,                 /* logo image */
+  .header-main .search-wrapper,           /* search */
+  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
+    order: 1;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  /* Categories Dropdown */
+  .header-main .col-lg.col-sm.col-md.col-6 {
+    order: 2;
+    flex: 1 1 auto;        /* share space with Store/About */
+    display: flex;
+    justify-content: flex-start; /* keep left */
+    gap: 6px;
+  }
+
+  /* Store + About */
+  .header-main .col-auto.d-flex {
+    order: 2;
+    flex: 1 1 auto;        /* share same row */
+    display: flex;
+    justify-content: flex-end; /* keep right */
+    gap: 6px;
+  }
+
+  /* Compact adjustments */
+  .logo-img { height: 36px !important; }
+  .brand-title { font-size: 12px !important; margin-left: 4px; }
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle { font-size: 0.7rem !important; }
+  .search-field input { width: 90px !important; font-size: 0.7rem !important; }
+}
 
 
 
