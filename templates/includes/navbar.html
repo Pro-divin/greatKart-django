@@ -608,64 +608,69 @@ body.dark-mode .dropdown-item:hover {
     }
 }
 
-/* ===== Responsive fixes ===== */
+/* ===== Responsive Navbar Updates ===== */
 @media (max-width: 991px) {
-    .header-main .row.align-items-center {
-        flex-wrap: wrap;       /* allow wrapping */
-        justify-content: center;
-    }
+  /* Hide logo image on tablets and smaller */
+  .logo-img {
+    display: none;
+  }
 
-    /* Brand and logo full width and centered */
-    .brand-wrap, .logo-link {
-        flex: 0 0 100%;
-        margin-bottom: 10px;
-        text-align: center;
-    }
+  /* Keep brand and text inline */
+  .brand-wrap, .brand-title {
+    flex: 0 0 auto;
+    font-size: 18px;
+    margin-right: 10px;
+  }
 
-    .logo-img {
-        height: 80px;
-        max-width: 200px;
-    }
+  /* Make nav links inline with small spacing */
+  .col-auto.d-flex.align-items-center,
+  .category-wrap.dropdown,
+  .user-info,
+  .search-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2px;
+    padding: 0 2px;
+  }
 
-    /* Categories dropdown full width */
-    .category-wrap.dropdown {
-        flex: 0 0 100%;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    .category-wrap .dropdown-menu {
-        width: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-    }
+  /* Shrink nav link font and padding */
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle {
+    font-size: 0.8rem;
+    margin: 0 2px;
+    padding: 2px 4px;
+  }
 
-    /* Navbar links stacked */
-    .col-auto.d-flex.align-items-center {
-        flex: 0 0 100%;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    /* Search stacked */
-    .search-wrapper {
-        flex: 0 0 100%;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    /* User info and cart stacked */
-    .user-info {
-        flex: 0 0 100%;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    .user-info a,
-    .widget-header,
-    #modeToggle {
-        margin: 0 5px;
-    }
+  /* Search field smaller to prevent overflow */
+  .search-field input {
+    width: 150px;
+  }
 }
+
+@media (max-width: 575px) {
+  /* Further shrink for small phones */
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle {
+    font-size: 0.75rem;
+    margin: 0 1px;
+    padding: 1px 3px;
+  }
+
+  .search-field input {
+    width: 120px;
+  }
+}
+
 
 /* ===== Phones ===== */
 @media (max-width: 575px) {
@@ -677,6 +682,58 @@ body.dark-mode .dropdown-item:hover {
     }
     .search-field input {
         width: 90%;
+    }
+}
+
+/* ===== Mobile Navbar Fix ===== */
+@media (max-width: 767px) {
+    /* Reduce brand and logo size */
+    .brand-title { font-size: 16px; }
+    .logo-img { height: 60px; }
+
+    /* Reduce nav link spacing */
+    .navbar .nav-link,
+    .category-wrap .btn,
+    .user-info a,
+    #modeToggle {
+        margin: 0 2px;
+        padding: 2px 4px;
+        font-size: 0.8rem;
+    }
+
+    /* Stack elements vertically */
+    .header-main .row.align-items-center {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .brand-wrap, 
+    .logo-link,
+    .category-wrap.dropdown,
+    .col-auto.d-flex.align-items-center,
+    .search-wrapper,
+    .user-info {
+        flex: 0 0 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    /* Search input smaller */
+    .search-field input {
+        width: 90%;
+    }
+
+    /* Cart and mode toggle smaller */
+    .widget-header .icon,
+    #modeToggle i {
+        font-size: 16px;
+    }
+
+    /* Dropdown full width */
+    .category-wrap .dropdown-menu {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
     }
 }
 
