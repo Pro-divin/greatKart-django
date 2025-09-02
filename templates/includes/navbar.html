@@ -393,6 +393,7 @@ body.dark-mode .dropdown-item:hover {
 }
 
 /* ===== Tablets (<=991px) ===== */
+
 /* ===== Tablets & Phones (<=991px) ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
@@ -422,7 +423,7 @@ body.dark-mode .dropdown-item:hover {
     flex: 1 1 100%;         /* take full width */
     display: flex;
     justify-content: center; /* center horizontally */
-    gap: 6px;                /* small spacing */
+    gap: 6px;
     margin-top: 4px;
   }
 
@@ -458,6 +459,14 @@ body.dark-mode .dropdown-item:hover {
     gap: 4px;
   }
 }
+
+/* ===== Extra Small Phones (<=400px) ===== */
+@media (max-width: 400px) {
+  .logo-img { display: none !important; }   /* hide logo image */
+  .brand-title { font-size: 9px !important; margin-left: 0 !important; }
+  .search-field input { width: 60px !important; font-size: 0.5rem !important; }
+}
+
 
 
 
