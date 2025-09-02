@@ -3,188 +3,115 @@
 
 {% block content %}
 
-<!-- Apply saved theme instantly -->
-<script>
-(function() {
-    const theme = localStorage.getItem('theme');
-    document.documentElement.classList.toggle('dark-mode', theme === 'dark');
-})();
-function toggleMode() {
-    const html = document.documentElement;
-    html.classList.toggle('dark-mode');
-    localStorage.setItem('theme', html.classList.contains('dark-mode') ? 'dark' : 'light');
-}
-</script>
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-:root {
-    --body-bg: #fff;
-    --text-color: #000;
-    --card-bg: #fff;
-    --link-hover: #000;
-    --border-color: #ccc;
-    --input-bg: #fff;
-    --input-color: #000;
-}
+/* Checkout page custom styles using CSS variables from base.html */
 
-/* General body & links */
-body {
-    background-color: var(--body-bg);
-    color: var(--text-color);
-    font-family: 'Helvetica Neue', sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-}
-a, .dropdown-item {
-    color: var(--text-color);
-    text-decoration: none;
-}
-a:hover, .dropdown-item:hover {
-    color: var(--link-hover);
-}
-
-/* Buttons base */
-.btn, .btn-outline-primary, .btn-primary, .btn-light {
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-
-/* Modern Place Order Button */
-.btn-place-order {
-    background: linear-gradient(90deg, #000, #868585) !important;
-    color: #fff;
-    border: 2px solid #000;
-    padding: 12px 20px;
-    font-size: 1.0rem;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    border-radius: 12px;
-    text-transform: uppercase;
-}
-.btn-place-order:hover {
-    background: linear-gradient(90deg,#7f7c7c, #333 ) !important;
-    color: #fff;
-    border-color: #fff;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-}
-
-/* Light mode buttons */
-.btn-primary {
-    background-color: #000;
-    color: #fff;
-    border: 1px solid var(--body-bg);
-}
-.btn-primary:hover {
-    background-color: #fff;
-    color: #000;
-    border-color: #000;
-}
-.btn-light {
-    background-color: #f8f9fa;
-    color: #000;
-    border: 1px solid #ccc;
-}
-.btn-light:hover {
-    background-color: #e2e6ea;
-}
-
-/* Cards and form */
+/* Cards and Form Inputs */
 .card {
     background-color: var(--card-bg);
     color: var(--text-color);
     border-radius: 10px;
     border: 1px solid var(--border-color);
     padding: 20px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
 input, select, textarea {
-    background-color: var(--input-bg);
-    color: var(--input-color);
+    background-color: var(--input-bg, var(--body-bg));
+    color: var(--input-color, var(--text-color));
     border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* Dark mode */
-/* Dark mode */
-.dark-mode {
-    --body-bg: #121212;
-    --card-bg: #1e1e1e;
-    --border-color: #555;
-    --input-bg: #2a2a2a;   /* dark background */
-    --input-color: #fff;   /* white text inside input */
-}
-.dark-mode body {
-    background-color: var(--body-bg);
-    color: #fff !important;
+/* Table */
+.table-shopping-cart {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
 }
 
-/* Ensure form fields are visible in dark mode */
-.dark-mode input,
-.dark-mode select,
-.dark-mode textarea {
-    background-color: var(--input-bg) !important;
-    color: var(--input-color) !important;
-    border: 1px solid var(--border-color) !important;
+.table-shopping-cart th,
+.table-shopping-cart td {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
 }
 
-
-.dark-mode body {
-    background-color: var(--body-bg);
-    color: #fff !important; /* pure white text */
+.table-shopping-cart a {
+    color: var(--text-color);
+    text-decoration: none;
 }
 
-/* Make ALL text pure white in dark mode */
-.dark-mode *, 
-.dark-mode .card, 
-.dark-mode input, 
-.dark-mode select, 
-.dark-mode textarea,
-.dark-mode label,
-.dark-mode table, 
-.dark-mode th,
-.dark-mode td,
-.dark-mode small,
-.dark-mode .price,
-.dark-mode .title,
-.dark-mode p {
-    color: #fff !important;
-}
-.dark-mode a, .dark-mode .dropdown-item {
-    color: #fff !important;
+.table-shopping-cart a:hover {
+    opacity: 0.8;
 }
 
-/* Dark mode buttons */
-.dark-mode .btn-primary {
-    background-color: #fff;
-    color: #000;
+/* General text & labels */
+label, small, p {
+    color: var(--text-color);
 }
-.dark-mode .btn-primary:hover {
-    background-color: #000;
-    color: #fff;
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .form-row {
+        flex-direction: column;
+    }
 }
+.btn-place-order, 
+.btn-light {
+    border-radius: 12px;                 /* rounded corners */
+    border: 2px solid #fff;              /* strong visible border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* more visible shadow */
+    transition: all 0.3s ease;
+}
+
+.btn-place-order:hover, 
+.btn-light:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6); /* stronger shadow on hover */
+    transform: translateY(-2px);            /* subtle lift effect */
+}
+
+/* Dark mode visibility */
+.dark-mode .btn-place-order,
 .dark-mode .btn-light {
-    background-color: #444 !important;
-    color: #fff;
-    border: 1px solid #666;
+    border: 2px solid #fff;                 /* ensure border is visible in dark mode */
+    box-shadow: 0 4px 12px rgba(255,255,255,0.2); /* subtle glow for dark background */
 }
+.dark-mode .btn-place-order:hover,
 .dark-mode .btn-light:hover {
-    background-color: #666 !important;
-    color: #fff;
+    box-shadow: 0 6px 16px rgba(255,255,255,0.3);
+}
+.table-shopping-cart .title {
+    color: var(--text-color) !important; /* product name visible */
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.table-shopping-cart .price-wrap {
+    color: var(--text-color) !important; /* size and color variations visible */
+    font-size: 0.9rem;
+}
+
+.dark-mode .table-shopping-cart .title,
+.dark-mode .table-shopping-cart .price-wrap {
+    color: #fff !important; /* white text in dark mode */
 }
 </style>
 
-<section class="section-content padding-y bg">
+<section class="section-content padding-y">
 <div class="container">
 <div class="row">
+
     <!-- Billing Address -->
-    <aside class="col-lg-6">
-        <div class="card mb-4">
+    <aside class="col-lg-6 mb-4">
+        <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Billing Address</h4>
                 <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
-                    <div class="form-row">
+                    <div class="form-row mb-3">
                         <div class="col form-group">
                             <label>First Name</label>
                             <input type="text" name="first_name" class="form-control" required>
@@ -194,7 +121,7 @@ input, select, textarea {
                             <input type="text" name="last_name" class="form-control" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row mb-3">
                         <div class="col form-group">
                             <label>Email</label>
                             <input type="email" name="email" class="form-control" required>
@@ -204,7 +131,7 @@ input, select, textarea {
                             <input type="text" name="phone" class="form-control" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row mb-3">
                         <div class="col form-group">
                             <label>City</label>
                             <input type="text" name="city" class="form-control" required>
@@ -218,7 +145,7 @@ input, select, textarea {
                             <input type="text" name="country" class="form-control" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-group mb-3">
                         <label>Order Note</label>
                         <textarea name="order_note" rows="2" class="form-control"></textarea>
                     </div>
@@ -227,8 +154,8 @@ input, select, textarea {
     </aside>
 
     <!-- Cart Summary -->
-    <aside class="col-lg-6">
-        <div class="card mb-4">
+    <aside class="col-lg-6 mb-4">
+        <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Your Cart</h4>
                 <table class="table table-borderless table-shopping-cart">
@@ -246,8 +173,8 @@ input, select, textarea {
                                 <figure class="itemside align-items-center">
                                     <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
                                     <figcaption class="info">
-                                        <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-                                        <p class="text-muted small">
+                                        <a href="{{ cart_item.product.get_url }}" class="title">{{ cart_item.product.product_name }}</a>
+                                        <p class="small text-muted">
                                             {% for item in cart_item.variations.all %}
                                                 {{ item.variation_category|capfirst }}: {{ item.variation_value|capfirst }}<br>
                                             {% endfor %}
@@ -259,7 +186,7 @@ input, select, textarea {
                             <td>
                                 <div class="price-wrap">
                                     <var class="price">RWF {{ cart_item.sub_total }}</var>
-                                    <small class="text-muted">RWF {{ cart_item.product.price }} each</small>
+                                    <small class="price-wrap">RWF {{ cart_item.product.price }} each</small>
                                 </div>
                             </td>
                         </tr>
@@ -267,13 +194,14 @@ input, select, textarea {
                     </tbody>
                 </table>
 
-                <!-- Modern Place Order Button -->
+                <!-- Keep your buttons exactly as-is -->
                 <button type="submit" class="btn btn-place-order btn-block">Place Order</button>
                 <a href="{% url 'store' %}" class="btn btn-light btn-block"><b>CONTINUE SHOPPING</b></a>
                 </form>
             </div>
         </div>
     </aside>
+
 </div>
 </div>
 </section>

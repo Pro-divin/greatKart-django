@@ -6,40 +6,57 @@
 <script src="{% static 'js/theme.js' %}"></script>
 
 <style>
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
+/* Base Variables for Light Mode */
 :root {
-  --black: #000000;
-  --white: #ffffff;
-  --gray: #f5f5f5;
-  --text-dark: #111111;
-  --text-light: #888888;
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --secondary-text-color: #555555;
+  --primary-color: #000000;
+  --overlay-bg: rgba(0,0,0,0.3);
+  --btn-bg: #000;
+  --btn-text: #fff;
+}
+/* Map */
+.map-container {
+  height: 400px; /* increased from 300px to 500px */
+  margin-top: 1.5rem;
 }
 
-body {
-  color: var(--text-dark);
-  background: var(--white);
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-color: #111111;
+  --text-color: #f5f5f5;
+  --secondary-text-color: #ccc;
+  --primary-color: #fff;
+  --overlay-bg: rgba(0,0,0,0.4);
+  --btn-bg: #f5f5f5;
+  --btn-text: #111;
+}
+
+/* Global Styles */
+html, body {
+  margin: 0;
+  padding: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode {
-  background: #111;
-  color: #f5f5f5;
+h1, h2, h3, h4, p, li {
+  color: var(--text-color);
 }
 
-body.dark-mode p,
-body.dark-mode li,
-body.dark-mode td,
-body.dark-mode th,
-body.dark-mode h2,
-body.dark-mode h3 {
-  color: #f5f5f5 !important;
-}
+a { color: var(--primary-color); text-decoration: none; }
+a:hover { opacity: 0.8; }
 
 /* Hero Section */
 .video-container {
@@ -48,35 +65,26 @@ body.dark-mode h3 {
   overflow: hidden;
   margin-bottom: 3rem;
 }
-
-.video-player {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
+.video-player { width: 100%; height: auto; display: block; }
 .video-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .video-overlay h1 {
-  color: var(--white);
   font-size: 3.5rem;
   font-weight: 300;
   letter-spacing: 3px;
   text-align: center;
+  color: var(--primary-color);
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-/* Section headers */
+/* Section Headers */
 .section-header {
   margin-bottom: 2rem;
   font-weight: 300;
@@ -84,8 +92,7 @@ body.dark-mode h3 {
 }
 
 /* Lists */
-.core-values li,
-.advantages li {
+.core-values li {
   margin-bottom: 1rem;
   padding-left: 1.5rem;
 }
@@ -96,90 +103,35 @@ body.dark-mode h3 {
   border-collapse: collapse;
   margin: 1.5rem 0;
 }
-
-.shipping-table th,
-.shipping-table td {
+.shipping-table th, .shipping-table td {
   padding: 0.8rem;
   text-align: left;
+  color: var(--text-color);
+  border: 1px solid var(--secondary-text-color);
 }
 
 /* Buttons */
 .btn-custom {
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   font-weight: 400;
   letter-spacing: 1px;
   padding: 0.7rem 2rem;
   border-radius: 0;
-  border: 1px solid var(--black);
+  border: 1px solid var(--btn-bg);
   transition: all 0.3s ease;
   text-transform: uppercase;
   font-size: 0.8rem;
 }
-
 .btn-custom:hover {
   background: transparent;
-  color: var(--black);
+  color: var(--btn-bg);
 }
 
-/* Map */
-.map-container {
-  height: 300px;
-  margin-top: 1.5rem;
-}
-
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Footer */
-footer {
-  background-color: var(--black);
-  color: var(--white);
-  padding: 3rem 0 1.5rem;
-  margin-top: 5rem;
-}
-
-footer h5 {
-  color: var(--white);
-  font-size: 1rem;
-  letter-spacing: 1px;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-}
-
-footer a {
-  color: var(--white);
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-footer a:hover {
-  opacity: 0.8;
-  color: var(--white);
-}
-
-.footer-divider {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  margin: 2rem 0;
-}
-
-/* Responsive */
-@media (max-width: 767px) {
-  .video-overlay h1 {
-    font-size: 2rem;
-  }
-  .section-header {
-    font-size: 1.5rem;
-  }
-}
-
-/* Modern Subscribe Button */
+/* Subscribe Button */
 .btn-subscribe {
-  background: linear-gradient(135deg, #666767, #0a0a0a);
-  color: #fff !important;
+  background: var(--btn-bg);
+  color: var(--btn-text) !important;
   border: none;
   border-radius: 50px;
   padding: 0.6rem 1.5rem;
@@ -188,29 +140,14 @@ footer a:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.895);
 }
+.btn-subscribe:hover { opacity: 0.9; }
 
-.btn-subscribe:hover {
-  background: linear-gradient(135deg, #0056b3, #0096c7);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+/* Responsive */
+@media (max-width: 767px) {
+  .video-overlay h1 { font-size: 2rem; }
+  .section-header { font-size: 1.5rem; }
 }
-
-/* Dark Mode */
-body.dark-mode .btn-subscribe {
-  background: linear-gradient(135deg,  #fbfcfc, #17313d);
-  color: #000 !important;
-  box-shadow: 0 4px 12px rgba(254, 254, 254, 0.3);
-  font-weight: bolder;
-}
-
-body.dark-mode .btn-subscribe:hover {
-  background: linear-gradient(135deg, #fbfcfc, #17313d);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(74, 193, 247, 0.4);
-}
-
 </style>
 
 <!-- Hero Video -->
@@ -228,8 +165,8 @@ body.dark-mode .btn-subscribe:hover {
   <div class="row align-items-center mb-5">
     <div class="col-lg-6">
       <h2 class="section-header">About Us</h2>
-      <p class="mb-4">Juru Collection is Rwanda's premier fashion brand dedicated to celebrating the vibrant culture and craftsmanship of our local artisans.</p>
-      <p>Based in Kigali, we create contemporary clothing that beautifully fuses tradition and modern design — proudly <em>Made in Rwanda</em>.</p>
+      <p class="mb-4">Juru Collection is Rwanda's premier fashion brand celebrating local artisans.</p>
+      <p>Based in Kigali, we create contemporary clothing fusing tradition and modern design — proudly <em>Made in Rwanda</em>.</p>
     </div>
     <div class="col-lg-6">
       <img src="{% static 'images/about-showcase.jpg' %}" alt="Juru Collection" class="img-fluid">
@@ -239,19 +176,19 @@ body.dark-mode .btn-subscribe:hover {
   <div class="row my-5 py-4">
     <div class="col-lg-4 mb-4 mb-lg-0">
       <h3 class="section-header">Our Mission</h3>
-      <p>To be Rwanda's leading fashion destination by empowering local artisans, promoting sustainable production, and sharing Rwandan cultural heritage through elegant, modern clothing.</p>
+      <p>Empowering local artisans, promoting sustainable production, and sharing Rwandan heritage.</p>
     </div>
     <div class="col-lg-4 mb-4 mb-lg-0">
       <h3 class="section-header">Our Vision</h3>
-      <p>To become a trusted African fashion brand that connects tradition with innovation, inspiring pride in Rwandan identity globally.</p>
+      <p>Become a trusted African fashion brand connecting tradition with innovation globally.</p>
     </div>
     <div class="col-lg-4">
       <h3 class="section-header">Core Values</h3>
       <ul class="core-values list-unstyled">
-        <li>Authenticity: Honoring genuine Rwandan craftsmanship</li>
-        <li>Innovation: Blending tradition with cutting-edge design</li>
-        <li>Community: Supporting local artisans</li>
-        <li>Quality: Premium products with attention to detail</li>
+        <li>Authenticity</li>
+        <li>Innovation</li>
+        <li>Community</li>
+        <li>Quality</li>
       </ul>
     </div>
   </div>
@@ -259,37 +196,23 @@ body.dark-mode .btn-subscribe:hover {
   <div class="row my-5">
     <div class="col-lg-6">
       <h2 class="section-header">Shipping Information</h2>
-      <p>We offer reliable and fast shipping for all orders worldwide.</p>
+      <p>Reliable and fast worldwide shipping.</p>
       <table class="shipping-table">
         <thead>
           <tr>
-            <th>Region</th>
-            <th>Shipping Time</th>
-            <th>Shipping Fee</th>
+            <th>Region</th><th>Shipping Time</th><th>Shipping Fee</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Rwanda</td>
-            <td>1-3 Business Days</td>
-            <td>FREE</td>
-          </tr>
-          <tr>
-            <td>Africa</td>
-            <td>5-10 Business Days</td>
-            <td>Calculated at checkout</td>
-          </tr>
-          <tr>
-            <td>International</td>
-            <td>7-14 Business Days</td>
-            <td>Calculated at checkout</td>
-          </tr>
+          <tr><td>Rwanda</td><td>1-3 Business Days</td><td>FREE</td></tr>
+          <tr><td>Africa</td><td>5-10 Business Days</td><td>Calculated at checkout</td></tr>
+          <tr><td>International</td><td>7-14 Business Days</td><td>Calculated at checkout</td></tr>
         </tbody>
       </table>
     </div>
     <div class="col-lg-6">
       <h2 class="section-header">Visit Us</h2>
-      <p>Experience our collection in person at our Kigali showroom:</p>
+      <p>Experience our collection at our Kigali showroom:</p>
       <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5055430903057!2d30.054174115260168!3d-1.9416876990458963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4189c192a01%3A0x1abff61613ac0602!2sCHIC!5e0!3m2!1sen!2srw!4v1691084182998!5m2!1sen!2srw" allowfullscreen="" loading="lazy"></iframe>
       </div>
@@ -303,16 +226,16 @@ body.dark-mode .btn-subscribe:hover {
   </div>
 </div>
 
-<!-- Footer -->
+<!-- Footer (unchanged) -->
 <footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-4 mb-4">
-        <h5>JURU COLLECTION</h5>
+        <p>JURU COLLECTION</p>
         <p>Kigali, Rwanda<br>CHIC Building, 2nd Floor<br>Email: info@jurucollection.rw<br>Phone: +250 788 123 456</p>
       </div>
       <div class="col-lg-4 mb-4">
-        <h5>QUICK LINKS</h5>
+        <p>QUICK LINKS<p>
         <ul class="list-unstyled">
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'store' %}">Shop</a></li>
@@ -321,8 +244,8 @@ body.dark-mode .btn-subscribe:hover {
         </ul>
       </div>
       <div class="col-lg-4 mb-4">
-        <h5>NEWSLETTER</h5>
-        <p>Subscribe to receive updates on new collections and exclusive offers.</p>
+        <p>NEWSLETTER<p>
+        <p>Subscribe to updates on new collections and exclusive offers.</p>
         {% if messages %}
           <div>
             {% for message in messages %}
@@ -334,7 +257,6 @@ body.dark-mode .btn-subscribe:hover {
           {% csrf_token %}
           {{ form.email|as_crispy_field }}
           <button class="btn-subscribe" type="submit">Subscribe</button>
-
         </form>
       </div>
     </div>
