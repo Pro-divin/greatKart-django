@@ -94,7 +94,7 @@ body {
 .brand-title {
   font-weight: bold;
   margin: 0;
-  font-size: 24px;
+  font-size: 14px;
   color: black !important;
 }
 .brand-part1, .brand-part2 {
@@ -117,10 +117,10 @@ body {
 
 .header-main .brand-wrap,
 .header-main .brand-title {
-  margin: 0;  /* remove extra margin */
+  margin: 0 !important;  /* remove extra margin */
 }
 .navbar-toggler {
-  padding: 0.1rem 0.1rem;
+  padding: 0.1rem 0.1rem !important;
 }
 
 
@@ -171,7 +171,7 @@ body.dark-mode .logo-img {
   border: none !important;
   background: none !important;
   color: var(--text-color) !important;
-  font-size: 0.9rem;
+  font-size: 0.9rem !important;
   text-decoration: none !important;
   position: static !important;
 }
@@ -184,7 +184,7 @@ body.dark-mode .logo-img {
 .widget-header .icon {
   border: none !important;
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .notify {
   font-size: 11px;
@@ -283,8 +283,17 @@ body.dark-mode .dropdown-item:hover {
 
 /* ========== Compact Navbar ========== */
 .header-main .row.align-items-center {
-    padding-top: 2px;    /* very small vertical padding */
-    padding-bottom: 2px;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+/* Brand & Logo */
+.brand-wrap, .brand-title, .logo-link, .logo-img {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
 }
 
 .header-main .brand-wrap,
@@ -301,7 +310,7 @@ body.dark-mode .dropdown-item:hover {
 }
 
 /* Nav links spacing */
-.navbar .nav-link,
+
 .header-main a {
     padding-top: 1px;    /* very small padding */
     padding-bottom: 2px;
@@ -312,14 +321,15 @@ body.dark-mode .dropdown-item:hover {
 }
 
 /* Categories dropdown & buttons spacing */
-.category-wrap .btn {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-left: 1px;
-    margin-right: 1px;
+.navbar .nav-link,
+.category-wrap .btn,
+.user-info a,
+#modeToggle {
+    font-size: 0.7rem !important; /* very small text */
+    margin: 0 2px !important;
+    padding: 1px 2px !important;
 }
+
 
 /* Cart & mode toggle spacing */
 .user-info a,
@@ -392,40 +402,30 @@ body.dark-mode .dropdown-item:hover {
     width: auto;
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 991px) {
-    .header-main .row.align-items-center,
-    .col-auto.d-flex.align-items-center,
-    .category-wrap.dropdown,
-    .search-wrapper,
-    .user-info {
+/* Responsive: phones (<=575px) */
+@media (max-width: 575px) {
+    .header-main .row.align-items-center {
         flex-wrap: nowrap !important;
-        justify-content: center !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        justify-content: flex-start !important;
     }
-
-    .brand-wrap, .logo-link {
-        flex: 0 0 auto !important;
-        margin-right: 2px !important;
-        font-size: 8px !important;
-    }
-
     .logo-img {
-        height: 50px !important;
+        height: 35px !important;
     }
-
+    .brand-title {
+        font-size: 10px !important;
+    }
     .navbar .nav-link,
     .category-wrap .btn,
     .user-info a,
     #modeToggle {
-        font-size: 0.4rem !important;
+        font-size: 0.6rem !important;
         margin: 0 1px !important;
-        padding: 1px 1px !important;
+        padding: 1px !important;
     }
-
     .search-field input {
-        width: 40px !important;
+        width: 60px !important;
+        font-size: 0.6rem !important;
+        padding: 1px 1px !important;
     }
 }
 
