@@ -539,94 +539,147 @@ body.dark-mode .dropdown-item:hover {
 }
 
 
-/* ================= NAVBAR HORIZONTAL FIX ================= */
+/* Default desktop */
 .header-main .row.align-items-center {
-    flex-wrap: nowrap !important; /* Never wrap on small devices */
+    display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    text-align: center;
 }
 
-.header-main .col-auto,
-.header-main .col-lg-2,
-.header-main .col-lg,
-.header-main .col-sm,
-.header-main .col-md {
-    flex: 0 0 auto; /* Keep width automatic */
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
+/* Logo & brand */
 .brand-wrap, .logo-link {
     flex: 0 0 auto;
-    margin: 0 !important;
     text-align: center;
 }
 
-.col-auto.d-flex.align-items-center {
-    flex: 0 0 auto; 
-    justify-content: flex-end; /* Keep user info & icons right */
-}
-
-.category-wrap.dropdown {
-    flex: 0 0 auto;
-    margin: 0 10px;
-}
-
-.user-info {
-    flex-direction: row !important;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.user-info a,
-.widget-header,
-#modeToggle {
-    margin: 0 5px;
-}
-
+/* Links & user info */
+.col-auto.d-flex.align-items-center,
+.category-wrap.dropdown,
 .search-wrapper {
     flex: 0 0 auto;
-    margin: 0 10px;
 }
 
-/* Keep logo size consistent */
-.logo-img {
-    height: 120px;
-    width: auto;
-}
-
-/* Navbar links spacing */
-.navbar .nav-link,
-.header-main a {
-    padding: 0 5px;
-    margin: 0 2px;
-}
-
-/* Disable stacking for small devices */
+/* Responsive: tablets and below */
 @media (max-width: 991px) {
     .header-main .row.align-items-center {
-        flex-wrap: nowrap !important;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    .brand-wrap, .logo-link, .category-wrap.dropdown, .col-auto.d-flex.align-items-center {
-        flex: 0 0 auto;
-        margin: 0 5px;
+
+    .brand-wrap, .logo-link {
+        flex: 0 0 100%;
+        margin-bottom: 8px;
     }
+
+    .category-wrap.dropdown,
+    .col-auto.d-flex.align-items-center,
     .search-wrapper {
-        margin-left: 10px;
-        margin-right: 10px;
+        flex: 0 0 100%;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .logo-img {
+        height: 80px; /* smaller logo for tablet */
+    }
+
+    .navbar .nav-link,
+    .category-wrap .btn,
+    .user-info a,
+    #modeToggle {
+        margin: 0 3px;
+        padding: 2px 4px;
     }
 }
 
+/* Responsive: phones */
 @media (max-width: 575px) {
     .logo-img {
-        height: 100px;
+        height: 60px;
     }
+
     .brand-title {
-        font-size: 18px;
+        font-size: 16px;
+    }
+
+    .search-field input {
+        width: 90%;
     }
 }
+
+/* ===== Responsive fixes ===== */
+@media (max-width: 991px) {
+    .header-main .row.align-items-center {
+        flex-wrap: wrap;       /* allow wrapping */
+        justify-content: center;
+    }
+
+    /* Brand and logo full width and centered */
+    .brand-wrap, .logo-link {
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .logo-img {
+        height: 80px;
+        max-width: 200px;
+    }
+
+    /* Categories dropdown full width */
+    .category-wrap.dropdown {
+        flex: 0 0 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .category-wrap .dropdown-menu {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    /* Navbar links stacked */
+    .col-auto.d-flex.align-items-center {
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    /* Search stacked */
+    .search-wrapper {
+        flex: 0 0 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* User info and cart stacked */
+    .user-info {
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .user-info a,
+    .widget-header,
+    #modeToggle {
+        margin: 0 5px;
+    }
+}
+
+/* ===== Phones ===== */
+@media (max-width: 575px) {
+    .logo-img {
+        height: 60px;
+    }
+    .brand-title {
+        font-size: 16px;
+    }
+    .search-field input {
+        width: 90%;
+    }
+}
+
 </style>
 
 <script>
