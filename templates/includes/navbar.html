@@ -394,6 +394,29 @@ body.dark-mode .dropdown-item:hover {
 
 /* ===== Tablets (<=991px) ===== */
 @media (max-width: 991px) {
+  .header-main .row.align-items-center {
+    flex-wrap: wrap !important;   /* allow 2 rows */
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+
+  /* first row: logo + brand + categories */
+  .header-main .col-auto:first-child,
+  .brand-wrap,
+  .category-wrap {
+    flex: 1 1 auto !important;
+    text-align: center;
+  }
+
+  /* second row: search + user + mode toggle */
+  .search-field,
+  .user-info,
+  .widget-header,
+  #modeToggle {
+    flex: 1 1 auto !important;
+    text-align: center;
+  }
+
   .logo-img { height: 40px !important; }
   .brand-title { font-size: 12px !important; }
   .navbar .nav-link,
@@ -405,6 +428,29 @@ body.dark-mode .dropdown-item:hover {
 
 /* ===== Phones (<=575px) ===== */
 @media (max-width: 575px) {
+  .header-main .row.align-items-center {
+    flex-wrap: wrap !important;   /* break into 2 lines */
+    justify-content: center !important;
+    gap: 2px !important;
+  }
+
+  /* first row: logo + brand + categories */
+  .header-main .col-auto:first-child,
+  .brand-wrap,
+  .category-wrap {
+    flex: 1 1 100% !important;
+    text-align: center;
+  }
+
+  /* second row: search + user + mode toggle */
+  .search-field,
+  .user-info,
+  .widget-header,
+  #modeToggle {
+    flex: 1 1 100% !important;
+    text-align: center;
+  }
+
   .logo-img { height: 28px !important; }
   .brand-title { font-size: 10px !important; }
   .navbar .nav-link,
@@ -420,6 +466,7 @@ body.dark-mode .dropdown-item:hover {
     font-size: 0.55rem !important;
   }
 }
+
 </style>
 
 <script>
