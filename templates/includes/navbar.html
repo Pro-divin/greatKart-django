@@ -517,6 +517,25 @@ body.dark-mode .dropdown-item:hover {
   .search-field input { width: 90px !important; font-size: 0.7rem !important; }
 }
 
+@media (max-width: 991px ) {
+  .header-main .row.align-items-center {
+    flex-wrap: nowrap !important; /* prevent wrapping */
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .header-main .col-auto:first-child,
+  .header-main .col-lg-2,
+  .header-main .search-wrapper,
+  .header-main .col-auto.ml-auto {
+    flex: 0 1 auto !important; /* allow shrinking */
+    min-width: 0 !important;   /* let items shrink properly */
+  }
+
+  .search-wrapper .search-field input {
+    width: 80px !important; /* shrink input on small screens */
+  }
+}
 
 
 </style>
