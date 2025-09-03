@@ -395,35 +395,34 @@ body.dark-mode .dropdown-item:hover {
 /* ===== Tablets (<=991px) ===== */
 
 /* ===== Tablets & Phones (<=991px) ===== */
+/* Tablets & Phones <= 991px */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
     display: flex !important;
     flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+    gap: 6px;
   }
 
-  /* First row: logo + brand + search + user info */
-  .header-main .col-auto:first-child,     /* brand title */
-  .header-main .col-lg-2,                 /* logo image */
-  .header-main .search-wrapper,           /* search */
-  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
+  /* ===== FIRST ROW ===== */
+  .header-main .col-auto:first-child,  /* Brand */
+  .header-main .col-lg-2,              /* Logo */
+  .header-main .search-wrapper {       /* Search */
     order: 1 !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 100% !important;         /* full width each item */
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    min-width: 0 !important;
   }
 
-  /* Second row: categories + store + about (centered) */
-  .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
-  .header-main .col-auto.d-flex {            /* store + about */
+  /* ===== SECOND ROW ===== */
+  .header-main .col-lg.col-sm.col-md.col-6,  /* Categories */
+  .header-main .col-auto.d-flex,             /* Store + About */
+  .header-main .col-auto.ml-auto {           /* User/cart/mode */
     order: 2 !important;
-    flex: 1 1 100% !important;         /* take full width */
+    flex: 1 1 100% !important;              /* full width second row */
     display: flex !important;
-    justify-content: center !important; /* center horizontally */
-    gap: 6px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     margin-top: 4px !important;
   }
 
@@ -434,109 +433,26 @@ body.dark-mode .dropdown-item:hover {
   .category-wrap .btn,
   .user-info a,
   #modeToggle { font-size: 0.7rem !important; }
-  .search-field input { width: 90px !important; font-size: 0.7rem !important; }
+  .search-field input { width: 90px !important; font-size: 0.7rem; }
 }
 
-/* ===== Phones (<=575px) ===== */
+/* Phones <= 575px */
 @media (max-width: 575px) {
   .logo-img { height: 26px !important; }
   .brand-title { font-size: 10px !important; }
+  .search-field input { width: 70px !important; font-size: 0.55rem; }
 
-  .navbar .nav-link,
-  .category-wrap .btn,
-  .user-info a,
-  #modeToggle {
-    font-size: 0.55rem !important;
-    margin: 0 2px !important;
-    padding: 1px 2px !important;
-  }
-
-  .search-field input { width: 70px !important; font-size: 0.55rem !important; }
-
-  /* Reduce gap between Store, About, Categories */
   .header-main .col-lg.col-sm.col-md.col-6,
   .header-main .col-auto.d-flex {
-    gap: 4px !important;
+    gap: 4px !important; /* tighten spacing */
   }
 }
 
-/* ===== Extra Small Phones (<=400px) ===== */
 @media (max-width: 400px) {
-  .logo-img { display: none !important; }   /* hide logo image */
+  .logo-img { height: 24px !important; }   /* instead of display:none */
   .brand-title { font-size: 9px !important; margin-left: 0 !important; }
-  .search-field input { width: 60px !important; font-size: 0.5rem !important; }
+  .search-field input { width: 60px !important; font-size: 0.5rem; }
 }
-
-/* ===== Tablets & Phones (<=991px) ===== */
-@media (max-width: 991px) {
-  .header-main .row.align-items-center {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-
-  /* First row: logo + brand + search + user info */
-  .header-main .col-auto:first-child,     /* brand title */
-  .header-main .col-lg-2,                 /* logo image */
-  .header-main .search-wrapper,           /* search */
-  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
-    order: 1 !important;
-    flex: 1 1 auto!important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    min-width: 0 !important;
-  }
-
-  /* Categories Dropdown */
-  .header-main .col-lg.col-sm.col-md.col-6 {
-    order: 2 !important;
-    flex: 1 1 auto !important;        /* share space with Store/About */
-    display: flex !important;
-    justify-content: flex-start !important; /* keep left */
-    gap: 6px !important;
-  }
-
-  /* Store + About */
-  .header-main .col-auto.d-flex {
-    order: 2 !important;
-    flex: 1 1 auto !important;        /* share same row */
-    display: flex !important;
-    justify-content: flex-end !important; /* keep right */
-    gap: 6px !important;
-  }
-
-  /* Compact adjustments */
-  .logo-img { height: 36px !important; }
-  .brand-title { font-size: 12px !important; margin-left: 4px; }
-  .navbar .nav-link,
-  .category-wrap .btn,
-  .user-info a,
-  #modeToggle { font-size: 0.7rem !important; }
-  .search-field input { width: 90px !important; font-size: 0.7rem !important; }
-}
-
-@media (max-width: 891px ) {
-  .header-main .row.align-items-center {
-    flex-wrap: nowrap !important; /* prevent wrapping */
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-
-  .header-main .col-auto:first-child,
-  .header-main .col-lg-2,
-  .header-main .search-wrapper,
-  .header-main .col-auto.ml-auto {
-    flex: 0 1 auto !important; /* allow shrinking */
-    min-width: 0 !important;   /* let items shrink properly */
-  }
-
-  .search-wrapper .search-field input {
-    width: 80px !important; /* shrink input on small screens */
-  }
-}
-
 
 </style>
 
