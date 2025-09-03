@@ -222,6 +222,7 @@ def resetPassword(request):
 
         # Set password correctly
         user.set_password(password)
+        user.is_active = True  # activate user to allow login
         user.save()
 
         # Clear session
@@ -232,6 +233,7 @@ def resetPassword(request):
         return redirect('login')
 
     return render(request, 'accounts/resetPassword.html')
+
 
 
 def my_orders(request):
