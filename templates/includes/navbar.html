@@ -154,43 +154,43 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
 
 /* Tablets & small desktops <= 991px */
 @media (max-width: 991px) {
-  .header-main .row.align-items-center { display: flex; flex-wrap: wrap; gap: 6px; }
+  .header-main .row.align-items-center { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
 
   /* Row 1: brand, logo, search */
   .header-main .col-auto:first-child,
   .header-main .col-lg-2,
   .header-main .search-wrapper {
-    order: 1; flex: 1 1 100%; display: flex; align-items: center; justify-content: space-between;
+    order: 1 !important; flex: 1 1 100% !important; display: flex !important; align-items: center !important; justify-content: space-between !important;
   }
 
   /* Row 2: categories, links, user/cart */
   .header-main .col-lg.col-sm.col-md.col-6,
   .header-main .col-auto.d-flex,
   .header-main .col-auto.ml-auto {
-    order: 2; flex: 1 1 100%; display: flex; justify-content: space-between; align-items: center; gap: 6px;
+    order: 2 !important; flex: 1 1 100% !important; display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 6px !important;
   }
 
   /* Shrink logo & text */
-  .logo-img { height: 36px; }
-  .brand-title { font-size: 12px; }
-  .navbar .nav-link, .category-wrap .btn, .user-info a, #modeToggle { font-size: 0.75rem; }
-  .search-field input { width: 90px; font-size: 0.7rem; }
+  .logo-img { height: 36px !important; }
+  .brand-title { font-size: 12px !important; }
+  .navbar .nav-link, .category-wrap .btn, .user-info a, #modeToggle { font-size: 0.75rem !important; }
+  .search-field input { width: 90px !important; font-size: 0.7rem !important; }
 }
 
 /* Phones <= 575px */
 @media (max-width: 575px) {
-  .logo-img { height: 26px; }
-  .brand-title { font-size: 10px; }
-  .search-field input { width: 70px; font-size: 0.55rem; }
+  .logo-img { height: 26px !important; }
+  .brand-title { font-size: 10px !important; }
+  .search-field input { width: 70px; font-size: 0.55rem !important; }
   .header-main .col-lg.col-sm.col-md.col-6,
-  .header-main .col-auto.d-flex { gap: 4px; }
+  .header-main .col-auto.d-flex { gap: 4px !important; }
 }
 
 /* Extra small phones <= 400px */
 @media (max-width: 400px) {
-  .logo-img { height: 24px; }
-  .brand-title { font-size: 9px; }
-  .search-field input { width: 60px; font-size: 0.5rem; }
+  .logo-img { height: 24px !important; }
+  .brand-title { font-size: 9px !important; }
+  .search-field input { width: 60px !important; font-size: 0.5rem !important; }
 }
 
 </style>
