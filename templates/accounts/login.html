@@ -237,7 +237,7 @@
       <!-- Login Box on right -->
       <div class="box">
         <div class="card">
-          <h4 class="card-title mb-4">Sign in</h4>
+          <h4 class="btn btn-primary btn-block">Sign in</h4>
           {% include 'includes/alerts.html' %}
           <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
