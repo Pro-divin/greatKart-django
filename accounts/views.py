@@ -5,6 +5,7 @@ from orders.models import Order
 from django.contrib import messages, auth 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.decorators.cache import never_cache
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -143,14 +144,18 @@ def activate(request, uidb64, token):
     
 
 @login_required(login_url='login')
+@never_cache
 def dashboard(request):
-    orders= Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
     context = {
         'orders_count': orders_count,
     }
-    return render(request, 'accounts/dashboard.html', context)
-
+    response = render(request, 'accounts/dashboard.html', context)
+    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response['Pragma'] = 'no-cache'
+    response['Expires'] = '0'
+    return response
 
 def forgotPassword(request):
     if request.method == 'POST':
