@@ -466,28 +466,37 @@ body.dark-mode .dropdown-item:hover {
   .brand-title { font-size: 9px !important; margin-left: 0 !important; }
   .search-field input { width: 60px !important; font-size: 0.5rem !important; }
 }
-
-/* ===== Tablets & Phones (<=991px) ===== */
+/* ===== Phones & Tablets (<=991px) ===== */
 @media (max-width: 991px) {
+  /* First row: logo + brand + search + user info/cart/toggle */
   .header-main .row.align-items-center {
-    display: flex;
-    flex-wrap: wrap !important;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
   }
 
-  /* First row: logo + brand + search + user info */
-  .header-main .col-auto:first-child,     /* brand title */
-  .header-main .col-lg-2,                 /* logo image */
-  .header-main .search-wrapper,           /* search */
-  .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
-    order: 1;
-    flex: 1 1 auto;
+  .header-main .first-row {
     display: flex;
+    flex: 1 1 100%;
     align-items: center;
     justify-content: space-between;
-    min-width: 0;
+    gap: 6px;
   }
+
+  .header-main .first-row > * {
+    flex: 0 1 auto;  /* prevent stretching */
+  }
+
+  /* Compact adjustments */
+  .logo-img { height: 36px !important; }
+  .brand-title { font-size: 12px !important; margin-left: 4px; }
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle { font-size: 0.7rem !important; }
+  .search-field input { width: 90px !important; font-size: 0.7rem !important; }
+}
+
 
   /* Categories Dropdown */
   .header-main .col-lg.col-sm.col-md.col-6 {
@@ -566,7 +575,6 @@ body.dark-mode .dropdown-item:hover {
   }
 </script>
 
-
 <header class="section-header">
   <nav class="navbar p-md-0 navbar-expand-sm navbar-light">
     <div class="container">
@@ -580,20 +588,72 @@ body.dark-mode .dropdown-item:hover {
   <section class="header-main">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-auto">
-          <a href="{% url 'home' %}" class="brand-wrap nav-link">
-            <h4 class="brand-title">
-              <span class="brand-part1">JURU</span>
-              <span class="brand-part2">Collection</span>
-            </h4>
-          </a>
-        </div>
 
-        <div class="col-lg-2 col-md-3 col-6">
-          <a href="{% url 'home' %}" class="brand-wrap logo-link">
-            <img class="logo-img" src="{% static 'images/logo.png' %}" alt="JURU Collection">
-          </a>
+        <!-- ✅ First Row Wrapper -->
+        <div class="first-row w-100 d-flex align-items-center justify-content-between">
+          
+          <div class="col-auto">
+            <a href="{% url 'home' %}" class="brand-wrap nav-link">
+              <h4 class="brand-title">
+                <span class="brand-part1">JURU</span>
+                <span class="brand-part2">Collection</span>
+              </h4>
+            </a>
+          </div>
+
+          <div class="col-lg-2 col-md-3 col-6">
+            <a href="{% url 'home' %}" class="brand-wrap logo-link">
+              <img class="logo-img" src="{% static 'images/logo.png' %}" alt="JURU Collection">
+            </a>
+          </div>
+
+          <!-- Search -->
+          <div class="search-wrapper ml-3" id="searchWrapper">
+            <button type="button" class="search-toggle" onclick="toggleSearch()">
+              <i class="fa fa-search"></i>
+            </button>
+            <div class="search-field">
+              <form method="GET" action="{% url 'search' %}">
+                <input type="text" name="keyword" placeholder="Search...">
+              </form>
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div class="col-auto ml-auto">
+            <div class="d-flex align-items-center justify-content-end user-info">
+              {% if user.id %}
+              <div class="text-right mr-3">
+                <small class="title">Welcome {{ user.first_name }}</small><br>
+                <a href="{% url 'dashboard' %}">Dashboard</a> | 
+                <a href="{% url 'logout' %}">Logout</a>
+              </div>
+              {% else %}
+              <div class="text-right mr-3">
+                <small class="title">Welcome guest!</small><br>
+                <a href="{% url 'login' %}">Sign in</a> | 
+                <a href="{% url 'register' %}">Register</a>
+              </div>
+              {% endif %}
+
+              <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                <div class="icon">
+                  <i class="fa fa-shopping-cart"></i>
+                </div>
+                <span id="notifyBadge" class="badge badge-pill badge-danger notify">
+                  {{ cart_count }}
+                  <i class="fa fa-times" onclick="closeNotify()"></i>
+                </span>
+              </a>
+
+              <!-- Mode toggle -->
+              <button id="modeToggle" class="btn btn-outline-primary ml-2" onclick="toggleMode()">
+                <i id="modeIcon" class="fa fa-moon"></i>
+              </button>
+            </div>
+          </div>
         </div>
+        <!-- ✅ End First Row -->
 
         <!-- Categories Dropdown -->
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
@@ -616,52 +676,8 @@ body.dark-mode .dropdown-item:hover {
           <a href="{% url 'about' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
         </div>
 
-        <!-- Search -->
-        <div class="search-wrapper ml-3" id="searchWrapper">
-          <button type="button" class="search-toggle" onclick="toggleSearch()">
-            <i class="fa fa-search"></i>
-          </button>
-          <div class="search-field">
-            <form method="GET" action="{% url 'search' %}">
-              <input type="text" name="keyword" placeholder="Search...">
-            </form>
-          </div>
-        </div>
-
-        <!-- Right side -->
-        <div class="col-auto ml-auto">
-          <div class="d-flex align-items-center justify-content-end user-info">
-            {% if user.id %}
-            <div class="text-right mr-3">
-              <small class="title">Welcome {{ user.first_name }}</small><br>
-              <a href="{% url 'dashboard' %}">Dashboard</a> | 
-              <a href="{% url 'logout' %}">Logout</a>
-            </div>
-            {% else %}
-            <div class="text-right mr-3">
-              <small class="title">Welcome guest!</small><br>
-              <a href="{% url 'login' %}">Sign in</a> | 
-              <a href="{% url 'register' %}">Register</a>
-            </div>
-            {% endif %}
-
-            <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-              <div class="icon">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-              <span id="notifyBadge" class="badge badge-pill badge-danger notify">
-                {{ cart_count }}
-                <i class="fa fa-times" onclick="closeNotify()"></i>
-              </span>
-            </a>
-
-            <!-- Mode toggle -->
-            <button id="modeToggle" class="btn btn-outline-primary ml-2" onclick="toggleMode()">
-              <i id="modeIcon" class="fa fa-moon"></i>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 </header>
+
