@@ -112,10 +112,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SMTP configuration (from environment variables)
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('divin2250@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('ekee womr djdw wwke')
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 
 # Crispy Forms
