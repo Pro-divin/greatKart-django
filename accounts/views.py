@@ -205,21 +205,34 @@ def resetpassword_validate(request, uidb64, token):
         messages.error(request, 'This link has expired!')
         return redirect('login')
 def resetPassword(request):
+    uid = request.session.get('uid')
+    if not uid:
+        messages.error(request, 'Session expired. Please request a new password reset.')
+        return redirect('forgotPassword')
+
+    user = Account.objects.get(pk=uid)
+
     if request.method == 'POST':
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
-        if password == confirm_password:
-            uid = request.session.get('uid')
-            user = Account.objects.get(pk=uid)
-            user.set_password(password)
-            user.save()
-            messages.success(request, 'Your password has been reset successfully.')
-            return redirect('login')
-        else:
+
+        if password != confirm_password:
             messages.error(request, 'Passwords do not match.')
             return redirect('resetPassword')
-    
+
+        # Set password correctly
+        user.set_password(password)
+        user.save()
+
+        # Clear session
+        del request.session['uid']
+
+        messages.success(request, 'Your password has been reset successfully. You can now log in.')
+
+        return redirect('login')
+
     return render(request, 'accounts/resetPassword.html')
+
 
 def my_orders(request):
     orders =Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
