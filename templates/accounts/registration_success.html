@@ -4,6 +4,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Welcome to Juru Collection!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -99,6 +102,19 @@
       If you didn’t create this account, please ignore this message or contact our support team.
     </p>
   </div>
+<script>
+  // Redirect to login if user tries to go back to this page
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+
+  window.onunload = function () { /* no-op to prevent caching */ };
+
+  // Optional: auto-redirect after a few seconds
+  setTimeout(function() {
+    window.location.href = "{% url 'login' %}";
+  }, 10000); // 10 seconds
+</script>
 
 </body>
 </html>

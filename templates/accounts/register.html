@@ -194,63 +194,64 @@
 </div>
 
 <script>
-const passwordInput = document.querySelector('#id_password'); // Django id
-const confirmInput = document.querySelector('#id_confirm_password'); // Django id for confirm password
+const passwordInput = document.querySelector('#id_password'); 
+const confirmInput = document.querySelector('#id_confirm_password'); 
 const submitBtn = document.querySelector('button[type="submit"]');
 const strengthText = document.getElementById('password-strength-text');
 const strengthFill = document.getElementById('password-strength-fill');
 
 function checkPasswordStrength(password) {
-    let strength = 0;
-
-    if (password.length >= 8 && password.match(/[a-zA-Z]/)) strength = 1; // letters only
-    if (password.length >= 8 && password.match(/[a-zA-Z]/) && password.match(/\d/)) strength = 2; // letters + numbers
-    if (password.length >= 8 && password.match(/[a-zA-Z]/) && password.match(/\d/) && password.match(/[^a-zA-Z0-9]/)) strength = 3; // letters + numbers + special
-
-    return strength;
+    if (password.length < 8) return 0; // Too short
+    if (password.match(/[a-zA-Z]/) && !password.match(/\d/) && !password.match(/[^a-zA-Z0-9]/)) return 1; // Letters only
+    if (password.match(/[a-zA-Z]/) && password.match(/\d/) && !password.match(/[^a-zA-Z0-9]/)) return 2; // Letters + numbers
+    if (password.match(/[a-zA-Z]/) && password.match(/\d/) && password.match(/[^a-zA-Z0-9]/)) return 3; // Letters + numbers + special
+    return 1; // fallback
 }
 
 function updatePasswordUI() {
     const password = passwordInput.value;
     const confirmPassword = confirmInput ? confirmInput.value : '';
     const strength = checkPasswordStrength(password);
-
     let canSubmit = false;
 
-    if (strength === 1) {
-        strengthText.textContent = "Weak";
-        strengthText.style.color = "#FFC107"; // yellow
-        strengthFill.style.width = "33%";
-        strengthFill.style.background = "#FFC107";
-    } else if (strength === 2) {
-        strengthText.textContent = "Medium";
-        strengthText.style.color = "orange";
-        strengthFill.style.width = "66%";
-        strengthFill.style.background = "orange";
-    } else if (strength === 3) {
-        strengthText.textContent = "Strong";
-        strengthText.style.color = "green";
-        strengthFill.style.width = "100%";
-        strengthFill.style.background = "green";
-    } else {
-        strengthText.textContent = "";
-        strengthFill.style.width = "0%";
+    // Show password strength
+    switch(strength) {
+        case 0:
+            strengthText.textContent = "Password must be at least 8 characters";
+            strengthText.style.color = "red";
+            strengthFill.style.width = "0%";
+            strengthFill.style.background = "red";
+            break;
+        case 1:
+            strengthText.textContent = "Weak";
+            strengthText.style.color = "#FFC107"; // yellow
+            strengthFill.style.width = "33%";
+            strengthFill.style.background = "#FFC107";
+            break;
+        case 2:
+            strengthText.textContent = "Medium";
+            strengthText.style.color = "orange";
+            strengthFill.style.width = "66%";
+            strengthFill.style.background = "orange";
+            break;
+        case 3:
+            strengthText.textContent = "Strong";
+            strengthText.style.color = "green";
+            strengthFill.style.width = "100%";
+            strengthFill.style.background = "green";
+            break;
     }
 
-    // Enable submit only if strong and passwords match
-    if (strength === 3 && password === confirmPassword && password.length > 0) {
-        canSubmit = true;
-    }
-
-    submitBtn.disabled = !canSubmit;
-
-    // Optional: show mismatch message
+    // Check password match
     if (confirmPassword && password !== confirmPassword) {
         strengthText.textContent = "Passwords do not match";
         strengthText.style.color = "red";
         canSubmit = false;
-        submitBtn.disabled = true;
+    } else if (strength === 3 && password === confirmPassword) {
+        canSubmit = true;
     }
+
+    submitBtn.disabled = !canSubmit;
 }
 
 // Event listeners
@@ -260,6 +261,7 @@ if (confirmInput) confirmInput.addEventListener('input', updatePasswordUI);
 // Disable submit initially
 submitBtn.disabled = true;
 </script>
+
 
           <!-- Optional error messages -->
           {{ form.email.errors }}

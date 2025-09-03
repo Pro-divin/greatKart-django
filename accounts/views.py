@@ -20,6 +20,7 @@ import requests
 
 
 
+@never_cache
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -30,7 +31,11 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+
+            user = Account.objects.create_user(
+                first_name=first_name, last_name=last_name,
+                email=email, username=username, password=password
+            )
             user.phone_number = phone_number
             user.save()
 
@@ -43,18 +48,19 @@ def register(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user),
             })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email = EmailMessage(mail_subject, message, to=[email])
             send_email.send()
 
-            # Render success template
-            return render(request, 'accounts/registration_success.html', {'user': user})
+            # Render success template with no-cache headers
+            response = render(request, 'accounts/registration_success.html', {'user': user})
+            response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            response['Pragma'] = 'no-cache'
+            response['Expires'] = '0'
+            return response
     else:
         form = RegistrationForm()
 
-    context = {
-        'form': form,
-    }
+    context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
 def login(request):
