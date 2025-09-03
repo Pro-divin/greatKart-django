@@ -20,7 +20,7 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Allow all hosts on Heroku
 
-ALLOWED_HOSTS = ['jurucollection.com', 'www.jurucollection.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
