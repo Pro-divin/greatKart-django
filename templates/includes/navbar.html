@@ -156,58 +156,75 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
 /* ================= RESPONSIVE NAVBAR FIX ================= */
 
 /* Tablets & small desktops <= 991px */
+/* ================= RESPONSIVE NAVBAR FOR TABLETS & PHONES ================= */
+
+/* Tablets & small desktops <= 991px */
 @media (max-width: 991px) {
   .header-main .row.align-items-center { 
-    display: flex !important; 
-    flex-wrap: nowrap !important; /* keep inline, prevent stacking */
-    gap: 6px !important; 
-    overflow-x: auto; /* allow horizontal scroll if too wide */
+    display: flex !important;
+    flex-wrap: wrap !important; /* allow wrap for links below */
+    gap: 4px !important;
+    margin: 0 !important;
   }
 
-  /* Row 1: brand, logo, search */
+  /* Top row: brand, small mode icon */
   .header-main .col-auto:first-child,
-  .header-main .col-lg-2,
-  .header-main .search-wrapper {
-    order: 1 !important; 
-    flex: 0 1 auto !important; /* shrink proportionally */
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: space-between !important;
+  .header-main #modeToggle {
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
   }
 
-  /* Row 2: categories, links, user/cart */
+  /* Hide logo and notification/cart icons on small screens */
+  .logo-img,
+  .widget-header {
+    display: none !important;
+  }
+
+  /* Links and categories row below */
   .header-main .col-lg.col-sm.col-md.col-6,
   .header-main .col-auto.d-flex,
   .header-main .col-auto.ml-auto {
-    order: 2 !important; 
-    flex: 0 1 auto !important; /* shrink proportionally */
-    display: flex !important; 
-    justify-content: space-between !important; 
-    align-items: center !important; 
-    gap: 6px !important;
+    order: 2 !important;
+    flex: 1 1 100% !important; /* take full width */
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    gap: 2px !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Shrink logo & text */
-  .logo-img { height: 36px !important; }
-  .brand-title { font-size: 10px !important; }
-  .navbar .nav-link, .category-wrap .btn, .user-info a, #modeToggle { font-size: 0.55rem !important; }
-  .search-field input { width: 90px !important; font-size: 0.5rem !important; }
+  /* Shrink brand text */
+  .brand-title { font-size: 12px !important; }
+
+  /* Shrink nav links and category button */
+  .navbar .nav-link,
+  .category-wrap .btn {
+    font-size: 0.7rem !important;
+    padding: 2px 4px !important;
+  }
+
+  /* Search field smaller */
+  .search-field input { width: 80px !important; font-size: 0.6rem !important; }
 }
 
 /* Phones <= 575px */
 @media (max-width: 575px) {
-  .logo-img { height: 26px !important; }
-  .brand-title { font-size: 7px !important; }
-  .search-field input { width: 70px; font-size: 0.55rem !important; }
-  .header-main .col-lg.col-sm.col-md.col-6,
-  .header-main .col-auto.d-flex { gap: 4px !important; }
+  .brand-title { font-size: 10px !important; }
+  .navbar .nav-link,
+  .category-wrap .btn { font-size: 0.6rem !important; }
+  .search-field input { width: 60px !important; font-size: 0.55rem !important; }
 }
 
 /* Extra small phones <= 400px */
 @media (max-width: 400px) {
-  .logo-img { height: 24px !important; }
-  .brand-title { font-size: 5px !important; }
-  .search-field input { width: 60px !important; font-size: 0.5rem !important; }
+  .brand-title { font-size: 9px !important; }
+  .navbar .nav-link,
+  .category-wrap .btn { font-size: 0.55rem !important; }
+  .search-field input { width: 50px !important; font-size: 0.5rem !important; }
 }
 
 </style>
