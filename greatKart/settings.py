@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'orders',
     'crispy_forms',
     'crispy_bootstrap5',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dikn7tbkc',
+    'API_KEY': '386496537733497',
+    'API_SECRET': 'OiTx7lytgrSDZLBim1gv2v2wbM0',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
