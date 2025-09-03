@@ -10,12 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-  /* Dark mode default background to prevent white flash */
-html.dark-mode, body.dark-mode {
-    background-color: #111; /* same as your dark mode background */
-    color: #fff;
-}
-
+/* ================= ROOT VARIABLES ================= */
 :root {
   --body-bg: #fff;
   --text-color: #000;
@@ -25,17 +20,17 @@ html.dark-mode, body.dark-mode {
 
 /* ================= BODY ================= */
 body {
-  background-color: var(--body-bg) !important;
+  background-color: var(--body-bg);
   color: var(--text-color);
   font-family: 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 /* ================= NAVBAR ================= */
 .navbar, .header-main {
-  background-color: var(--body-bg) !important;
+  background-color: var(--body-bg);
   color: var(--text-color);
   border: none;
   box-shadow: none;
@@ -46,14 +41,11 @@ body {
 .navbar-brand,
 .dropdown-item,
 .widget-header a {
-  position: relative;
   color: var(--text-color) !important;
   font-weight: 500;
   text-decoration: none;
-  border: none !important;
-  background: none !important;
   font-size: 0.9rem;
-  transition: color 0.3s ease;
+  position: relative;
 }
 
 /* Hover underline */
@@ -65,15 +57,14 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -2px;
   width: 100%;
-  height: 2px !important;
+  height: 2px;
   background-color: var(--hover-color);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
 }
-
 .navbar .nav-link:hover::after,
 .header-main a:hover::after,
 .navbar-brand:hover::after,
@@ -82,12 +73,10 @@ body {
   transform: scaleX(1);
   transform-origin: left;
 }
-
 .navbar .nav-link.active::after,
 .header-main a.active::after,
 .dropdown-item.active::after {
   transform: scaleX(1);
-  transform-origin: left;
 }
 
 /* ================= BRAND ================= */
@@ -95,165 +84,56 @@ body {
   font-weight: bold;
   margin: 0;
   font-size: 14px;
-  color: black !important;
-}
-.brand-part1, .brand-part2 {
   color: var(--text-color);
 }
-
-/* Logo image only */
-/* Logo image only */
+.brand-part1, .brand-part2 { color: var(--text-color); }
 .logo-img {
-  height: 140px; /* reduced from 220px */
+  height: 140px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) saturate(100%) contrast(150%);
   display: block;
+  filter: brightness(0) saturate(100%) contrast(150%);
 }
-.header-main .row.align-items-center {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.header-main .brand-wrap,
-.header-main .brand-title {
-  margin: 0 !important;  /* remove extra margin */
-}
-.navbar-toggler {
-  padding: 0.1rem 0.1rem !important;
-}
-
-
-/* Dark mode logo */
 body.dark-mode .logo-img {
   filter: brightness(0) invert(1);
 }
 
-
-
-/* Remove underline for logo link only */
-.brand-wrap.logo-link::after,
-.brand-wrap.logo-link:hover::after {
-  content: none !important;
-  display: none !important;
-}
-
-
-
-/* ================= CATEGORIES DROPDOWN ================= */
+/* ================= DROPDOWNS ================= */
 .category-wrap .btn {
-  border: none !important;
-  background: none !important;
-  color: var(--text-color) !important;
+  border: none;
+  background: none;
+  color: var(--text-color);
   font-weight: 600;
   font-size: 0.9rem;
-  text-decoration: none !important;
 }
-.category-wrap .btn:hover {
-  text-decoration: none !important;
-  color: var(--hover-color) !important;
-}
-.dropdown-menu {
-  border: none;
-  background: var(--body-bg);
-  box-shadow: none;
-}
-.dropdown-item {
-  padding: 6px 14px;
-  font-size: 0.85rem;
-}
-.dropdown-item:hover {
-  text-decoration: none;
-}
+.category-wrap .btn:hover { color: var(--hover-color); }
+.dropdown-menu { border: none; background: var(--body-bg); }
+.dropdown-item { font-size: 0.85rem; }
 
 /* ================= BUTTONS ================= */
 .btn, .btn-outline-primary, .btn-primary {
-  border: none !important;
-  background: none !important;
-  color: var(--text-color) !important;
-  font-size: 0.9rem;
-  text-decoration: none !important;
-  position: static !important;
-}
-.btn:hover, .btn-outline-primary:hover, .btn-primary:hover {
-  text-decoration: none !important;
-  color: var(--hover-color) !important;
-}
-
-/* ================= CART ICON ================= */
-.widget-header .icon {
-  border: none !important;
+  border: none;
+  background: none;
   color: var(--text-color);
-  font-size: 18px;
 }
-.notify {
-  font-size: 11px;
-  padding: 2px 6px;
-  position: relative;
-  top: -10px;
-  right: 10px;
-}
+.btn:hover { color: var(--hover-color); }
+
+/* ================= CART & USER ================= */
+.widget-header .icon { font-size: 18px; color: var(--text-color); }
+.notify { font-size: 11px; position: relative; top: -10px; right: 10px; }
+.user-info { font-size: 0.8rem; line-height: 1.3; }
 
 /* ================= SEARCH ================= */
-.search-wrapper {
-  position: relative;
-}
-.search-toggle {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 18px;
-  cursor: pointer;
-}
-.search-field {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 250px;
-  margin-top: 10px;
-  z-index: 1000;
-}
-.search-field input {
-  width: 100%;
-  border: 1px solid var(--text-color);
-  padding: 3px 8px;
-  font-size: 0.85rem;
-  border-radius: 3px;
-  background: var(--body-bg);
-  color: var(--text-color);
-  height: 28px;
-  font-weight: bolder;
-}
-.search-wrapper.active .search-field {
-  display: block;
-}
+.search-wrapper { position: relative; }
+.search-toggle { background: none; border: none; color: var(--text-color); font-size: 18px; cursor: pointer; }
+.search-field { display: none; position: absolute; top: 100%; right: 0; width: 250px; z-index: 1000; margin-top: 5px; }
+.search-field input { width: 100%; border: 1px solid var(--text-color); padding: 3px 8px; font-size: 0.85rem; border-radius: 3px; background: var(--body-bg); color: var(--text-color); height: 28px; }
 
-/* ================= PRODUCT TEXT ================= */
-.price, .product-price, .item-price, 
-.card-text, .product-title, .product-detail, 
-.review-text, .title, .info-wrap a {
-  color: var(--text-color);
-  font-weight: 600;
-}
-.card-product-grid .title,
-.card-product-grid .price {
-  color: var(--text-color) !important;
-}
+/* Show search when active */
+.search-wrapper.active .search-field { display: block; }
 
 /* ================= FOOTER ================= */
-.section-footer {
-  background-color: var(--body-bg);
-  color: var(--text-color);
-  padding: 20px 0;
-  text-align: center;
-  border-top: none;
-}
-.section-footer a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 0.85rem;
-}
+.section-footer { background: var(--body-bg); color: var(--text-color); text-align: center; padding: 20px 0; }
 
 /* ================= DARK MODE ================= */
 body.dark-mode {
@@ -262,245 +142,101 @@ body.dark-mode {
   --card-bg: #1e1e1e;
   --hover-color: #fff;
 }
-body.dark-mode .dropdown-menu {
-  background: var(--body-bg);
-}
-body.dark-mode .dropdown-item {
-  color: var(--text-color) !important;
-}
-body.dark-mode .dropdown-item:hover {
-  text-decoration: none;
-}
+body.dark-mode .dropdown-menu { background: var(--body-bg); }
+body.dark-mode .dropdown-item { color: var(--text-color); }
 
-/* ================= USER INFO ================= */
-.user-info {
-  font-size: 0.8rem;
-  line-height: 1.3;
-}
-.user-info a {
-  font-size: 0.8rem;
-}
+/* ================= HEADER MAIN COMPACT ================= */
+.header-main .row.align-items-center { padding: 2px 0; margin: 0; }
+.header-main .brand-wrap, .header-main .brand-title { margin: 0; line-height: 1; }
+.header-main .col-auto, .header-main .col-lg-2, .header-main .col-lg, .header-main .col-sm, .header-main .col-md { padding: 0; margin: 0; }
 
-/* ========== Compact Navbar ========== */
-.header-main .row.align-items-center {
-    padding-top: 2px;    /* very small vertical padding */
-    padding-bottom: 2px;
-}
+/* ================= RESPONSIVE NAVBAR ================= */
 
-.header-main .brand-wrap,
-.header-main .brand-title {
-    margin: 0;           /* remove extra margin */
-    line-height: 1;      /* tighten vertical space */
-}
-
-.header-main .col-auto,
-.header-main .col-lg-2 {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin: 0;
-}
-
-/* Nav links spacing */
-.navbar .nav-link,
-.header-main a {
-    padding-top: 1px;    /* very small padding */
-    padding-bottom: 2px;
-    margin-top: 0px;
-    margin-bottom: 0;
-    margin-left: 2px;
-    margin-right: 2px;
-}
-
-/* Categories dropdown & buttons spacing */
-.category-wrap .btn {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-left: 1px;
-    margin-right: 1px;
-}
-
-/* Cart & mode toggle spacing */
-.user-info a,
-.widget-header,
-#modeToggle {
-    margin-left: 1px;
-    margin-right: 1px;
-}
-
-/* Keep logo size unchanged */
-.logo-img {
-    height: 120px; /* keep the original logo height */
-    width: auto;
-}
-
-/* ===== Compact Navbar ===== */
-.header-main {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.header-main .container {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-.header-main .row.align-items-center {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.header-main .col-auto,
-.header-main .col-lg-2,
-.header-main .col-lg,
-.header-main .col-sm,
-.header-main .col-md {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.navbar .nav-link,
-.header-main a {
-    padding-top: 1px !important;
-    padding-bottom: 1px !important;
-    margin: 0 !important;
-}
-
-.category-wrap .btn {
-    padding-top: 1px !important;
-    padding-bottom: 1px !important;
-    margin: 0 !important;
-}
-
-.user-info a,
-.widget-header,
-#modeToggle {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Keep logo size unchanged */
-.logo-img {
-    height: 120px; /* unchanged */
-    width: auto;
-}
-
-/* ===== Tablets (<=991px) ===== */
-
-/* ===== Tablets & Phones (<=991px) ===== */
-/* Tablets & Phones <= 991px */
+/* Tablets & small desktops <= 991px */
 @media (max-width: 991px) {
-  .header-main .row.align-items-center {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px;
+  .header-main .row.align-items-center { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* Row 1: brand, logo, search */
+  .header-main .col-auto:first-child,
+  .header-main .col-lg-2,
+  .header-main .search-wrapper {
+    order: 1; flex: 1 1 100%; display: flex; align-items: center; justify-content: space-between;
   }
 
-  /* ===== FIRST ROW ===== */
-  .header-main .col-auto:first-child,  /* Brand */
-  .header-main .col-lg-2,              /* Logo */
-  .header-main .search-wrapper {       /* Search */
-    order: 1 !important;
-    flex: 1 1 100% !important;         /* full width each item */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+  /* Row 2: categories, links, user/cart */
+  .header-main .col-lg.col-sm.col-md.col-6,
+  .header-main .col-auto.d-flex,
+  .header-main .col-auto.ml-auto {
+    order: 2; flex: 1 1 100%; display: flex; justify-content: space-between; align-items: center; gap: 6px;
   }
 
-  /* ===== SECOND ROW ===== */
-  .header-main .col-lg.col-sm.col-md.col-6,  /* Categories */
-  .header-main .col-auto.d-flex,             /* Store + About */
-  .header-main .col-auto.ml-auto {           /* User/cart/mode */
-    order: 2 !important;
-    flex: 1 1 100% !important;              /* full width second row */
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    margin-top: 4px !important;
-  }
-
-  /* Compact adjustments */
-  .logo-img { height: 36px !important; }
-  .brand-title { font-size: 12px !important; margin-left: 4px; }
-  .navbar .nav-link,
-  .category-wrap .btn,
-  .user-info a,
-  #modeToggle { font-size: 0.7rem !important; }
-  .search-field input { width: 90px !important; font-size: 0.7rem; }
+  /* Shrink logo & text */
+  .logo-img { height: 36px; }
+  .brand-title { font-size: 12px; }
+  .navbar .nav-link, .category-wrap .btn, .user-info a, #modeToggle { font-size: 0.75rem; }
+  .search-field input { width: 90px; font-size: 0.7rem; }
 }
 
 /* Phones <= 575px */
 @media (max-width: 575px) {
-  .logo-img { height: 26px !important; }
-  .brand-title { font-size: 10px !important; }
-  .search-field input { width: 70px !important; font-size: 0.55rem; }
-
+  .logo-img { height: 26px; }
+  .brand-title { font-size: 10px; }
+  .search-field input { width: 70px; font-size: 0.55rem; }
   .header-main .col-lg.col-sm.col-md.col-6,
-  .header-main .col-auto.d-flex {
-    gap: 4px !important; /* tighten spacing */
-  }
+  .header-main .col-auto.d-flex { gap: 4px; }
 }
 
+/* Extra small phones <= 400px */
 @media (max-width: 400px) {
-  .logo-img { height: 24px !important; }   /* instead of display:none */
-  .brand-title { font-size: 9px !important; margin-left: 0 !important; }
-  .search-field input { width: 60px !important; font-size: 0.5rem; }
+  .logo-img { height: 24px; }
+  .brand-title { font-size: 9px; }
+  .search-field input { width: 60px; font-size: 0.5rem; }
 }
 
 </style>
 
 <script>
-  // Apply theme immediately
-  (function() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
-  })();
+(function() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(savedTheme);
+})();
 
-  function applyTheme(theme) {
-    const body = document.body;
-    const icon = document.getElementById('modeIcon');
-
-    if (theme === 'dark') {
-      body.classList.add('dark-mode');
-      setDarkVars();
-      if (icon) icon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      body.classList.remove('dark-mode');
-      setLightVars();
-      if (icon) icon.classList.replace('fa-sun', 'fa-moon');
-    }
-    localStorage.setItem('theme', theme);
+function applyTheme(theme) {
+  const body = document.body;
+  const icon = document.getElementById('modeIcon');
+  if (theme === 'dark') {
+    body.classList.add('dark-mode'); setDarkVars();
+    if (icon) icon.classList.replace('fa-moon','fa-sun');
+  } else {
+    body.classList.remove('dark-mode'); setLightVars();
+    if (icon) icon.classList.replace('fa-sun','fa-moon');
   }
+  localStorage.setItem('theme', theme);
+}
 
-  function toggleMode() {
-    const body = document.body;
-    const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    applyTheme(newTheme);
-  }
+function toggleMode() {
+  const body = document.body;
+  const current = body.classList.contains('dark-mode') ? 'dark' : 'light';
+  applyTheme(current==='dark'?'light':'dark');
+}
 
-  function setDarkVars() {
-    document.documentElement.style.setProperty('--body-bg', '#121212');
-    document.documentElement.style.setProperty('--text-color', '#fff');
-    document.documentElement.style.setProperty('--card-bg', '#1e1e1e');
-    document.documentElement.style.setProperty('--hover-color', '#fff');
-  }
+function setDarkVars() {
+  document.documentElement.style.setProperty('--body-bg','#121212');
+  document.documentElement.style.setProperty('--text-color','#fff');
+  document.documentElement.style.setProperty('--card-bg','#1e1e1e');
+  document.documentElement.style.setProperty('--hover-color','#fff');
+}
+function setLightVars() {
+  document.documentElement.style.setProperty('--body-bg','#fff');
+  document.documentElement.style.setProperty('--text-color','#000');
+  document.documentElement.style.setProperty('--card-bg','#fff');
+  document.documentElement.style.setProperty('--hover-color','#000');
+}
 
-  function setLightVars() {
-    document.documentElement.style.setProperty('--body-bg', '#fff');
-    document.documentElement.style.setProperty('--text-color', '#000');
-    document.documentElement.style.setProperty('--card-bg', '#fff');
-    document.documentElement.style.setProperty('--hover-color', '#000');
-  }
+function toggleSearch() {
+  document.getElementById('searchWrapper').classList.toggle('active');
+}
 </script>
-
 
 <header class="section-header">
   <nav class="navbar p-md-0 navbar-expand-sm navbar-light">
@@ -515,22 +251,22 @@ body.dark-mode .dropdown-item:hover {
   <section class="header-main">
     <div class="container">
       <div class="row align-items-center">
+
+        <!-- Brand -->
         <div class="col-auto">
           <a href="{% url 'home' %}" class="brand-wrap nav-link">
-            <h4 class="brand-title">
-              <span class="brand-part1">JURU</span>
-              <span class="brand-part2">Collection</span>
-            </h4>
+            <h4 class="brand-title"><span class="brand-part1">JURU</span> <span class="brand-part2">Collection</span></h4>
           </a>
         </div>
 
+        <!-- Logo -->
         <div class="col-lg-2 col-md-3 col-6">
           <a href="{% url 'home' %}" class="brand-wrap logo-link">
             <img class="logo-img" src="{% static 'images/logo.png' %}" alt="JURU Collection">
           </a>
         </div>
 
-        <!-- Categories Dropdown -->
+        <!-- Categories -->
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
           <div class="category-wrap dropdown d-inline-block float-right">
             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
@@ -551,11 +287,9 @@ body.dark-mode .dropdown-item:hover {
           <a href="{% url 'about' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
         </div>
 
-        <!-- Search (only change: added col-auto) -->
+        <!-- Search -->
         <div class="col-auto search-wrapper ml-3" id="searchWrapper">
-          <button type="button" class="search-toggle" onclick="toggleSearch()">
-            <i class="fa fa-search"></i>
-          </button>
+          <button type="button" class="search-toggle" onclick="toggleSearch()"><i class="fa fa-search"></i></button>
           <div class="search-field">
             <form method="GET" action="{% url 'search' %}">
               <input type="text" name="keyword" placeholder="Search...">
@@ -563,7 +297,7 @@ body.dark-mode .dropdown-item:hover {
           </div>
         </div>
 
-        <!-- Right side -->
+        <!-- User/Cart/Mode -->
         <div class="col-auto ml-auto">
           <div class="d-flex align-items-center justify-content-end user-info">
             {% if user.id %}
@@ -581,11 +315,8 @@ body.dark-mode .dropdown-item:hover {
             {% endif %}
 
             <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-              <div class="icon">
-                <i class="fa fa-shopping-cart"></i>
-              </div>
-              <span id="notifyBadge" class="badge badge-pill badge-danger notify">
-                {{ cart_count }}
+              <div class="icon"><i class="fa fa-shopping-cart"></i></div>
+              <span id="notifyBadge" class="badge badge-pill badge-danger notify">{{ cart_count }}
                 <i class="fa fa-times" onclick="closeNotify()"></i>
               </span>
             </a>
@@ -596,6 +327,7 @@ body.dark-mode .dropdown-item:hover {
             </button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
