@@ -174,19 +174,71 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Create password</label>
-              {{ form.password }}
-            </div>
-            <div class="form-group col-md-6">
-              <label>Repeat password</label>
-              {{ form.confirm_password }}
-            </div>
-          </div>
+  <div class="form-group col-md-6">
+    <label>Create password</label>
+    {{ form.password }}
+    <div id="password-strength-bar" style="height:6px; width:100%; background:#e0e0e0; border-radius:3px; margin-top:5px;">
+      <div id="password-strength-fill" style="height:100%; width:0%; background:red; border-radius:3px;"></div>
+    </div>
+    <div id="password-strength-text" style="margin-top:5px; font-weight:600;"></div>
+  </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Register</button>
-          </div>
+  <div class="form-group col-md-6">
+    <label>Repeat password</label>
+    {{ form.confirm_password }}
+  </div>
+</div>
+
+<div class="form-group">
+  <button type="submit" class="btn btn-primary">Register</button>
+</div>
+
+<script>
+const passwordInput = document.querySelector('#id_password'); // Django id
+const submitBtn = document.querySelector('button[type="submit"]');
+const strengthText = document.getElementById('password-strength-text');
+const strengthFill = document.getElementById('password-strength-fill');
+
+function checkPasswordStrength(password) {
+  let strength = 0;
+  if (password.match(/[a-zA-Z]/)) strength = 1; // letters only
+  if (password.match(/[a-zA-Z]/) && password.match(/\d/)) strength = 2; // letters + numbers
+  if (password.match(/[a-zA-Z]/) && password.match(/\d/) && password.match(/[^a-zA-Z0-9]/)) strength = 3; // letters + numbers + special
+  return strength;
+}
+
+passwordInput.addEventListener('input', () => {
+  const password = passwordInput.value;
+  const strength = checkPasswordStrength(password);
+
+  if (strength === 1) {
+    strengthText.textContent = "Weak";
+    strengthText.style.color = "yellow";
+    strengthFill.style.width = "33%";
+    strengthFill.style.background = "yellow";
+    submitBtn.disabled = true;
+  } else if (strength === 2) {
+    strengthText.textContent = "Medium";
+    strengthText.style.color = "orange";
+    strengthFill.style.width = "66%";
+    strengthFill.style.background = "orange";
+    submitBtn.disabled = true;
+  } else if (strength === 3) {
+    strengthText.textContent = "Strong";
+    strengthText.style.color = "green";
+    strengthFill.style.width = "100%";
+    strengthFill.style.background = "green";
+    submitBtn.disabled = false;
+  } else {
+    strengthText.textContent = "";
+    strengthFill.style.width = "0%";
+    submitBtn.disabled = true;
+  }
+});
+
+// Disable submit initially
+submitBtn.disabled = true;
+</script>
 
           <!-- Optional error messages -->
           {{ form.email.errors }}
