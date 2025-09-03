@@ -397,10 +397,10 @@ body.dark-mode .dropdown-item:hover {
 /* ===== Tablets & Phones (<=991px) ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap !important;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
 
   /* First row: logo + brand + search + user info */
@@ -408,23 +408,23 @@ body.dark-mode .dropdown-item:hover {
   .header-main .col-lg-2,                 /* logo image */
   .header-main .search-wrapper,           /* search */
   .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
-    order: 1;
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 0;
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-width: 0 !important;
   }
 
   /* Second row: categories + store + about (centered) */
   .header-main .col-lg.col-sm.col-md.col-6,  /* categories */
   .header-main .col-auto.d-flex {            /* store + about */
-    order: 2;
-    flex: 1 1 100%;         /* take full width */
-    display: flex;
-    justify-content: center; /* center horizontally */
-    gap: 6px;
-    margin-top: 4px;
+    order: 2 !important;
+    flex: 1 1 100% !important;         /* take full width */
+    display: flex !important;
+    justify-content: center !important; /* center horizontally */
+    gap: 6px !important;
+    margin-top: 4px !important;
   }
 
   /* Compact adjustments */
@@ -456,7 +456,7 @@ body.dark-mode .dropdown-item:hover {
   /* Reduce gap between Store, About, Categories */
   .header-main .col-lg.col-sm.col-md.col-6,
   .header-main .col-auto.d-flex {
-    gap: 4px;
+    gap: 4px !important;
   }
 }
 
@@ -470,10 +470,10 @@ body.dark-mode .dropdown-item:hover {
 /* ===== Tablets & Phones (<=991px) ===== */
 @media (max-width: 991px) {
   .header-main .row.align-items-center {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap !important;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
 
   /* First row: logo + brand + search + user info */
@@ -481,30 +481,30 @@ body.dark-mode .dropdown-item:hover {
   .header-main .col-lg-2,                 /* logo image */
   .header-main .search-wrapper,           /* search */
   .header-main .col-auto.ml-auto {        /* user info + cart + toggle */
-    order: 1;
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 0;
+    order: 1 !important;
+    flex: 1 1 auto!important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-width: 0 !important;
   }
 
   /* Categories Dropdown */
   .header-main .col-lg.col-sm.col-md.col-6 {
-    order: 2;
-    flex: 1 1 auto;        /* share space with Store/About */
-    display: flex;
-    justify-content: flex-start; /* keep left */
-    gap: 6px;
+    order: 2 !important;
+    flex: 1 1 auto !important;        /* share space with Store/About */
+    display: flex !important;
+    justify-content: flex-start !important; /* keep left */
+    gap: 6px !important;
   }
 
   /* Store + About */
   .header-main .col-auto.d-flex {
-    order: 2;
-    flex: 1 1 auto;        /* share same row */
-    display: flex;
-    justify-content: flex-end; /* keep right */
-    gap: 6px;
+    order: 2 !important;
+    flex: 1 1 auto !important;        /* share same row */
+    display: flex !important;
+    justify-content: flex-end !important; /* keep right */
+    gap: 6px !important;
   }
 
   /* Compact adjustments */
@@ -517,7 +517,7 @@ body.dark-mode .dropdown-item:hover {
   .search-field input { width: 90px !important; font-size: 0.7rem !important; }
 }
 
-@media (max-width: 991px ) {
+@media (max-width: 891px ) {
   .header-main .row.align-items-center {
     flex-wrap: nowrap !important; /* prevent wrapping */
     align-items: center !important;
