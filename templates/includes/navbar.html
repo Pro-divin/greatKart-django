@@ -483,6 +483,37 @@ body.dark-mode .mobile-topbar {
     margin-right: 4px; /* optional, tighter spacing */
 }
 
+/* Force left alignment of icons on mobile */
+@media (max-width: 575px) {
+  .mobile-header .container-fluid {
+    padding-left: 2px !important;  /* remove container padding */
+    padding-right: 2px !important;
+  }
+
+  .mobile-header .d-flex.align-items-center.gap-2 {
+    margin-left: 0 !important;     /* remove left margin */
+    gap: 2px !important;           /* minimal spacing between icons */
+  }
+
+  /* Force search, cart, and mode buttons to stick left */
+  .mobile-header .search-wrapper,
+  .mobile-header .d-flex.align-items-center.gap-1 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Shrink the icons slightly if needed */
+  .mobile-header i.fa {
+    font-size: 16px !important;
+  }
+
+  /* Remove any extra input margin */
+  #mobileSearchInput {
+    margin-left: 0 !important;
+    width: 80px !important;  /* optional, adjust width */
+  }
+}
+
 </style>
 
 <script>
