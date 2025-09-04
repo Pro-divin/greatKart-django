@@ -82,6 +82,13 @@ DATABASES = {
     )
 }
 
+POSTGRES_LOCALLY = True  # keep it as boolean
+
+if os.environ.get('ENVIRONMENT') == 'production' or POSTGRES_LOCALLY:
+    DATABASES['default'] = dj_database_url.parse(os.environ.get('DATABASE_URL'))
+
+        
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -102,9 +109,20 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'greatKart' / 'static']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+if os.environ.get('ENVIRONMENT') == 'production':
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = '/media/'  # optional, Cloudinary provides full URL
+else:
+    MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_URL = '/media/'
+
+
+# Cloudinary configuration from environment variables
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),    
+}
 
 # Messages framework
 MESSAGE_TAGS = {messages.ERROR: "danger"}
@@ -128,10 +146,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Cloudinary configuration
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),    
-}
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
