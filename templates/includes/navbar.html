@@ -590,7 +590,7 @@ body:not(.dark-mode) .product-name,
 body:not(.dark-mode) .product-price,
 body:not(.dark-mode) .card .title,
 body:not(.dark-mode) .card .text-muted,
-body:not(.dark-mode) .card .price-wrap,
+body:not(.dark-mode) .card .price-wrap
  {
     color: #000 !important;
 }
@@ -800,8 +800,8 @@ function submitOnEnter(e){
     </a>
 
     <!-- Inline navigation links -->
-    <span class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</span>
-    <span class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</span>
+    <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
+    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
    {% if user.id %}
             <div class="user-info text-right mr-3">
               <small>Welcome {{ user.first_name }}</small><br>
