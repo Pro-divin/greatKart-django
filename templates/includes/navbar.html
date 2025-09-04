@@ -605,26 +605,40 @@ body:not(.dark-mode) .mobile-glass-search {
     color: #000 !important;
 }
 
-/* Mobile dropdown fix */
+/* ================= MOBILE DROPDOWN FIX ================= */
 @media (max-width: 575px) {
+  /* Ensure dropdowns are always visible on mobile */
+  .mobile-header .dropdown {
+    position: relative !important; /* parent for absolute dropdown */
+    z-index: 1050;                 /* above other elements */
+  }
+
   .mobile-header .dropdown-menu {
     position: absolute !important;
-    top: 100% !important;
+    top: 100% !important;          /* below the button */
     left: 0 !important;
-    display: none;
-    z-index: 9999;
+    display: none;                 /* initially hidden */
     min-width: 160px;
+    max-width: 250px;              /* prevent too wide dropdown */
+    overflow: visible !important;  /* allow content to show outside container */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
-  .mobile-header .dropdown.show .dropdown-menu {
-    display: block;
-  }
-  .mobile-header .dropdown {
-    position: relative; /* required for absolute dropdown */
-  }
-}
 
-.mobile-header .d-flex.align-items-center.gap-2 {
-  overflow: visible !important;
+  .mobile-header .dropdown.show .dropdown-menu {
+    display: block !important;     /* show when open */
+  }
+
+  /* Allow horizontal scroll if dropdown too wide */
+  .mobile-header {
+    overflow-x: visible !important;
+  }
+
+  /* Adjust padding for dropdown items */
+  .mobile-header .dropdown-item {
+    white-space: nowrap;           /* prevent wrapping */
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
 }
 
 </style>
@@ -717,7 +731,38 @@ function submitOnEnter(e){
   }
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Function to handle dropdown toggling
+  function setupDropdown(dropdownId) {
+    const button = document.getElementById(dropdownId);
+    const menu = button.nextElementSibling;
+
+    button.addEventListener('click', function(e) {
+      e.preventDefault(); // prevent default Bootstrap conflicts
+      menu.classList.toggle('show');  // toggle visibility
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function(e) {
+      if (!button.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('show');
+      }
+    });
+  }
+
+  // Setup both dropdowns
+  setupDropdown('desktopCategories');
+  setupDropdown('mobileCategories');
+
+  // Optional: handle window resize to reset dropdowns
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
+  });
+});
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 {% load static %}
