@@ -444,6 +444,34 @@ body.dark-mode .mobile-topbar {
 .mobile-topbar .mobile-brand-text {
   letter-spacing: 2px;
 }
+ 
+.mobile-topbar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;            /* spacing between items */
+  font-size: 0.9rem;
+}
+
+.mobile-topbar .nav-link {
+  white-space: nowrap;  /* prevent wrapping */
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.mobile-topbar .nav-link:hover,
+.mobile-topbar .nav-link.active {
+  color: #ffd700;       /* highlight color */
+}
+
+.mobile-brand-text {
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+}
 
 
 </style>
@@ -606,17 +634,20 @@ function toggleDesktopSearch() {
 <section class="mobile-header d-lg-none">
 
   <!-- Top Bar with JuruCollection -->
-  <div class="mobile-topbar text-center py-1">
+  <!-- ================= MOBILE HEADER ================= -->
+<section class="mobile-header d-lg-none">
+  <div class="mobile-topbar d-flex align-items-center justify-content-center gap-3 py-1">
+
+    <!-- Brand name -->
     <span class="mobile-brand-text">JuruCollection</span>
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
-          </li>
-        </ul>
+
+    <!-- Inline navigation links -->
+    <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
+    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
+
   </div>
+</section>
+  
 
   <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -677,10 +708,7 @@ function toggleDesktopSearch() {
 
       </div>
 
-      <!-- Toggle button for collapsed menu -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+     
 
       <!-- Collapsible menu -->
       
