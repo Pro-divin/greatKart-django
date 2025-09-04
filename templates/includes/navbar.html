@@ -703,12 +703,7 @@ function toggleDesktopSearch() {
 
         <!-- User / Cart / Mode -->
         <div class="d-flex align-items-center gap-1">
-          {% if user.id %}
-            <a href="{% url 'dashboard' %}"><i class="fa fa-user"></i></a>
-            <a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i></a>
-          {% else %}
-            <a href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i></a>
-          {% endif %}
+          
           <a href="{% url 'cart' %}" class="position-relative">
             <i class="fa fa-shopping-cart" ></i>
             <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px; ">
