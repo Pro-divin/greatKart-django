@@ -344,28 +344,12 @@ body.dark-mode table.table-shopping-cart td small {
   }
 }
 
-/* ================= MOBILE MENU LIGHT IN DARK MODE ================= */
+/* Keep mobile menu toggle icon dark in dark mode */
 @media (max-width: 575px) {
-  body.dark-mode .mobile-header .navbar,
-  body.dark-mode .mobile-header .dropdown-menu,
-  body.dark-mode .mobile-header .collapse {
-      background-color: #fff !important; /* keep menu white */
-  }
-
-  body.dark-mode .mobile-header .nav-link,
-  body.dark-mode .mobile-header .dropdown-item {
-      color: #000 !important; /* text black */
-  }
-
-  body.dark-mode .mobile-header .nav-link.active {
-      color: #000 !important; /* active link black */
-  }
-
-  body.dark-mode .mobile-header .dropdown-item:hover {
-      background-color: #f0f0f0 !important; /* subtle hover */
+  body.dark-mode .navbar-toggler {
+    filter: invert(0) !important; /* ensures the icon stays dark */
   }
 }
-
 
 </style>
 
