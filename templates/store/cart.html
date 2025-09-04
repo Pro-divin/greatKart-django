@@ -153,15 +153,24 @@ body.dark-mode .text-dark {
 body.dark-mode .title {
     color: #fff !important;
 }
-body.dark-mode .text-muted {
-    color: #bbb !important;
-}
+
 
 /* Force cart product name and price to white in dark mode */
 body.dark-mode .card .title,
 body.dark-mode .card .product-price {
     color: #fff !important;
 }
+/* Product price color in light mode */
+.product-price {
+    color: #000; /* black in light mode */
+    transition: color 0.3s ease;
+}
+
+/* Dark mode override (already exists) */
+body.dark-mode .product-price {
+    color: #fff !important; /* white in dark mode */
+}
+
 
 </style>
 
