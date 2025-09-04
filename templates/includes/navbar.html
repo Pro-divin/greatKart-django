@@ -219,49 +219,6 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
   }
 }
 
-</style>
-
-<script>
-(function() {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  applyTheme(savedTheme);
-})();
-
-function applyTheme(theme) {
-  const body = document.body;
-  const icon = document.getElementById('modeIcon');
-  if (theme === 'dark') {
-    body.classList.add('dark-mode'); setDarkVars();
-    if (icon) icon.classList.replace('fa-moon','fa-sun');
-  } else {
-    body.classList.remove('dark-mode'); setLightVars();
-    if (icon) icon.classList.replace('fa-sun','fa-moon');
-  }
-  localStorage.setItem('theme', theme);
-}
-
-function toggleMode() {
-  const body = document.body;
-  const current = body.classList.contains('dark-mode') ? 'dark' : 'light';
-  applyTheme(current==='dark'?'light':'dark');
-}
-
-function setDarkVars() {
-  document.documentElement.style.setProperty('--body-bg','#121212');
-  document.documentElement.style.setProperty('--text-color','#fff');
-  document.documentElement.style.setProperty('--card-bg','#1e1e1e');
-  document.documentElement.style.setProperty('--hover-color','#fff');
-}
-function setLightVars() {
-  document.documentElement.style.setProperty('--body-bg','#fff');
-  document.documentElement.style.setProperty('--text-color','#000');
-  document.documentElement.style.setProperty('--card-bg','#fff');
-  document.documentElement.style.setProperty('--hover-color','#000');
-}
-
-function toggleSearch() {
-  document.getElementById('searchWrapper').classList.toggle('active');
-}
 /* Modern Dropdown Style */
 .category-wrap .dropdown-menu {
   background: rgba(255, 255, 255, 0.9); /* semi-transparent */
@@ -306,6 +263,50 @@ body.dark-mode .category-wrap .dropdown-item:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+</style>
+
+<script>
+(function() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(savedTheme);
+})();
+
+function applyTheme(theme) {
+  const body = document.body;
+  const icon = document.getElementById('modeIcon');
+  if (theme === 'dark') {
+    body.classList.add('dark-mode'); setDarkVars();
+    if (icon) icon.classList.replace('fa-moon','fa-sun');
+  } else {
+    body.classList.remove('dark-mode'); setLightVars();
+    if (icon) icon.classList.replace('fa-sun','fa-moon');
+  }
+  localStorage.setItem('theme', theme);
+}
+
+function toggleMode() {
+  const body = document.body;
+  const current = body.classList.contains('dark-mode') ? 'dark' : 'light';
+  applyTheme(current==='dark'?'light':'dark');
+}
+
+function setDarkVars() {
+  document.documentElement.style.setProperty('--body-bg','#121212');
+  document.documentElement.style.setProperty('--text-color','#fff');
+  document.documentElement.style.setProperty('--card-bg','#1e1e1e');
+  document.documentElement.style.setProperty('--hover-color','#fff');
+}
+function setLightVars() {
+  document.documentElement.style.setProperty('--body-bg','#fff');
+  document.documentElement.style.setProperty('--text-color','#000');
+  document.documentElement.style.setProperty('--card-bg','#fff');
+  document.documentElement.style.setProperty('--hover-color','#000');
+}
+
+function toggleSearch() {
+  document.getElementById('searchWrapper').classList.toggle('active');
 }
 
 </script>
