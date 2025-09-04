@@ -303,6 +303,8 @@ body.dark-mode table.table-shopping-cart td small {
   .category-wrap .btn { padding: 0 2px !important; }
   .header-main .col-auto.d-flex { gap: 2px !important; }
 }
+
+
 /* ================= BRAND ================= */
 .logo-img {
   height: 40px;   /* ✅ reasonable default for desktop */
@@ -356,7 +358,6 @@ body.dark-mode .logo-img {
   }
 }
 
-
 </style>
 
 <script>
@@ -403,59 +404,142 @@ function toggleSearch() {
 
 </script>
 
-<header class="mobile-header d-lg-none">
-  <nav class="navbar navbar-light px-2 py-1">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
+{% load static %}
 
-      <!-- Logo -->
-      <a href="{% url 'home' %}" class="navbar-brand p-0 m-0">
-        <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
-      </a>
+<header>
 
-      <!-- Search -->
-      <div class="search-wrapper mx-2 flex-grow-1" id="searchWrapper">
-        <form method="GET" action="{% url 'search' %}" class="d-flex">
-          <input type="text" name="keyword" placeholder="Search..." class="form-control form-control-sm">
-        </form>
-      </div>
+  <!-- ================= DESKTOP HEADER ================= -->
+  <section class="header-main d-none d-lg-block">
+    <div class="container">
+      <div class="row align-items-center">
 
-      <!-- Icons -->
-      <div class="nav-icons d-flex align-items-center">
+        <!-- Logo -->
+        <div class="col-lg-2 col-md-3">
+          <a href="{% url 'home' %}" class="brand-wrap">
+            <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
+          </a>
+        </div>
 
         <!-- Categories -->
-        <div class="dropdown mx-1">
-          <button class="btn p-1" data-toggle="dropdown">
-            <i class="fa fa-bars"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{% url 'store' %}">All products</a>
-            {% for category in links %}
-              <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
-            {% endfor %}
+        <div class="col-lg col-md">
+          <div class="category-wrap dropdown">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bars"></i> Categories
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store' %}">All products</a>
+              {% for category in links %}
+                <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+              {% endfor %}
+            </div>
           </div>
         </div>
 
-        <!-- Cart -->
-        <a href="{% url 'cart' %}" class="btn p-1 position-relative mx-1">
-          <i class="fa fa-shopping-cart"></i>
-          <span id="notifyBadge" class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px;">
-            {{ cart_count }}
-          </span>
-        </a>
+        <!-- Navigation Links -->
+        <div class="col-auto d-flex align-items-center">
+          <a href="{% url 'store' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'store' %}active{% endif %}">Store</a>
+          <a href="{% url 'about' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+        </div>
 
-        <!-- Mode toggle -->
-        <button id="modeToggle" class="btn p-1 mx-1" onclick="toggleMode()">
-          <i id="modeIcon" class="fa fa-moon"></i>
-        </button>
+        <!-- Search -->
+        <div class="col-auto search-wrapper">
+          <form method="GET" action="{% url 'search' %}">
+            <input type="text" name="keyword" placeholder="Search..." class="form-control form-control-sm">
+          </form>
+        </div>
 
-        <!-- User -->
-        {% if user.id %}
-          <a href="{% url 'dashboard' %}" class="btn p-1 mx-1"><i class="fa fa-user"></i></a>
-        {% else %}
-          <a href="{% url 'login' %}" class="btn p-1 mx-1"><i class="fa fa-sign-in-alt"></i></a>
-        {% endif %}
+        <!-- User / Cart / Mode -->
+        <div class="col-auto ml-auto d-flex align-items-center">
+
+          {% if user.id %}
+            <div class="user-info text-right mr-3">
+              <small>Welcome {{ user.first_name }}</small><br>
+              <a href="{% url 'dashboard' %}">Dashboard</a> | 
+              <a href="{% url 'logout' %}">Logout</a>
+            </div>
+          {% else %}
+            <div class="user-info text-right mr-3">
+              <small>Welcome Guest!</small><br>
+              <a href="{% url 'login' %}">Sign in</a> | 
+              <a href="{% url 'register' %}">Register</a>
+            </div>
+          {% endif %}
+
+          <!-- Cart -->
+          <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3 position-relative">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px;">
+              {{ cart_count }}
+            </span>
+          </a>
+
+          <!-- Mode toggle -->
+          <button id="modeToggle" class="btn ml-2" onclick="toggleMode()">
+            <i id="modeIcon" class="fa fa-moon"></i>
+          </button>
+
+        </div>
       </div>
     </div>
-  </nav>
+  </section>
+
+  <!-- ================= MOBILE HEADER ================= -->
+  <section class="mobile-header d-lg-none">
+    <nav class="navbar navbar-light px-2 py-1">
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="navbar-brand p-0 m-0">
+          <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
+        </a>
+
+        <!-- Search -->
+        <div class="search-wrapper mx-2 flex-grow-1" id="searchWrapper">
+          <form method="GET" action="{% url 'search' %}" class="d-flex">
+            <input type="text" name="keyword" placeholder="Search..." class="form-control form-control-sm">
+          </form>
+        </div>
+
+        <!-- Icons -->
+        <div class="nav-icons d-flex align-items-center">
+
+          <!-- Categories -->
+          <div class="dropdown mx-1">
+            <button class="btn p-1" data-toggle="dropdown">
+              <i class="fa fa-bars"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="{% url 'store' %}">All products</a>
+              {% for category in links %}
+                <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Cart -->
+          <a href="{% url 'cart' %}" class="btn p-1 position-relative mx-1">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px;">
+              {{ cart_count }}
+            </span>
+          </a>
+
+          <!-- Mode toggle -->
+          <button id="modeToggle" class="btn p-1 mx-1" onclick="toggleMode()">
+            <i id="modeIcon" class="fa fa-moon"></i>
+          </button>
+
+          <!-- User -->
+          {% if user.id %}
+            <a href="{% url 'dashboard' %}" class="btn p-1 mx-1"><i class="fa fa-user"></i></a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn p-1 mx-1"><i class="fa fa-sign-in-alt"></i></a>
+          {% endif %}
+
+        </div>
+      </div>
+    </nav>
+  </section>
+
 </header>
 
