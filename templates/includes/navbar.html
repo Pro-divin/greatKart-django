@@ -335,6 +335,15 @@ body.dark-mode table.table-shopping-cart td small {
   }
 }
 
+@media (max-width: 575px) {
+  .search-wrapper input {
+    transition: width 0.3s ease;
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    height: 28px;
+  }
+}
+
 
 </style>
 
@@ -382,8 +391,13 @@ function toggleSearch() {
 
 
 function toggleMobileSearch() {
-  const wrapper = document.getElementById('mobileSearchWrapper');
-  wrapper.classList.toggle('active');
+  const input = document.getElementById('mobileSearchInput');
+  if(input.style.display === 'none' || input.style.display === ''){
+    input.style.display = 'inline-block';
+    input.focus();
+  } else {
+    input.style.display = 'none';
+  }
 }
 
 </script>
@@ -472,60 +486,59 @@ function toggleMobileSearch() {
   <!-- ================= MOBILE HEADER ================= -->
 <section class="mobile-header d-lg-none">
   <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
-    <div class="container-fluid d-flex align-items-center">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
 
       <!-- Logo -->
       <a href="{% url 'home' %}" class="navbar-brand p-0 m-0">
         <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
       </a>
 
-      <!-- Categories dropdown -->
-      <div class="dropdown mx-2">
-        <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa fa-bars"></i> Categories
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="mobileCategories">
-          <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
-          {% for category in links %}
-            <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
+      <div class="d-flex align-items-center gap-2">
 
-      <!-- Search icon & wrapper -->
-      <div class="search-wrapper mx-2" id="mobileSearchWrapper">
-        <button class="btn search-toggle" onclick="toggleMobileSearch()">
-          <i class="fa fa-search"></i>
-        </button>
-        <div class="search-field">
-          <form method="GET" action="{% url 'search' %}">
-            <input type="text" name="keyword" placeholder="Search...">
-          </form>
+        <!-- Categories dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-bars"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="mobileCategories">
+            <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+            {% for category in links %}
+              <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+            {% endfor %}
+          </ul>
         </div>
-      </div>
 
-      <!-- User / Cart / Mode icons -->
-      <div class="d-flex align-items-center mx-2">
-        {% if user.id %}
-          <span class="mx-1">Hi, {{ user.first_name }}</span>
-          <a href="{% url 'dashboard' %}" class="mx-1"><i class="fa fa-user"></i></a>
-          <a href="{% url 'logout' %}" class="mx-1"><i class="fa fa-sign-out-alt"></i></a>
-        {% else %}
-          <a href="{% url 'login' %}" class="mx-1"><i class="fa fa-sign-in-alt"></i></a>
-        {% endif %}
-        <a href="{% url 'cart' %}" class="mx-1 position-relative">
-          <i class="fa fa-shopping-cart"></i>
-          <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px;">
-            {{ cart_count }}
-          </span>
-        </a>
-        <button id="modeToggle" class="btn mx-1" onclick="toggleMode()">
-          <i id="modeIcon" class="fa fa-moon"></i>
-        </button>
+        <!-- Inline Search -->
+        <div class="d-flex align-items-center search-wrapper" id="mobileSearchWrapper">
+          <button class="btn search-toggle" onclick="toggleMobileSearch()">
+            <i class="fa fa-search"></i>
+          </button>
+          <input type="text" name="keyword" placeholder="Search..." class="form-control form-control-sm ms-1" style="display:none; width: 100px;" id="mobileSearchInput">
+        </div>
+
+        <!-- User / Cart / Mode -->
+        <div class="d-flex align-items-center gap-1">
+          {% if user.id %}
+            <a href="{% url 'dashboard' %}"><i class="fa fa-user"></i></a>
+            <a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt"></i></a>
+          {% else %}
+            <a href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i></a>
+          {% endif %}
+          <a href="{% url 'cart' %}" class="position-relative">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px;">
+              {{ cart_count }}
+            </span>
+          </a>
+          <button id="modeToggle" class="btn" onclick="toggleMode()">
+            <i id="modeIcon" class="fa fa-moon"></i>
+          </button>
+        </div>
+
       </div>
 
       <!-- Toggle button for collapsed menu -->
-      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
