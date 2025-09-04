@@ -151,6 +151,49 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
 .header-main .col-auto, .header-main .col-lg-2, .header-main .col-lg, .header-main .col-sm, .header-main .col-md { padding: 0; margin: 0; }
 
 /* ================= RESPONSIVE NAVBAR ================= */
+/* ================= PRODUCT STYLES ================= */
+.product-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color); /* follow theme */
+  margin-top: 8px;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e63946; /* default accent (red for visibility) */
+  margin-top: 4px;
+}
+
+/* Dark mode override */
+body.dark-mode .product-card {
+  background: #1e1e1e;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.dark-mode .product-title {
+  color: #fff !important; /* ensure readability */
+}
+
+body.dark-mode .product-price {
+  color: #ff9800 !important; /* orange pop for dark mode */
+}
 
 /* Tablets & small desktops <= 991px */
 /* ================= RESPONSIVE NAVBAR FIX ================= */
