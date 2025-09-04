@@ -605,6 +605,28 @@ body:not(.dark-mode) .mobile-glass-search {
     color: #000 !important;
 }
 
+/* Mobile dropdown fix */
+@media (max-width: 575px) {
+  .mobile-header .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    display: none;
+    z-index: 9999;
+    min-width: 160px;
+  }
+  .mobile-header .dropdown.show .dropdown-menu {
+    display: block;
+  }
+  .mobile-header .dropdown {
+    position: relative; /* required for absolute dropdown */
+  }
+}
+
+.mobile-header .d-flex.align-items-center.gap-2 {
+  overflow: visible !important;
+}
+
 </style>
 
 <script>
