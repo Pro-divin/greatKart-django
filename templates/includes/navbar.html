@@ -27,10 +27,6 @@ body {
   padding: 0;
   transition: all 0.3s ease;
 }
-body {
-  padding-top: 100px; /* adjust according to navbar + header-main height */
-}
-
 
 /* ================= NAVBAR ================= */
 .navbar, .header-main {
@@ -224,32 +220,38 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
 }
 
 /* Modern Dropdown Style */
-.category-wrap {
-  position: relative; /* needed for absolute positioning of dropdown */
-  z-index: 1050; /* above content */
-}
-
 .category-wrap .dropdown-menu {
-  position: absolute !important; /* float over content */
-  top: 100% !important; /* right below button */
-  left: 0 !important;
-  z-index: 1060 !important; /* above navbar and other content */
-  width: 250px !important; /* optional */
-  max-height: 80vh !important; /* scroll if too tall */
-  overflow-y: auto !important; /* scroll inside dropdown */
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.9) !important; /* semi-transparent */
+  backdrop-filter: blur(10px) !important; /* glass effect */
   border-radius: 12px !important;
   border: 1px solid rgba(0,0,0,0.1) !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.15) !important;
+  padding: 8px 0 !important;
   animation: dropdownFade 0.25s ease !important;
 }
 
 body.dark-mode .category-wrap .dropdown-menu {
-  background: rgba(30, 30, 30, 0.95) !important;
+  background: rgba(30, 30, 30, 0.9) !important; /* glass dark */
   border: 1px solid rgba(255,255,255,0.1) !important;
 }
 
+.category-wrap .dropdown-item {
+  padding: 10px 18px !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  color: var(--text-color) !important;
+  border-radius: 8px !important;
+  transition: all 0.25s ease !important;
+}
+
+.category-wrap .dropdown-item:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  transform: translateX(5px) !important;
+}
+
+body.dark-mode .category-wrap .dropdown-item:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
 
 /* Smooth dropdown animation */
 @keyframes dropdownFade {
@@ -310,8 +312,7 @@ function toggleSearch() {
 </script>
 
 <header class="section-header">
-  <nav class="navbar p-md-0 navbar-expand-sm navbar-light fixed-top">
-
+  
   <nav class="navbar p-md-0 navbar-expand-sm navbar-light">
     <div class="container">
       <!-- Brand -->
