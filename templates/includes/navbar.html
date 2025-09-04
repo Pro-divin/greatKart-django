@@ -258,10 +258,28 @@ function toggleSearch() {
 <header class="section-header">
   <nav class="navbar p-md-0 navbar-expand-sm navbar-light">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- Brand -->
+      <a href="{% url 'home' %}" class="navbar-brand d-sm-none">
+        <span class="brand-part1">JURU</span> <span class="brand-part2">Collection</span>
+      </a>
+
+      <!-- Toggler button (visible < 576px) -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <!-- Collapsible menu (mobile only) -->
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ml-auto d-sm-none">
+          <li class="nav-item">
+            <a href="{% url 'store' %}" class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}">Store</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -270,9 +288,12 @@ function toggleSearch() {
       <div class="row align-items-center">
 
         <!-- Brand -->
-        <div class="col-auto">
+        <div class="col-auto d-none d-sm-block">
           <a href="{% url 'home' %}" class="brand-wrap nav-link">
-            <h4 class="brand-title"><span class="brand-part1">JURU</span> <span class="brand-part2">Collection</span></h4>
+            <h4 class="brand-title">
+              <span class="brand-part1">JURU</span>
+              <span class="brand-part2">Collection</span>
+            </h4>
           </a>
         </div>
 
@@ -298,15 +319,17 @@ function toggleSearch() {
           </div>
         </div>
 
-        <!-- Store + About -->
-        <div class="col-auto d-flex align-items-center">
+        <!-- Store + About (desktop only) -->
+        <div class="col-auto d-none d-sm-flex align-items-center">
           <a href="{% url 'store' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'store' %}active{% endif %}">Store</a>
           <a href="{% url 'about' %}" class="nav-link mx-2 {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
         </div>
 
         <!-- Search -->
         <div class="col-auto search-wrapper ml-3" id="searchWrapper">
-          <button type="button" class="search-toggle" onclick="toggleSearch()"><i class="fa fa-search"></i></button>
+          <button type="button" class="search-toggle" onclick="toggleSearch()">
+            <i class="fa fa-search"></i>
+          </button>
           <div class="search-field">
             <form method="GET" action="{% url 'search' %}">
               <input type="text" name="keyword" placeholder="Search...">
