@@ -344,6 +344,27 @@ body.dark-mode table.table-shopping-cart td small {
   }
 }
 
+@media (max-width: 575px) {
+  .mobile-header .d-flex.align-items-center.gap-2 {
+    gap: 0.2rem !important;  /* reduce gap between logo, categories, search, user/cart/mode */
+  }
+
+  .mobile-header .dropdown .btn,
+  .mobile-header .search-wrapper button,
+  .mobile-header .d-flex.align-items-center.gap-1 a,
+  #modeToggle {
+    padding: 0 2px !important;  /* reduce internal button padding */
+    font-size: 0.5rem !important;  /* shrink icon/text */
+  }
+
+  #mobileSearchInput {
+    width: 60px !important; /* shrink search input */
+  }
+
+  .logo-img {
+    height: 24px !important; /* shrink logo */
+  }
+}
 
 </style>
 
