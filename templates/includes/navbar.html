@@ -639,7 +639,9 @@ function toggleDesktopSearch() {
   <div class="mobile-topbar d-flex align-items-center justify-content-center gap-3 py-1">
 
     <!-- Brand name -->
+     <a href="{% url 'home' %}" class="brand-wrap">
     <span class="mobile-brand-text">JuruCollection</span>
+    </a>
 
     <!-- Inline navigation links -->
     <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
