@@ -328,6 +328,40 @@ body.dark-mode .category-wrap .dropdown-item:hover {
   .header-main .col-auto.d-flex { gap: 2px !important; }
 }
 
+/* Hide brand text on phones <= 575px */
+@media (max-width: 575px) {
+  .header-main .brand-wrap {
+    display: none !important;
+  }
+
+  /* Ensure all other items stay in one row */
+  .header-main .row.align-items-center {
+    flex-wrap: nowrap !important;           /* prevent wrapping */
+    overflow-x: auto;                        /* allow horizontal scroll if needed */
+    -webkit-overflow-scrolling: touch;       /* smooth scrolling on iOS */
+  }
+
+  .header-main .col-lg-2,
+  .header-main .col-lg,
+  .header-main .col-auto,
+  .header-main .col-auto.ml-auto,
+  .header-main .search-wrapper {
+    flex: 1 1 auto;   /* allow shrinking */
+    min-width: 0;     /* prevent overflow */
+  }
+
+  .logo-img { height: 26px !important; }        /* shrink logo */
+  .navbar .nav-link,
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle { 
+    font-size: 0.55rem !important; 
+    white-space: nowrap;                         /* prevent wrapping */
+  }
+  .search-field input { width: 70px !important; font-size: 0.5rem !important; }
+  .category-wrap .btn { padding: 0 2px !important; }
+  .header-main .col-auto.d-flex { gap: 2px !important; }
+}
 
 </style>
 
