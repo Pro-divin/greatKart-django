@@ -521,6 +521,11 @@ function toggleMobileSearch() {
           <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bars"></i>
           </button>
+          <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-bars"></i> Categories
+          </button>
+
+          
           <ul class="dropdown-menu" aria-labelledby="mobileCategories">
             <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
             {% for category in links %}
