@@ -167,26 +167,6 @@ body.dark-mode table.table-shopping-cart td small {
     color: #fff !important;
 }
 
-/* ================= MOBILE MENU IN DARK MODE ================= */
-body.dark-mode .mobile-header .navbar,
-body.dark-mode .mobile-header .dropdown-menu,
-body.dark-mode .mobile-header .collapse {
-    background-color: #000 !important; /* keep menu white */
-    color: #fff !important;            /* text black */
-}
-
-body.dark-mode .mobile-header .nav-link,
-body.dark-mode .mobile-header .dropdown-item {
-    color: #000 !important;           /* links black */
-}
-
-body.dark-mode .mobile-header .nav-link.active {
-    color: #000 !important;           /* active link black */
-}
-
-body.dark-mode .mobile-header .dropdown-item:hover {
-    background-color: #f0f0f0 !important; /* subtle hover */
-}
 
 
 /* ================= CLEAN MOBILE HEADER FIX ================= */
@@ -364,6 +344,27 @@ body.dark-mode .mobile-header .dropdown-item:hover {
   }
 }
 
+/* ================= MOBILE MENU LIGHT IN DARK MODE ================= */
+@media (max-width: 575px) {
+  body.dark-mode .mobile-header .navbar,
+  body.dark-mode .mobile-header .dropdown-menu,
+  body.dark-mode .mobile-header .collapse {
+      background-color: #fff !important; /* keep menu white */
+  }
+
+  body.dark-mode .mobile-header .nav-link,
+  body.dark-mode .mobile-header .dropdown-item {
+      color: #000 !important; /* text black */
+  }
+
+  body.dark-mode .mobile-header .nav-link.active {
+      color: #000 !important; /* active link black */
+  }
+
+  body.dark-mode .mobile-header .dropdown-item:hover {
+      background-color: #f0f0f0 !important; /* subtle hover */
+  }
+}
 
 
 </style>
@@ -430,6 +431,7 @@ function toggleDesktopSearch() {
     field.querySelector('input').focus();
   }
 }
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
