@@ -210,6 +210,15 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
   .search-field input { width: 60px !important; font-size: 0.5rem !important; }
 }
 
+/* On tablets & phones, move search closer to menu */
+@media (max-width: 991px) {
+  .header-main .search-wrapper {
+    order: 2 !important; /* move just after menu/categories */
+    margin-left: 4px !important; 
+    margin-right: auto !important; /* push user/cart to the end */
+  }
+}
+
 </style>
 
 <script>
