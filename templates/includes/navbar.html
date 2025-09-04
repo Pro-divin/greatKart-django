@@ -646,7 +646,19 @@ function toggleDesktopSearch() {
     <!-- Inline navigation links -->
     <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
     <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
-
+   {% if user.id %}
+            <div class="user-info text-right mr-3">
+              <small>Welcome {{ user.first_name }}</small><br>
+              <a href="{% url 'dashboard' %}">Dashboard</a> | 
+              <a href="{% url 'logout' %}">Logout</a>
+            </div>
+          {% else %}
+            <div class="user-info text-right mr-3">
+              <small>Welcome Guest!</small><br>
+              <a href="{% url 'login' %}">Sign in</a> | 
+              <a href="{% url 'register' %}">Register</a>
+            </div>
+          {% endif %}
   </div>
 </section>
   
@@ -698,7 +710,7 @@ function toggleDesktopSearch() {
             <a href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i></a>
           {% endif %}
           <a href="{% url 'cart' %}" class="position-relative">
-            <i class="fa fa-shopping-cart" style="margin-left: 50px;"></i>
+            <i class="fa fa-shopping-cart" ></i>
             <span class="badge badge-danger badge-pill position-absolute" style="top:-5px; right:-8px; ">
               {{ cart_count }}
             </span>
