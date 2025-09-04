@@ -430,6 +430,21 @@ body.dark-mode .dropdown-item:hover {
   color: #fff;
 }
 
+/* Mobile Top Bar */
+.mobile-topbar {
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+body.dark-mode .mobile-topbar {
+  background-color: #000;  /* stays black in dark mode */
+  color: #fff;
+}
+.mobile-topbar .mobile-brand-text {
+  letter-spacing: 1px;
+}
+
 
 </style>
 
@@ -587,6 +602,22 @@ function toggleDesktopSearch() {
 
   <!-- ================= MOBILE HEADER ================= -->
   <!-- ================= MOBILE HEADER ================= -->
+   <!-- ================= MOBILE HEADER ================= -->
+<section class="mobile-header d-lg-none">
+
+  <!-- Top Bar with JuruCollection -->
+  <div class="mobile-topbar text-center py-1">
+    <span class="mobile-brand-text">JuruCollection</span>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <!-- Logo -->
+      <a href="{% url 'home' %}" class="navbar-brand p-0 m-0">
+        <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
+      </a>
+
 <section class="mobile-header d-lg-none">
   <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
     <div class="container-fluid d-flex align-items-center justify-content-between">
