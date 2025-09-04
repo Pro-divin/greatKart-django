@@ -579,6 +579,33 @@ body.dark-mode .mobile-topbar {
   padding-left: 70px;
 }
 
+/* ================= FORCE LIGHT MODE TEXT ================= */
+body:not(.dark-mode) {
+    color: #000 !important;
+}
+
+body:not(.dark-mode) a,
+body:not(.dark-mode) .nav-link,
+body:not(.dark-mode) .dropdown-item,
+body:not(.dark-mode) .product-name,
+body:not(.dark-mode) .product-price,
+body:not(.dark-mode) .card .title,
+body:not(.dark-mode) .card .text-muted,
+body:not(.dark-mode) .card .price-wrap,
+body:not(.dark-mode) small {
+    color: #000 !important;
+}
+
+/* Inputs placeholder text */
+body:not(.dark-mode) ::placeholder {
+    color: rgba(0,0,0,0.6) !important;
+}
+
+/* Mobile search input text */
+body:not(.dark-mode) .mobile-glass-search {
+    color: #000 !important;
+}
+
 </style>
 
 <script>
@@ -774,8 +801,8 @@ function submitOnEnter(e){
     </a>
 
     <!-- Inline navigation links -->
-    <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
-    <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
+    <span class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</span>
+    <span class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</span>
    {% if user.id %}
             <div class="user-info text-right mr-3">
               <small>Welcome {{ user.first_name }}</small><br>
