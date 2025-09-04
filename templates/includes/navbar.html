@@ -627,8 +627,7 @@ function toggleSearch() {
 function toggleMobileSearch() {
   const wrapper = document.getElementById('mobileSearchWrapper');
   const input = document.getElementById('mobileSearchInput');
-
-  wrapper.classList.toggle('active');  // add class for CSS animation
+  wrapper.classList.toggle('active');
 
   if(wrapper.classList.contains('active')){
     input.style.display = 'inline-block';
@@ -641,7 +640,7 @@ function toggleMobileSearch() {
 
 function toggleDesktopSearch() {
   const field = document.getElementById('desktopSearchField');
-  if(field.style.display === 'block'){
+  if(field.style.display === 'block') {
     field.style.display = 'none';
   } else {
     field.style.display = 'block';
@@ -649,6 +648,12 @@ function toggleDesktopSearch() {
   }
 }
 
+function submitOnEnter(e){
+  if(e.key === 'Enter'){
+    e.preventDefault(); // prevent default for mobile toggle issues
+    e.target.form.submit(); // submit the parent form
+  }
+}
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -693,14 +698,15 @@ function toggleDesktopSearch() {
 
         <!-- Search -->
         <!-- Desktop Search -->
-        <div class="col-auto search-wrapper" id="desktopSearchWrapper">
-          <button class="btn search-toggle" onclick="toggleDesktopSearch()">
-            <i class="fa fa-search"></i>
-          </button>
-          <form method="GET" action="{% url 'search' %}" class="search-field" id="desktopSearchField">
-            <input type="text" name="keyword" placeholder="Search...">
-          </form>
-        </div>
+        <!-- Desktop Search -->
+      <div class="col-auto search-wrapper" id="desktopSearchWrapper">
+        <button class="btn search-toggle" type="button" onclick="toggleDesktopSearch()">
+          <i class="fa fa-search"></i>
+        </button>
+        <form method="GET" action="{% url 'search' %}" class="search-field" id="desktopSearchField">
+          <input type="text" name="keyword" placeholder="Search..." onkeydown="submitOnEnter(event)">
+        </form>
+      </div>
 
 
         <!-- User / Cart / Mode -->
@@ -804,11 +810,13 @@ function toggleDesktopSearch() {
         <!-- Inline Search -->
         <!-- Mobile Search -->
     <div class="d-flex align-items-center search-wrapper" id="mobileSearchWrapper">
-      <button class="btn search-toggle" onclick="toggleMobileSearch()">
+      <button class="btn search-toggle" type="button" onclick="toggleMobileSearch()">
         <i class="fa fa-search"></i>
       </button>
-      <input type="text" name="keyword" placeholder="Search..."
-             class="mobile-glass-search" id="mobileSearchInput" style="display:none;">
+      <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="keyword" placeholder="Search..."
+               class="mobile-glass-search" id="mobileSearchInput" style="display:none;" onkeydown="submitOnEnter(event)">
+      </form>
     </div>
 
 
