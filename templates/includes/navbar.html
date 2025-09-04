@@ -150,12 +150,23 @@ body.dark-mode .dropdown-item { color: var(--text-color); }
 .header-main .brand-wrap, .header-main .brand-title { margin: 0; line-height: 1; }
 .header-main .col-auto, .header-main .col-lg-2, .header-main .col-lg, .header-main .col-sm, .header-main .col-md { padding: 0; margin: 0; }
 
-body.dark-mode .product-name,
-body.dark-mode .product-price {
+.product-name,
+.product-price {
+    color: var(--text-color) !important;
+    transition: color 0.3s ease !;
+}
+ 
+/* Force cart product name and price to white in dark mode */
+body.dark-mode .card .title,
+body.dark-mode .card .price-wrap,
+body.dark-mode .card .text-muted {
+    color: #fff !important;
+}
+body.dark-mode table.table-shopping-cart td div.price-wrap,
+body.dark-mode table.table-shopping-cart td small {
     color: #fff !important;
 }
 
- 
 /* ================= RESPONSIVE NAVBAR ================= */
 
 /* Tablets & small desktops <= 991px */

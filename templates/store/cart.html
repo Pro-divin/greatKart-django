@@ -150,6 +150,19 @@ body.dark-mode .fa {
 body.dark-mode .text-dark {
     color: #fff !important;
 }
+body.dark-mode .title {
+    color: #fff !important;
+}
+body.dark-mode .text-muted {
+    color: #bbb !important;
+}
+
+/* Force cart product name and price to white in dark mode */
+body.dark-mode .card .title,
+body.dark-mode .card .product-price {
+    color: #fff !important;
+}
+
 </style>
 
 <section class="section-content padding-y bg">
@@ -212,9 +225,10 @@ body.dark-mode .text-dark {
                   </div>
                 </td>
                 <td>
-                  <div class="price-wrap">RWF {{ cart_item.sub_total }}</div>
-                  <small class="text-muted">RWF {{ cart_item.product.price }} each</small>
+                  <div class="price-wrap product-price">RWF {{ cart_item.sub_total }}</div>
+                  <small class="product-price">RWF {{ cart_item.product.price }} each</small>
                 </td>
+
                 <td>
                   <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Remove</a>
                 </td>
