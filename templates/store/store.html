@@ -203,6 +203,33 @@ body.dark-mode .card-product-grid .price-wrap .price {
     color: #fff !important; /* price white */
 }
 
+/* ================= FORCE LIGHT MODE TEXT ================= */
+body:not(.dark-mode) {
+    color: #000 !important;
+}
+
+body:not(.dark-mode) a,
+body:not(.dark-mode) .nav-link,
+body:not(.dark-mode) .dropdown-item,
+body:not(.dark-mode) .product-name,
+body:not(.dark-mode) .product-price,
+body:not(.dark-mode) .card .title,
+body:not(.dark-mode) .card .text-muted,
+body:not(.dark-mode) .card .price-wrap,
+body:not(.dark-mode) small {
+    color: #000 !important;
+}
+
+/* Inputs placeholder text */
+body:not(.dark-mode) ::placeholder {
+    color: rgba(0,0,0,0.6) !important;
+}
+
+/* Mobile search input text */
+body:not(.dark-mode) .mobile-glass-search {
+    color: #000 !important;
+}
+
 
 </style>
 
