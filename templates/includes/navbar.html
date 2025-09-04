@@ -169,42 +169,45 @@ body.dark-mode table.table-shopping-cart td small {
 
 
 
-/* ================= MOBILE HEADER INLINE FIX ================= */
+/* ================= CLEAN MOBILE HEADER FIX ================= */
 @media (max-width: 575px) {
-  /* Reset Bootstrap row margins (they cause overflow) */
+  /* Reset Bootstrap margins that cause overflow */
   .header-main .row {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  /* Force inline flex, no wrapping */
+  /* Make row behave like one inline bar */
   .header-main .row.align-items-center {
     display: flex !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 6px;
+    overflow-x: hidden !important;  /* 🔑 no horizontal scroll */
+    gap: 4px !important;
   }
 
-  /* Keep every column as shrink-to-fit */
+  /* Each column shrinks naturally */
   .header-main .row.align-items-center > div {
-    flex: 0 0 auto !important;
-    min-width: fit-content !important;
-    padding: 0 3px !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    padding: 0 2px !important;
     margin: 0 !important;
   }
 
-  /* Hide brand text on phones */
+  /* Hide brand text */
+  .header-main .brand-title,
   .header-main .brand-wrap .brand-title {
     display: none !important;
   }
 
-  /* Shrink logo */
-  .logo-img { height: 26px !important; width: auto !important; }
+  /* Compact logo */
+  .logo-img {
+    height: 26px !important;
+    width: auto !important;
+  }
 
-  /* Compact text/buttons/icons */
+  /* Compact text/buttons */
   .navbar .nav-link,
   .category-wrap .btn,
   .user-info a,
@@ -214,137 +217,17 @@ body.dark-mode table.table-shopping-cart td small {
     white-space: nowrap !important;
   }
 
-  /* Compact search */
+  /* Compact search input */
   .search-field input {
-    width: 80px !important;
-    font-size: 0.55rem !important;
-  }
-}
-
-
-/* Modern Dropdown Style */
-.category-wrap .dropdown-menu {
-  background: rgba(255, 255, 255, 0.9) !important; /* semi-transparent */
-  backdrop-filter: blur(10px) !important; /* glass effect */
-  border-radius: 12px !important;
-  border: 1px solid rgba(0,0,0,0.1) !important;
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.15) !important;
-  padding: 8px 0 !important;
-  animation: dropdownFade 0.25s ease !important;
-}
-
-body.dark-mode .category-wrap .dropdown-menu {
-  background: rgba(30, 30, 30, 0.9) !important; /* glass dark */
-  border: 1px solid rgba(255,255,255,0.1) !important;
-}
-
-.category-wrap .dropdown-item {
-  padding: 10px 18px !important;
-  font-size: 0.9rem !important;
-  font-weight: 500 !important;
-  color: var(--text-color) !important;
-  border-radius: 8px !important;
-  transition: all 0.25s ease !important;
-}
-
-.category-wrap .dropdown-item:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-  transform: translateX(5px) !important;
-}
-
-body.dark-mode .category-wrap .dropdown-item:hover {
-  background: rgba(255,255,255,0.08) !important;
-}
-
-/* Smooth dropdown animation */
-@keyframes dropdownFade {
-  from {
-    opacity: 0 !important;
-    transform: translateY(-8px) !important;
-  }
-  to {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-}
-
-/* Force mobile menu only on xs screens (<576px) */
-@media (min-width: 576px) {
-  .navbar-collapse.d-sm-none {
-    display: none !important; /* hide mobile menu on sm+ */
-  }
-}
-
-/* Ensure mobile menu is hidden on desktop */
-@media (min-width: 992px) {
-  #navbarMenu {
-    display: none !important;
-  }
-}
-
-@media (max-width: 575px) {
-  .header-main .row.align-items-center {
-    flex-wrap: nowrap;           /* keep in one line */
-    overflow-x: auto;            /* horizontal scroll if needed */
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+    width: 70px !important;
+    font-size: 0.5rem !important;
   }
 
-  .header-main .col-lg-2,
-  .header-main .col-lg,
-  .header-main .col-auto,
-  .header-main .col-auto.ml-auto,
-  .header-main .search-wrapper {
-    flex: 1 1 auto;    /* allow shrinking */
-    min-width: 0;      /* prevent overflow */
+  /* Compact welcome box */
+  .user-info {
+    text-align: left !important;
+    line-height: 1.1 !important;
   }
-
-  .logo-img { height: 24px !important; }
-  .brand-title { font-size: 5px !important; }
-  .navbar .nav-link,
-  .category-wrap .btn,
-  .user-info a,
-  #modeToggle { 
-    font-size: 0.45rem !important; 
-    white-space: nowrap;   /* prevent wrapping */
-  }
-  .search-field input { width: 60px !important; font-size: 0.45rem !important; }
-  .category-wrap .btn { padding: 0 2px !important; }
-  .header-main .col-auto.d-flex { gap: 2px !important; }
-}
-
-/* Hide brand text on phones <= 575px */
-@media (max-width: 575px) {
-  .header-main .brand-wrap {
-    display: none !important;
-  }
-
-  /* Ensure all other items stay in one row */
-  .header-main .row.align-items-center {
-    flex-wrap: nowrap !important;           /* prevent wrapping */
-    overflow-x: auto;                        /* allow horizontal scroll if needed */
-    -webkit-overflow-scrolling: touch;       /* smooth scrolling on iOS */
-  }
-
-  .header-main .col-lg-2,
-  .header-main .col-lg,
-  .header-main .col-auto,
-  .header-main .col-auto.ml-auto,
-  .header-main .search-wrapper {
-    flex: 1 1 auto;   /* allow shrinking */
-    min-width: 0;     /* prevent overflow */
-  }
-
-  .logo-img { height: 26px !important; }        /* shrink logo */
-  .navbar .nav-link,
-  .category-wrap .btn,
-  .user-info a,
-  #modeToggle { 
-    font-size: 0.55rem !important; 
-    white-space: nowrap;                         /* prevent wrapping */
-  }
-  .search-field input { width: 70px !important; font-size: 0.5rem !important; }
-  .category-wrap .btn { padding: 0 2px !important; }
-  .header-main .col-auto.d-flex { gap: 2px !important; }
 }
 
 </style>
