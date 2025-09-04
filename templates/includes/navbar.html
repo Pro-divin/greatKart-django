@@ -511,19 +511,18 @@ body.dark-mode .mobile-topbar {
   }
 
   /* Remove any extra input margin */
-  #mobileSearchInput {
-    margin-left: 0 !important;
-    width: 80px !important;  /* optional, adjust width */
-  }
-}
-.class{
-  padding-right: 30px;
-  padding-left: 70px;
+ .search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-/* Glass style for mobile search */
 .mobile-glass-search {
   display: none;
+  position: absolute;
+  right: 100%; /* move it to the left of the icon */
+  top: 50%;
+  transform: translateY(-50%);
   width: 120px;
   padding: 3px 8px;
   border-radius: 12px;
@@ -535,14 +534,66 @@ body.dark-mode .mobile-topbar {
   font-size: 0.7rem;
   transition: all 0.3s ease;
   outline: none;
+  z-index: 1000;
 }
 
 /* Show input when active */
 .search-wrapper.active .mobile-glass-search {
   display: inline-block;
-  width: 150px;
+}
 }
 
+/* ================= GLASSMORPHIC SEARCH ================= */
+
+/* Desktop search input */
+#desktopSearchField input {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);  /* semi-transparent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+#desktopSearchField input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Focus effect */
+#desktopSearchField input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+  outline: none;
+}
+
+/* Mobile glass search */
+.mobile-glass-search {
+  display: none;
+  position: absolute;
+  right: 100%; /* or adjust to left of icon */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-color);
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
+  outline: none;
+  z-index: 1000;
+}
+
+.search-wrapper.active .mobile-glass-search {
+  display: inline-block;
+}
 
 </style>
 
