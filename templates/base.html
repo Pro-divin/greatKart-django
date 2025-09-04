@@ -73,33 +73,33 @@
 
     /* Responsive Navbar Fix */
 .navbar {
-  display: flex;
-  flex-wrap: wrap;  /* allow items to wrap instead of overflowing */
-  padding: 0.5rem 1rem; /* restore breathing room */
+  display: flex !important;
+  flex-wrap: wrap !important;  /* allow items to wrap instead of overflowing */
+  padding: 0.5rem 1rem !important; /* restore breathing room */
 }
 
 .navbar-nav {
-  display: flex;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-wrap: wrap !important;
 }
 
 .navbar-nav .nav-item {
-  margin: 2px 5px;  /* reduce space on small screens */
+  margin: 2px 5px !important;  /* reduce space on small screens */
 }
 
 .navbar a {
-  font-size: 1rem;
-  padding: 0.4rem 0.6rem;
+  font-size: 1rem !important;
+  padding: 0.4rem 0.6rem !important;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
   .navbar a {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem !important;
+    padding: 0.3rem 0.5rem !important;
   }
 }
 
