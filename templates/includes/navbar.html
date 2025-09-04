@@ -364,6 +364,53 @@ body.dark-mode table.table-shopping-cart td small {
     content: none !important;
 }
 
+/* ================= GLASSMORPHIC DROPDOWN ================= */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+  backdrop-filter: blur(10px);           /* glass blur */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  z-index: 9999;
+}
+
+.dropdown-item {
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--hover-color);
+  transform: translateX(5px);
+}
+
+/* Mobile dropdown tweaks */
+.mobile-header .dropdown-menu {
+  min-width: 150px;
+  padding: 8px 0;
+}
+
+/* Dark mode glass */
+body.dark-mode .dropdown-menu {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
 
 </style>
 
