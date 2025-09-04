@@ -84,8 +84,17 @@ DATABASES = {
 
 POSTGRES_LOCALLY = True  # keep it as boolean
 
-if os.environ.get('ENVIRONMENT') == 'production' or POSTGRES_LOCALLY:
-    DATABASES['default'] = dj_database_url.parse(os.environ.get('DATABASE_URL'))
+if os.environ.get('ENVIRONMENT') == 'production':
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    if DATABASE_URL:
+        DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+else:
+    # use default sqlite for local
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+
 
         
 

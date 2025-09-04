@@ -2,9 +2,7 @@ from django.db import models
 from category.models import Category
 from django.urls import reverse
 from accounts.models import Account
-
-# Create your models here.
-
+from cloudinary.models import CloudinaryField
 
 
 class Product(models.Model):
@@ -12,7 +10,7 @@ class Product(models.Model):
     slug              = models.SlugField(max_length=200, unique=True)
     description       = models.TextField(max_length=500, blank=True)
     price             = models.IntegerField()
-    images            = models.ImageField(upload_to='photos/products')
+    images            = CloudinaryField('image')  # <-- Cloudinary main image
     stock             = models.IntegerField()
     is_available      = models.BooleanField(default=True)
     category          = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -25,13 +23,15 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+
 class VariationManager(models.Manager):
     def colors(self):
-        return super(VariationManager, self).filter(variation_category='color',is_active=True)
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
     
     def sizes(self):
-        return super(VariationManager, self).filter(variation_category='size',is_active=True)
+        return super(VariationManager, self).filter(variation_category='size', is_active=True)
     
+
 variation_category_choice = (
      ('color','color'),
     ('size','size'),
@@ -49,6 +49,7 @@ class Variation(models.Model):
     def __str__(self):
         return self.variation_value
     
+
 class ReviewRating(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -64,18 +65,14 @@ class ReviewRating(models.Model):
         return self.subject
 
 
-    
-
-    
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, related_name='gallery_images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='store/product-gallery', max_length=255)
+    image = CloudinaryField('image')  # <-- Cloudinary gallery image
     alt_text = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.product.product_name
     
-
 
 class Subscriber(models.Model):
     email = models.EmailField(unique=True)
