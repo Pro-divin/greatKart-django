@@ -344,27 +344,7 @@ body.dark-mode table.table-shopping-cart td small {
   }
 }
 
-@media (max-width: 575px) {
-  .mobile-header .d-flex.align-items-center.gap-2 {
-    gap: 0.2rem !important;  /* reduce gap between logo, categories, search, user/cart/mode */
-  }
 
-  .mobile-header .dropdown .btn,
-  .mobile-header .search-wrapper button,
-  .mobile-header .d-flex.align-items-center.gap-1 a,
-  #modeToggle {
-    padding: 0 2px !important;  /* reduce internal button padding */
-    font-size: 0.5rem !important;  /* shrink icon/text */
-  }
-
-  #mobileSearchInput {
-    width: 60px !important; /* shrink search input */
-  }
-
-  .logo-img {
-    height: 24px !important; /* shrink logo */
-  }
-}
 
 </style>
 
@@ -508,6 +488,7 @@ function toggleMobileSearch() {
 <section class="mobile-header d-lg-none">
   <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
     <div class="container-fluid d-flex align-items-center justify-content-between">
+
 
       <!-- Logo -->
       <a href="{% url 'home' %}" class="navbar-brand p-0 m-0">
