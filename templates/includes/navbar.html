@@ -443,7 +443,20 @@ function toggleSearch() {
         <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
       </a>
 
-      <!-- User / Cart / Mode icons between logo and menu -->
+      <!-- Categories dropdown between logo and menu -->
+      <div class="dropdown mx-2">
+        <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-bars"></i> Categories
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="mobileCategories">
+          <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+          {% for category in links %}
+            <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- User / Cart / Mode icons -->
       <div class="d-flex align-items-center mx-2">
         {% if user.id %}
           <span class="mx-1">Hi, {{ user.first_name }}</span>
@@ -451,7 +464,6 @@ function toggleSearch() {
           <a href="{% url 'logout' %}" class="mx-1"><i class="fa fa-sign-out-alt"></i></a>
         {% else %}
           <a href="{% url 'login' %}" class="mx-1"><i class="fa fa-sign-in-alt"></i></a>
-          <a href="{% url 'register' %}" class="mx-1"><i class="fa fa-user-plus"></i></a>
         {% endif %}
         <a href="{% url 'cart' %}" class="mx-1 position-relative">
           <i class="fa fa-shopping-cart"></i>
@@ -459,7 +471,6 @@ function toggleSearch() {
             {{ cart_count }}
           </span>
         </a>
-        <!-- Mode toggle -->
         <button id="modeToggle" class="btn mx-1" onclick="toggleMode()">
           <i id="modeIcon" class="fa fa-moon"></i>
         </button>
@@ -485,6 +496,7 @@ function toggleSearch() {
     </div>
   </nav>
 </section>
+
 
 
 
