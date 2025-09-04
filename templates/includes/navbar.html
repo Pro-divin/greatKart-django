@@ -633,20 +633,34 @@ function toggleMobileSearch() {
     input.style.display = 'inline-block';
     input.focus();
   } else {
-    input.style.display = 'none';
+    // if input has value, submit form
+    if(input.value.trim() !== '') {
+      input.form.submit();
+    } else {
+      input.style.display = 'none';
+    }
   }
 }
+
 
 
 function toggleDesktopSearch() {
   const field = document.getElementById('desktopSearchField');
+  const input = field.querySelector('input');
+
   if(field.style.display === 'block') {
-    field.style.display = 'none';
+    // If already visible and has value, submit
+    if(input.value.trim() !== '') {
+      input.form.submit();
+    } else {
+      field.style.display = 'none';
+    }
   } else {
     field.style.display = 'block';
-    field.querySelector('input').focus();
+    input.focus();
   }
 }
+
 
 function submitOnEnter(e){
   if(e.key === 'Enter'){
