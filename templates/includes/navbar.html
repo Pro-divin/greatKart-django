@@ -608,8 +608,7 @@ function toggleDesktopSearch() {
   <!-- Top Bar with JuruCollection -->
   <div class="mobile-topbar text-center py-1">
     <span class="mobile-brand-text">JuruCollection</span>
-    <div class="collapse navbar-collapse" id="mobileNavbar">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.url_name == 'store' %}active{% endif %}" href="{% url 'store' %}">Store</a>
           </li>
@@ -617,7 +616,6 @@ function toggleDesktopSearch() {
             <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
           </li>
         </ul>
-      </div>
   </div>
 
   <nav class="navbar navbar-expand-lg navbar-light px-2 py-1">
