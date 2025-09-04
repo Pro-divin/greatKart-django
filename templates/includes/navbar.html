@@ -305,58 +305,6 @@ body.dark-mode table.table-shopping-cart td small {
 }
 
 
-/* ================= BRAND ================= */
-.logo-img {
-  height: 40px;   /* ✅ reasonable default for desktop */
-  width: auto;
-  object-fit: contain;
-  display: block;
-  filter: brightness(0) saturate(100%) contrast(150%);
-}
-body.dark-mode .logo-img {
-  filter: brightness(0) invert(1);
-}
-
-/* ================= MOBILE HEADER FIX ================= */
-@media (max-width: 575px) {
-  /* Hide old desktop header */
-  .header-main {
-    display: none !important;
-  }
-
-  /* Compact logo */
-  .logo-img {
-    height: 26px !important;
-  }
-
-  /* Mobile header container */
-  .mobile-header .container-fluid {
-    padding: 0 4px !important;
-    overflow-x: hidden;
-  }
-
-  /* Compact search field */
-  .mobile-header .form-control {
-    font-size: 0.7rem;
-    padding: 2px 5px;
-    height: 26px;
-  }
-
-  /* Compact icons */
-  .nav-icons .btn {
-    font-size: 0.9rem;
-    padding: 2px;
-  }
-
-  .nav-icons {
-    gap: 2px;
-  }
-
-  /* Prevent any horizontal scroll */
-  body, html {
-    overflow-x: hidden !important;
-  }
-}
 
 </style>
 
