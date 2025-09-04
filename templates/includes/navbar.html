@@ -519,16 +519,16 @@ function toggleDesktopSearch() {
         <!-- Categories -->
         <div class="col-lg col-md">
           <div class="category-wrap dropdown">
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-bars"></i> Categories
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'store' %}">All products</a>
-            {% for category in links %}
-              <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
-            {% endfor %}
+            <button class="btn dropdown-toggle" type="button" id="desktopCategories" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-bars"></i> Categories
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="desktopCategories">
+              <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+              {% for category in links %}
+                <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+              {% endfor %}
+            </ul>
           </div>
-        </div>
 
         </div>
 
