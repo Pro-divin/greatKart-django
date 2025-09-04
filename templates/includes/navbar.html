@@ -305,6 +305,36 @@ body.dark-mode table.table-shopping-cart td small {
 }
 
 
+/* Mobile search toggle */
+@media (max-width: 575px) {
+  .search-wrapper .search-field {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 150px;
+    background: var(--body-bg);
+    z-index: 1000;
+    margin-top: 5px;
+    border: 1px solid var(--text-color);
+    border-radius: 3px;
+  }
+
+  .search-wrapper.active .search-field {
+    display: block;
+  }
+
+  .search-wrapper .search-field input {
+    width: 100%;
+    padding: 3px 5px;
+    font-size: 0.6rem;
+    background: var(--body-bg);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+  }
+}
+
 
 </style>
 
@@ -348,6 +378,12 @@ function setLightVars() {
 
 function toggleSearch() {
   document.getElementById('searchWrapper').classList.toggle('active');
+}
+
+
+function toggleMobileSearch() {
+  const wrapper = document.getElementById('mobileSearchWrapper');
+  wrapper.classList.toggle('active');
 }
 
 </script>
@@ -443,7 +479,7 @@ function toggleSearch() {
         <img src="{% static 'images/logo.png' %}" class="logo-img" alt="Logo">
       </a>
 
-      <!-- Categories dropdown between logo and menu -->
+      <!-- Categories dropdown -->
       <div class="dropdown mx-2">
         <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa fa-bars"></i> Categories
@@ -454,6 +490,18 @@ function toggleSearch() {
             <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
           {% endfor %}
         </ul>
+      </div>
+
+      <!-- Search icon & wrapper -->
+      <div class="search-wrapper mx-2" id="mobileSearchWrapper">
+        <button class="btn search-toggle" onclick="toggleMobileSearch()">
+          <i class="fa fa-search"></i>
+        </button>
+        <div class="search-field">
+          <form method="GET" action="{% url 'search' %}">
+            <input type="text" name="keyword" placeholder="Search...">
+          </form>
+        </div>
       </div>
 
       <!-- User / Cart / Mode icons -->
@@ -496,7 +544,6 @@ function toggleSearch() {
     </div>
   </nav>
 </section>
-
 
 
 
