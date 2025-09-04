@@ -173,70 +173,30 @@ body.dark-mode table.table-shopping-cart td small {
 /* ================= RESPONSIVE NAVBAR FIX ================= */
 
 /* Tablets & small desktops <= 991px */
-@media (max-width: 991px) {
-  .header-main .row.align-items-center { 
-    
-    flex-wrap: nowrap !important; /* keep inline, prevent stacking */
-    gap: 6px !important; 
-    overflow-x: auto; /* allow horizontal scroll if too wide */
-  }
-
-  /* Row 1: brand, logo, search */
-  .header-main .col-auto:first-child,
-  .header-main .col-lg-2,
-  .header-main .search-wrapper {
-    order: 1 !important; 
-    flex: 0 1 auto !important; /* shrink proportionally */
-    display: flex !important; 
-    align-items: center !important; 
-    justify-content: space-between !important;
-  }
-
-  /* Row 2: categories, links, user/cart */
-  .header-main .col-lg.col-sm.col-md.col-6,
-  .header-main .col-auto.d-flex,
-  .header-main .col-auto.ml-auto {
-    order: 2 !important; 
-    flex: 0 1 auto !important; /* shrink proportionally */
-    
-    justify-content: space-between !important; 
-    align-items: center !important; 
-    gap: 6px !important;
-  }
-.header-main .col-auto.d-flex {
-  display: flex !important;
-}
-  /* Shrink logo & text */
-  .logo-img { height: 36px !important; }
-  .brand-title { font-size: 10px !important; }
-  .navbar .nav-link, .category-wrap .btn, .user-info a, #modeToggle { font-size: 0.55rem !important; }
-  .search-field input { width: 90px !important; font-size: 0.5rem !important; }
-}
-
-/* Phones <= 575px */
 @media (max-width: 575px) {
-  .logo-img { height: 26px !important; }
-  .brand-title { font-size: 7px !important; }
-  .search-field input { width: 70px; font-size: 0.55rem !important; }
-  .header-main .col-lg.col-sm.col-md.col-6,
-  .header-main .col-auto.d-flex { gap: 4px !important; }
-}
-
-/* Extra small phones <= 400px */
-@media (max-width: 400px) {
-  .logo-img { height: 24px !important; }
-  .brand-title { font-size: 5px !important; }
-  .search-field input { width: 60px !important; font-size: 0.5rem !important; }
-}
-
-/* On tablets & phones, move search closer to menu */
-@media (max-width: 991px) {
-  .header-main .search-wrapper {
-    order: 2 !important; /* move just after menu/categories */
-    margin-left: 4px !important; 
-    margin-right: auto !important; /* push user/cart to the end */
+  .header-main .row.align-items-center {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
   }
+
+  .header-main .row.align-items-center > div {
+    flex: 0 0 auto;
+    min-width: fit-content;
+  }
+
+  .logo-img { height: 26px; }
+  .category-wrap .btn,
+  .user-info a,
+  #modeToggle,
+  .navbar .nav-link {
+    font-size: 0.55rem;
+    white-space: nowrap;
+  }
+  .search-field input { width: 120px; font-size: 0.55rem; }
 }
+
 
 /* Modern Dropdown Style */
 .category-wrap .dropdown-menu {
