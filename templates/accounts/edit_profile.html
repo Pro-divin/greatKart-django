@@ -9,30 +9,7 @@
     object-fit: cover;
     object-position: top;
 }
-/* Default Light Mode */
-.btn-save {
-    background-color: #000 !important; /* black background */
-    color: #fff !important;            /* white text */
-    font-weight: 600;
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 50px;
-    transition: all 0.3s ease-in-out;
-}
 
-.btn-save:hover {
-    background-color: #333 !important;
-}
-
-/* Dark Mode */
-body.dark-mode .btn-save {
-    background-color: #fff !important; /* white background */
-    color: #000 !important;            /* black text */
-}
-
-body.dark-mode .btn-save:hover {
-    background-color: #ccc !important; /* slightly darker on hover */
-}
 </style>
 <section class="section-conten padding-y bg-light">
 
@@ -174,7 +151,7 @@ body.dark-mode .btn-save:hover {
 /* Dark Mode */
 body.dark-mode {
     background-color: #111;
-    color: #fff ;
+    color: #fff;
 }
 
 body.dark-mode .card, body.dark-mode .card-header {
@@ -202,8 +179,8 @@ body.dark-mode .btn-save:hover .btn-icon {
 }
 /* ==================== SAVE BUTTON ==================== */
 .btn-save {
-    background-color: #ff7e5f; /* bright gradient color for visibility */
-    background-image: linear-gradient(135deg, #ff7e5f, #feb47b);
+    background-color: #000; /* bright gradient color for visibility */
+    background-image: linear-gradient(135deg, #000, #000);
     color: #fff;
     font-weight: 600;
     padding: 0.75rem 2rem;
@@ -216,9 +193,9 @@ body.dark-mode .btn-save:hover .btn-icon {
 }
 
 .btn-save:hover {
-    background-image: linear-gradient(135deg, #ff6a3d, #fd9d52);
+    background-image: linear-gradient(135deg, #000, #000);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    box-shadow: 0 6px 16px rgba(247, 247, 247, 0.35);
 }
 
 .btn-save .btn-icon {
@@ -231,12 +208,12 @@ body.dark-mode .btn-save:hover .btn-icon {
 
 /* Dark mode adjustment */
 body.dark-mode .btn-save {
-    background-image: linear-gradient(135deg, #4facfe, #00f2fe);
-    color: #fff;
+    background-image: linear-gradient(135deg, #fff, #fff);
+    color: #000;
 }
 
 body.dark-mode .btn-save:hover {
-    background-image: linear-gradient(135deg, #2193b0, #6dd5ed);
+    background-image: linear-gradient(135deg, #fff, #fff);
 }
 
 /* Dark mode adjustment for Save button */
