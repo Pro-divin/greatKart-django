@@ -34,43 +34,33 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-
-            user = Account.objects.create_user(
-                first_name=first_name, last_name=last_name,
-                email=email, username=username, password=password
-            )
+            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
             user.save()
 
             # Email activation
             current_site = get_current_site(request)
-
-            subject = 'Please activate your account'
-            to_email = user.email
-            from_email = 'noreply@jurucollection.com'
-            
-            html_content = render_to_string('accounts/account_verification_email.html', {
-                'user_name': user.first_name,
-                'verification_link': f"http://{current_site.domain}/accounts/activate/{urlsafe_base64_encode(force_bytes(user.pk))}/{default_token_generator.make_token(user)}/"
+            mail_subject = 'Please activate your account'
+            message = render_to_string('accounts/account_verification_email.html', {
+                'user': user,
+                'domain': current_site,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user),
             })
-            
-            text_content = strip_tags(html_content)  # fallback for non-HTML clients
-            
-            email = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
-            email.attach_alternative(html_content, "text/html")  # attach HTML version
-            email.send()
+            to_email = email
+            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email.send()
 
-            # Render success template with no-cache headers
-            response = render(request, 'accounts/registration_success.html', {'user': user})
-            response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-            response['Pragma'] = 'no-cache'
-            response['Expires'] = '0'
-            return response
+            # Render success template
+            return render(request, 'accounts/registration_success.html', {'user': user})
     else:
         form = RegistrationForm()
 
-    context = {'form': form}
+    context = {
+        'form': form,
+    }
     return render(request, 'accounts/register.html', context)
+
 
 def login(request):
     if request.method == 'POST':

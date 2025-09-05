@@ -81,6 +81,15 @@
         font-size: 15px;
       }
     }
+    .container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
   </style>
 </head>
 <body>
@@ -100,6 +109,8 @@
 
     <p class="footer-note">
       If you didn’t create this account, please ignore this message or contact our support team.
+      <p>Please check your email (<strong>{{ user.email }}</strong>) including spam/junk folder to activate your account.</p>
+
     </p>
   </div>
 <script>

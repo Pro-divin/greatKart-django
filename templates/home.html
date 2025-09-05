@@ -258,8 +258,9 @@ body.dark-mode .card-product-grid {
   <form method="POST" action="{% url 'subscribe' %}" class="mt-3">
     {% csrf_token %}
     <div class="input-group">
-      <input type="email" name="email" class="form-control" placeholder="Your email" required>
-      <button class="btn btn-dark" type="submit">Subscribe</button>
+      <input type="email" name="email" class="form-control" placeholder="Your email" required style="margin-top: 5px;">
+      <button class="btn-social" type="submit" >Subscribe</button>
+
     </div>
   </form>
 </div>
