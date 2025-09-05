@@ -107,11 +107,11 @@
 
     <a href="{% url 'login' %}" class="button">Login to Your Account</a>
 
-    <p class="footer-note">
-      If you didn’t create this account, please ignore this message or contact our support team.
-      <p>Please check your email (<strong>{{ user.email }}</strong>) including spam/junk folder to activate your account.</p>
+    <div class="footer-note">
+  <p>If you didn’t create this account, please ignore this message or contact our support team.</p>
+  <p>Please check your email (<strong>{{ user.email }}</strong>) including spam/junk folder to activate your account.</p>
+</div>
 
-    </p>
   </div>
 <script>
   // Redirect to login if user tries to go back to this page
