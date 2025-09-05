@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #ffffff;
+      background-color: #ffffff !important;
       margin: 0;
       padding: 0;
       color: #111111;
@@ -16,9 +16,9 @@
     .container {
       max-width: 600px;
       margin: 40px auto;
-      background: #ffffff;
+      background: #ffffff !important;
       padding: 40px;
-      border: 1px solid #ddd;
+      border: 1px solid #ddd !important;
       border-radius: 12px;
       text-align: center;
     }
@@ -30,20 +30,20 @@
     }
     h2 {
       font-size: 24px;
-      color: #000000;
+      color: #000000 !important;
       margin-bottom: 20px;
     }
     p {
       font-size: 16px;
       line-height: 1.6;
-      color: #333333;
+      color: #333333 !important;
     }
     .btn {
       display: inline-block;
       margin: 30px auto;
       padding: 14px 28px;
-      background-color: #000000;
-      color: #ffffff;
+      background-color: #000000 !important;
+      color: #ffffff !important;
       text-decoration: none;
       border-radius: 6px;
       font-weight: bold;
@@ -56,14 +56,14 @@
     .footer {
       margin-top: 40px;
       font-size: 13px;
-      color: #777777;
+      color: #777777 !important;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="logo">
-      <img src="https://yourdomain.com/logo-black.png" alt="Juru Collection Logo">
+      <img src="{% static 'images/logo.png' %}" alt="Juru Collection Logo">
     </div>
 
     <h2>Verify Your Email</h2>
