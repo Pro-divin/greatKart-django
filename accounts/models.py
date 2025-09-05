@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from cloudinary.models import CloudinaryField
+
 
 # Custom user manager
 class MyAccountManager(BaseUserManager):
@@ -73,8 +75,7 @@ class Account(AbstractBaseUser):
 # User profile model (must be outside Account)
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-   
-    profile_picture = models.ImageField(blank=True, upload_to='userprofile')
+    profile_picture = CloudinaryField('image', blank=True, null=True)
     city = models.CharField(blank=True, max_length=20)
     district = models.CharField(blank=True, max_length=20)
     country = models.CharField(blank=True, max_length=50)
