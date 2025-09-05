@@ -63,7 +63,8 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="{% static 'images/logo.png' %}" alt="Juru Collection Logo">
+      <img src="https://www.jurucollection.com/static/images/logo.png" alt="Juru Collection Logo">
+
     </div>
 
     <h2>Verify Your Email</h2>
@@ -73,7 +74,8 @@
     <p>Welcome to <strong>Juru Collection</strong>! Please confirm your email address to activate your account and begin exploring authentic Rwandan fashion.</p>
 
     <div>
-      <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}" class="btn">Verify My Email</a>
+      <a href="https://{{ domain }}{% url 'activate' uidb64=uid token=token %}" class="btn">Verify My Email</a>
+      
     </div>
 
     <p>If you did not create an account, you can safely ignore this message.</p>
