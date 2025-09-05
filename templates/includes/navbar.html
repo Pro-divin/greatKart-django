@@ -779,19 +779,19 @@ function submitOnEnter(e){
         <!-- Categories -->
         <div class="col-lg col-md">
           <!-- Desktop Categories -->
-        <!-- ================= DESKTOP CATEGORIES ================= -->
 <div class="category-wrap dropdown d-none d-lg-block">
   <button class="btn dropdown-toggle" type="button" id="desktopCategories" 
-          data-bs-toggle="dropdown" aria-expanded="false">
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fa fa-bars"></i> Categories
   </button>
-  <ul class="dropdown-menu shadow" aria-labelledby="desktopCategories">
-    <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+  <div class="dropdown-menu shadow" aria-labelledby="desktopCategories">
+    <a class="dropdown-item" href="{% url 'store' %}">All products</a>
     {% for category in links %}
-      <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+      <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
     {% endfor %}
-  </ul>
+  </div>
 </div>
+
 
         </div>
 
@@ -893,19 +893,20 @@ function submitOnEnter(e){
 
       <div class="d-flex align-items-center gap-2">
 
-        <!-- ================= MOBILE CATEGORIES ================= -->
+       <!-- Mobile Categories -->
 <div class="dropdown d-lg-none">
   <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" 
-          data-bs-toggle="dropdown" aria-expanded="false">
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fa fa-bars"></i> Categories
   </button>
-  <ul class="dropdown-menu shadow" aria-labelledby="mobileCategories">
-    <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+  <div class="dropdown-menu shadow" aria-labelledby="mobileCategories">
+    <a class="dropdown-item" href="{% url 'store' %}">All products</a>
     {% for category in links %}
-      <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+      <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
     {% endfor %}
-  </ul>
+  </div>
 </div>
+
 
     <div class="class">
 
