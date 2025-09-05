@@ -369,69 +369,80 @@ body.dark-mode table.table-shopping-cart td small {
 
 /* ================= GLASSMORPHIC DROPDOWN ================= */
 /* ================= GLASSMORPHIC DROPDOWN ================= */
+
+
+
+/* Shared dropdown styles */
 .dropdown-menu {
-  background: rgba(255, 255, 255, 0.15); /* semi-transparent white */
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  padding: 10px 0;
   min-width: 180px;
-  z-index: 9999;
+  padding: 8px 0;
+  z-index: 1050;
 
-  /* Animation */
   opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
 }
 
-/* When dropdown is visible */
+/* Show animation */
 .dropdown.show .dropdown-menu {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Dropdown items */
 .dropdown-item {
   color: var(--text-color);
   font-weight: 500;
   font-size: 0.9rem;
-  padding: 10px 20px;
-  transition: all 0.25s ease;
+  padding: 8px 16px;
   border-radius: 8px;
-  position: relative;
+  transition: all 0.25s ease;
 }
-
-.dropdown-item:hover,
-.dropdown-item:focus {
+.dropdown-item:hover {
   background: rgba(255, 255, 255, 0.25);
   color: var(--hover-color);
   transform: translateX(5px);
 }
 
-/* ================= MOBILE MENU DROPDOWN ================= */
-.mobile-header .dropdown-menu {
-  min-width: 160px;
-  padding: 8px 0;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 12px;
+/* Mobile dropdown fix */
+@media (max-width: 575px) {
+  .mobile-header .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: auto;
+    min-width: 160px;
+    max-width: 90vw;   /* prevent overflow */
+    overflow-x: auto;
+    border-radius: 10px;
+  }
+
+  .mobile-header .dropdown-item {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    white-space: nowrap; /* prevent text breaking */
+  }
 }
 
-/* ================= DARK MODE ================= */
+/* Dark mode dropdown */
 body.dark-mode .dropdown-menu {
-  background: rgba(20, 20, 20, 0.6);
+  background: rgba(20, 20, 20, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 body.dark-mode .dropdown-item {
   color: #eee;
 }
-
 body.dark-mode .dropdown-item:hover {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
+
 
 /* Mobile Top Bar */
 .mobile-topbar {
@@ -641,6 +652,18 @@ body:not(.dark-mode) .mobile-glass-search {
   }
 }
 
+/* FIX Bootstrap dropdown visibility */
+.dropdown-menu {
+  display: none;   /* hidden by default */
+}
+
+.dropdown.show .dropdown-menu {
+  display: block;  /* visible when open */
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
 </style>
 
 <script>
@@ -732,35 +755,7 @@ function submitOnEnter(e){
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  
-  // Function to handle dropdown toggling
-  function setupDropdown(dropdownId) {
-    const button = document.getElementById(dropdownId);
-    const menu = button.nextElementSibling;
 
-    button.addEventListener('click', function(e) {
-      e.preventDefault(); // prevent default Bootstrap conflicts
-      menu.classList.toggle('show');  // toggle visibility
-    });
-
-    // Close dropdown if clicked outside
-    document.addEventListener('click', function(e) {
-      if (!button.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove('show');
-      }
-    });
-  }
-
-  // Setup both dropdowns
-  setupDropdown('desktopCategories');
-  setupDropdown('mobileCategories');
-
-  // Optional: handle window resize to reset dropdowns
-  window.addEventListener('resize', function() {
-    document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
-  });
-});
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -783,17 +778,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Categories -->
         <div class="col-lg col-md">
-          <div class="category-wrap dropdown">
-            <button class="btn dropdown-toggle" type="button" id="desktopCategories" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bars"></i> Categories
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="desktopCategories">
-              <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
-              {% for category in links %}
-                <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
+          <!-- Desktop Categories -->
+        <!-- ================= DESKTOP CATEGORIES ================= -->
+<div class="category-wrap dropdown d-none d-lg-block">
+  <button class="btn dropdown-toggle" type="button" id="desktopCategories" 
+          data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-bars"></i> Categories
+  </button>
+  <ul class="dropdown-menu shadow" aria-labelledby="desktopCategories">
+    <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+    {% for category in links %}
+      <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
 
         </div>
 
@@ -895,21 +893,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="d-flex align-items-center gap-2">
 
-        <!-- Categories dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-bars"></i> Categories
-          </button>
+        <!-- ================= MOBILE CATEGORIES ================= -->
+<div class="dropdown d-lg-none">
+  <button class="btn btn-sm dropdown-toggle" type="button" id="mobileCategories" 
+          data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-bars"></i> Categories
+  </button>
+  <ul class="dropdown-menu shadow" aria-labelledby="mobileCategories">
+    <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
+    {% for category in links %}
+      <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
 
-          
-          
-          <ul class="dropdown-menu" aria-labelledby="mobileCategories">
-            <li><a class="dropdown-item" href="{% url 'store' %}">All products</a></li>
-            {% for category in links %}
-              <li><a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
     <div class="class">
 
     </div>
