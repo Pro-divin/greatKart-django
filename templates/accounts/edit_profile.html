@@ -9,6 +9,30 @@
     object-fit: cover;
     object-position: top;
 }
+/* Default Light Mode */
+.btn-save {
+    background-color: #000; /* black background */
+    color: #fff;            /* white text */
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-save:hover {
+    background-color: #333;
+}
+
+/* Dark Mode */
+body.dark-mode .btn-save {
+    background-color: #fff; /* white background */
+    color: #000;            /* black text */
+}
+
+body.dark-mode .btn-save:hover {
+    background-color: #ccc; /* slightly darker on hover */
+}
 </style>
 <section class="section-conten padding-y bg-light">
 
