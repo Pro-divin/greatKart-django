@@ -159,4 +159,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Cloudinary configuration
 
 
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
 
