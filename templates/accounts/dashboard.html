@@ -28,6 +28,60 @@ body.dark-mode main .card a:hover {
     color: #fff !important;
     text-decoration: underline;
 }
+/* ==================== PROFILE PICTURE ==================== */
+.profile-img {
+    width: 150px; /* larger for better visibility */
+    height: 150px;
+    border-radius: 50%; /* circular */
+    object-fit: cover; /* keeps aspect ratio and fills circle */
+    object-position: top;
+    border: 4px solid #ffd700; /* golden border for highlight */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* subtle shadow */
+    display: block;
+    margin: 0 auto 20px auto; /* center above content */
+}
+
+/* ==================== CARD STYLING ==================== */
+.card {
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+    color: #000 !important;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    border-bottom: none;
+    font-weight: 600;
+    background-color: #000;
+    color: #fff !important;
+    text-align: center;
+}
+
+/* ==================== DARK MODE ==================== */
+body.dark-mode {
+    background-color: #111;
+    color: #fff;
+}
+
+body.dark-mode .card, body.dark-mode .card-header {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.dark-mode main .card a {
+    color: #ffd700 !important;
+}
+
+body.dark-mode main .card a:hover {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
 </style>
 
 
@@ -60,11 +114,12 @@ body.dark-mode main .card a:hover {
                                     <div class="card-body">
                                         {% if user.userprofile.profile_picture %}
                                             <img src="{{ user.userprofile.profile_picture.url }}" 
-                                                 alt="Profile picture" width="50" height="50" style="border-radius:50%;">
+                                                 alt="Profile picture" class="profile-img">
                                         {% else %}
                                             <img src="{% static 'images/default_profile.jpeg' %}" 
-                                                 alt="Default profile picture" width="50" height="50" style="border-radius:50%;">
+                                                 alt="Default profile picture" class="profile-img">
                                         {% endif %}
+
                                         <p class="mb-0">{{ user.email }}</p>
                                         <p>{{ user.phone_number }}</p>
                                     </div>
