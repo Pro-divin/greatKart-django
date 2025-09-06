@@ -331,6 +331,7 @@ body.dark-mode .rating-star i.filled {
 }
 
 
+
 </style>
 
 <script>
@@ -499,5 +500,13 @@ body.dark-mode .rating-star i.filled {
 
 </div>
 </section>
+<script>
+  function toggleTheme() {
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+  localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark-mode" : "light-mode");
+}
+
+</script>
 
 {% endblock %}
