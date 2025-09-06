@@ -330,6 +330,11 @@ body.dark-mode .rating-star i.filled {
   color:#ffd700 !important; /* Same Gold in dark mode */
 }
 
+[data-theme="dark"] .review-submit-btn {
+  border: 2px solid #fff!important;
+  background-color: #fff !important;
+  color: #000 !important;
+}
 
 
 </style>
@@ -500,13 +505,6 @@ body.dark-mode .rating-star i.filled {
 
 </div>
 </section>
-<script>
-  function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark-mode" : "light-mode");
-}
 
-</script>
 
 {% endblock %}
